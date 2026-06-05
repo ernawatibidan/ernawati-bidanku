@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERNAWATI BidanKu — Platform Digital Kebidanan Indonesia</title>
+<meta name="description" content="ERNAWATI BidanKu — Ekosistem Platform Digital Kebidanan berbasis Evidence-Based Practice. Dikembangkan oleh Ernawati, SST., Bdn., M.Kes, FIKK Institut Kesehatan Karsa Husada Garut.">
+<meta name="keywords" content="platform kebidanan digital, FLORIS Rosa, FLORIS Camomile, FLORIS Damask, BONITA, NUTRIGIZI, osteoporosis, gizi ibu hamil, persalinan, bidan, Indonesia Emas 2045">
+<meta name="author" content="Ernawati, SST., Bdn., M.Kes">
+<meta property="og:title" content="ERNAWATI BidanKu — Platform Digital Kebidanan">
+<meta property="og:description" content="Ekosistem 10 Platform Digital Kebidanan untuk Siklus Hidup Kesehatan Perempuan Indonesia">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:   #1D6B61;
+  --teal-m: #2D9B8E;
+  --teal-l: #E6F7F5;
+  --navy:   #1A3556;
+  --rose:   #C44962;
+  --rose-l: #FFF0F3;
+  --cam:    #C8860A;
+  --cam-l:  #FFF8E6;
+  --dam:    #9B2D6F;
+  --dam-l:  #FDF0F7;
+  --gold:   #FFD97D;
+  --white:  #FFFFFF;
+  --cream:  #FAFAF8;
+  --text:   #1A1A1A;
+  --muted:  #6B7280;
+  --border: #E5E7EB;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  background:linear-gradient(135deg, var(--navy) 0%, var(--teal) 50%, var(--dam) 100%);
+  padding:48px 20px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute;
+  top:-60px; right:-60px;
+  width:260px; height:260px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+.hero::after {
+  content:'';
+  position:absolute;
+  bottom:-80px; left:-40px;
+  width:200px; height:200px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.04);
+}
+.hero-inner { max-width:580px; margin:0 auto; position:relative; z-index:1; }
+.hero-badge {
+  display:inline-block;
+  background:rgba(255,255,255,0.15);
+  color:var(--gold);
+  font-size:0.7rem;
+  font-weight:700;
+  padding:5px 14px;
+  border-radius:20px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  border:1px solid rgba(255,215,125,0.3);
+  margin-bottom:16px;
+}
+.hero-rose { font-size:3rem; display:block; margin-bottom:12px; }
+.hero-title {
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;
+  font-weight:700;
+  color:#fff;
+  line-height:1.15;
+  margin-bottom:8px;
+}
+.hero-sub {
+  font-size:0.9rem;
+  color:rgba(255,255,255,0.85);
+  margin-bottom:6px;
+  font-style:italic;
+}
+.hero-tagline {
+  font-size:0.75rem;
+  color:rgba(255,255,255,0.65);
+  margin-bottom:20px;
+  line-height:1.6;
+}
+.hero-author {
+  background:rgba(255,255,255,0.12);
+  border-radius:14px;
+  padding:14px 20px;
+  display:inline-block;
+  border:1px solid rgba(255,255,255,0.2);
+}
+.hero-author .name {
+  font-size:1rem;
+  font-weight:700;
+  color:#fff;
+  margin-bottom:3px;
+}
+.hero-author .inst {
+  font-size:0.72rem;
+  color:rgba(255,255,255,0.75);
+  line-height:1.5;
+}
+
+/* ── WAVE ── */
+.wave {
+  background:linear-gradient(135deg, var(--navy) 0%, var(--teal) 50%, var(--dam) 100%);
+  clip-path:ellipse(100% 55% at 50% 0%);
+  height:40px;
+  margin-top:-2px;
+}
+
+/* ── SECTION ── */
+.section {
+  max-width:680px;
+  margin:0 auto;
+  padding:32px 16px;
+}
+
+.sec-label {
+  font-size:0.7rem;
+  font-weight:700;
+  color:var(--teal);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.sec-title {
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  color:var(--navy);
+  margin-bottom:6px;
+  line-height:1.3;
+}
+.sec-sub {
+  font-size:0.82rem;
+  color:var(--muted);
+  margin-bottom:24px;
+  line-height:1.6;
+}
+
+/* ── PLATFORM CARDS ── */
+.platform-card {
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:16px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  border:1px solid var(--border);
+  transition:transform 0.2s, box-shadow 0.2s;
+  text-decoration:none;
+  display:block;
+  background:#fff;
+}
+.platform-card:hover {
+  transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+}
+.pc-header {
+  padding:20px 22px 16px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.pc-icon {
+  font-size:2.2rem;
+  width:56px;
+  height:56px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.pc-info { flex:1; }
+.pc-code {
+  font-family:'DM Sans',monospace;
+  font-size:0.62rem;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:3px;
+}
+.pc-name {
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--navy);
+  line-height:1.2;
+  margin-bottom:3px;
+}
+.pc-tagline {
+  font-size:0.72rem;
+  color:var(--muted);
+  font-style:italic;
+}
+.pc-arrow {
+  font-size:1.2rem;
+  flex-shrink:0;
+}
+.pc-body {
+  padding:0 22px 18px;
+}
+.pc-desc {
+  font-size:0.8rem;
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:12px;
+}
+.pc-modules {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.pc-mod {
+  font-size:0.65rem;
+  font-weight:600;
+  padding:3px 10px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  gap:3px;
+}
+.pc-btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 20px;
+  margin:14px 22px 18px;
+  border-radius:12px;
+  font-size:0.88rem;
+  font-weight:700;
+  text-decoration:none;
+  transition:all 0.2s;
+}
+.pc-btn:hover { opacity:0.9; transform:translateY(-1px); }
+
+/* FLORIS Rosa */
+.card-rosa .pc-header { background:linear-gradient(135deg,#E6F7F5,#fff); }
+.card-rosa .pc-icon { background:var(--teal-l); }
+.card-rosa .pc-code { color:var(--teal); }
+.card-rosa .pc-mod { background:var(--teal-l); color:var(--teal); }
+.card-rosa .pc-btn { background:linear-gradient(135deg,var(--teal),var(--navy)); color:#fff; }
+
+/* FLORIS Camomile */
+.card-cam .pc-header { background:linear-gradient(135deg,#FFF8E6,#fff); }
+.card-cam .pc-icon { background:var(--cam-l); }
+.card-cam .pc-code { color:var(--cam); }
+.card-cam .pc-mod { background:var(--cam-l); color:var(--cam); }
+.card-cam .pc-btn { background:linear-gradient(135deg,var(--cam),#8B5E07); color:#fff; }
+
+/* FLORIS Damask */
+.card-dam .pc-header { background:linear-gradient(135deg,#FDF0F7,#fff); }
+.card-dam .pc-icon { background:var(--dam-l); }
+.card-dam .pc-code { color:var(--dam); }
+.card-dam .pc-mod { background:var(--dam-l); color:var(--dam); }
+.card-dam .pc-btn { background:linear-gradient(135deg,var(--dam),#6B1D4F); color:#fff; }
+
+/* ── ECOSYSTEM STRIP ── */
+.ecosystem {
+  background:linear-gradient(135deg,var(--navy),var(--teal));
+  border-radius:20px;
+  padding:24px 20px;
+  margin-bottom:16px;
+}
+.eco-title {
+  font-family:'Playfair Display',serif;
+  color:#fff;
+  font-size:1.1rem;
+  margin-bottom:4px;
+}
+.eco-sub {
+  color:rgba(255,255,255,0.7);
+  font-size:0.72rem;
+  margin-bottom:16px;
+  font-style:italic;
+}
+.eco-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
+.eco-item {
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  padding:8px 4px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.15);
+}
+.eco-item.active {
+  background:rgba(255,255,255,0.2);
+  border-color:var(--gold);
+}
+.eco-flower { font-size:1.2rem; display:block; margin-bottom:3px; }
+.eco-code {
+  font-size:0.58rem;
+  font-weight:700;
+  color:rgba(255,255,255,0.7);
+  display:block;
+}
+.eco-name {
+  font-size:0.6rem;
+  color:rgba(255,255,255,0.9);
+  display:block;
+  font-weight:600;
+  line-height:1.2;
+  margin-top:2px;
+}
+.eco-status {
+  font-size:0.55rem;
+  color:var(--gold);
+  display:block;
+  margin-top:2px;
+}
+
+/* ── ABOUT ── */
+.about-card {
+  background:#fff;
+  border-radius:20px;
+  padding:24px 20px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom:16px;
+}
+.about-header {
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  margin-bottom:14px;
+}
+.about-avatar {
+  width:56px; height:56px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--teal),var(--navy));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.6rem;
+  flex-shrink:0;
+}
+.about-name {
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:3px;
+}
+.about-role {
+  font-size:0.72rem;
+  color:var(--muted);
+  line-height:1.5;
+}
+.about-nidn {
+  font-size:0.68rem;
+  color:var(--teal);
+  font-weight:600;
+  margin-top:3px;
+}
+.about-desc {
+  font-size:0.8rem;
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:14px;
+}
+.about-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.about-tag {
+  font-size:0.65rem;
+  font-weight:600;
+  padding:4px 10px;
+  border-radius:20px;
+  background:var(--teal-l);
+  color:var(--teal);
+}
+
+/* ── STATS ── */
+.stats-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-bottom:16px;
+}
+.stat-card {
+  background:#fff;
+  border-radius:14px;
+  padding:16px 14px;
+  text-align:center;
+  border:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.stat-val {
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--navy);
+  line-height:1;
+  margin-bottom:4px;
+}
+.stat-lbl {
+  font-size:0.67rem;
+  color:var(--muted);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+}
+
+/* ── ETHIC BADGE ── */
+.ethic-badge {
+  background:var(--teal-l);
+  border:1px solid var(--teal);
+  border-radius:12px;
+  padding:12px 16px;
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-bottom:16px;
+  font-size:0.75rem;
+  color:var(--teal);
+  line-height:1.6;
+}
+
+/* ── SEMINAR BANNER ── */
+.seminar-banner {
+  background:linear-gradient(135deg,var(--rose),var(--dam));
+  border-radius:20px;
+  padding:20px;
+  color:#fff;
+  margin-bottom:16px;
+  text-align:center;
+}
+.seminar-banner .title {
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.seminar-banner .sub {
+  font-size:0.72rem;
+  opacity:0.85;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+.seminar-badge {
+  display:inline-block;
+  background:rgba(255,255,255,0.2);
+  border:1px solid rgba(255,255,255,0.3);
+  padding:5px 14px;
+  border-radius:20px;
+  font-size:0.68rem;
+  font-weight:700;
+  letter-spacing:0.5px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--navy);
+  padding:32px 20px;
+  text-align:center;
+}
+.footer-inner { max-width:580px; margin:0 auto; }
+.footer-logo {
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  color:#fff;
+  margin-bottom:4px;
+}
+.footer-sub {
+  font-size:0.7rem;
+  color:rgba(255,255,255,0.6);
+  font-style:italic;
+  margin-bottom:14px;
+}
+.footer-links {
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.footer-link {
+  font-size:0.72rem;
+  color:rgba(255,255,255,0.7);
+  text-decoration:none;
+  font-weight:600;
+}
+.footer-link:hover { color:#fff; }
+.footer-copy {
+  font-size:0.62rem;
+  color:rgba(255,255,255,0.4);
+  line-height:1.8;
+}
+.footer-indonesia {
+  margin-top:12px;
+  font-size:0.7rem;
+  color:rgba(255,255,255,0.5);
+  font-style:italic;
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌹 ERNAWATI BidanKu Digital Ecosystem</div>
+    <span class="hero-rose">🌹</span>
+    <h1 class="hero-title">ERNAWATI BidanKu</h1>
+    <p class="hero-sub">Evidence-based Reference for Neonatal And Women's Health Advancing Technology Innovation</p>
+    <p class="hero-tagline">
+      Platform Digital Kebidanan Berbasis Evidence-Based Practice<br>
+      untuk Siklus Hidup Kesehatan Perempuan Indonesia
+    </p>
+    <div class="hero-author">
+      <div class="name">Ernawati, SST., Bdn., M.Kes</div>
+      <div class="inst">
+        Pendidikan Profesi Bidan — FIKK<br>
+        Institut Kesehatan Karsa Husada Garut (IKesKHG)<br>
+        Garut, Jawa Barat, Indonesia · NIDN: 0407027302
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wave"></div>
+
+<!-- ── SEMINAR BANNER ── -->
+<div class="section" style="padding-bottom:0">
+  <div class="seminar-banner">
+    <div style="font-size:1.5rem;margin-bottom:8px">🎪</div>
+    <div class="title">Hadir di Seminar Nasional Pembangunan Kesehatan</div>
+    <div class="sub">
+      Peningkatan Kesehatan Gizi Masyarakat<br>
+      Menuju Indonesia Emas 2045
+    </div>
+    <span class="seminar-badge">🏆 Gerai NUTRIGIZI BIDAN EMAS</span>
+  </div>
+</div>
+
+<!-- ── PLATFORM SECTION ── -->
+<div class="section">
+  <div class="sec-label">Platform Digital</div>
+  <div class="sec-title">3 Platform Aktif — Siap Digunakan</div>
+  <div class="sec-sub">Semua platform dapat diakses online maupun offline. Tidak perlu instalasi. Berbasis bukti ilmiah internasional.</div>
+
+  <!-- FLORIS Rosa -->
+  <a class="platform-card card-rosa" href="floris-rosa-offline-1-1.html">
+    <div class="pc-header">
+      <div class="pc-icon">🌹</div>
+      <div class="pc-info">
+        <div class="pc-code">FL-01 · FLORIS Rosa</div>
+        <div class="pc-name">Asuhan Persalinan & BBL</div>
+        <div class="pc-tagline">Platform Digital Intrapartum & Perawatan Bayi Baru Lahir</div>
+      </div>
+      <span class="pc-arrow">→</span>
+    </div>
+    <div class="pc-body">
+      <div class="pc-desc">Platform komprehensif untuk asuhan persalinan berbasis bukti — dari timer kontraksi, taksiran berat janin, tanda bahaya intrapartum, gizi persalinan, hingga perawatan BBL lengkap termasuk DCC, Vitamin K₁, dan HB0.</div>
+      <div class="pc-modules">
+        <span class="pc-mod">⏱️ Timer Kontraksi</span>
+        <span class="pc-mod">📅 Usia & TBJ</span>
+        <span class="pc-mod">🔍 Tanda Bahaya</span>
+        <span class="pc-mod">🥗 Gizi Intrapartum</span>
+        <span class="pc-mod">👶 Edukasi BBL</span>
+        <span class="pc-mod">📚 37 Referensi</span>
+      </div>
+    </div>
+    <div class="pc-btn">🚀 Buka FLORIS Rosa</div>
+  </a>
+
+  <!-- FLORIS Camomile -->
+  <a class="platform-card card-cam" href="floris-camomile-nutrigizi.html">
+    <div class="pc-header">
+      <div class="pc-icon">🌼</div>
+      <div class="pc-info">
+        <div class="pc-code">FL-04 · FLORIS Camomile</div>
+        <div class="pc-name">NUTRIGIZI BidanKu</div>
+        <div class="pc-tagline">Nutrition Intelligent Guide for Indonesian Zero-Hunger Initiative</div>
+      </div>
+      <span class="pc-arrow">→</span>
+    </div>
+    <div class="pc-body">
+      <div class="pc-desc">Platform gizi komprehensif untuk ibu hamil, menyusui, dan balita — skrining IMT, LILA, deteksi KEK dan anemia, kalkulator kalori Harris-Benedict, pemantauan kenaikan BB ibu hamil, deteksi stunting balita berbasis tanggal lahir, panduan MPASI, dan edukasi 1000 HPK.</div>
+      <div class="pc-modules">
+        <span class="pc-mod">📋 Skrining Gizi</span>
+        <span class="pc-mod">🤰 Ibu Hamil</span>
+        <span class="pc-mod">🧮 Kalkulator</span>
+        <span class="pc-mod">👶 Tumbuh Kembang</span>
+        <span class="pc-mod">🍽️ Menu & MPASI</span>
+        <span class="pc-mod">📖 1000 HPK</span>
+      </div>
+    </div>
+    <div class="pc-btn">🌼 Buka NUTRIGIZI BidanKu</div>
+  </a>
+
+  <!-- FLORIS Damask -->
+  <a class="platform-card card-dam" href="floris-damask-bonita-2.html">
+    <div class="pc-header">
+      <div class="pc-icon">🌸</div>
+      <div class="pc-info">
+        <div class="pc-code">FL-09 · FLORIS Damask</div>
+        <div class="pc-name">BONITA BidanKu</div>
+        <div class="pc-tagline">Bone Intelligence for Indonesian Women</div>
+      </div>
+      <span class="pc-arrow">→</span>
+    </div>
+    <div class="pc-body">
+      <div class="pc-desc">Platform skrining osteoporosis dan kesehatan tulang untuk perempuan Indonesia — IOF One-Minute Test 19 pertanyaan, estimasi T-score, kalkulator kebutuhan kalsium otomatis dari BB & TB, panduan nutrisi tulang, latihan pencegahan, dan edukasi lengkap siklus hidup tulang perempuan.</div>
+      <div class="pc-modules">
+        <span class="pc-mod">🔍 Skrining Risiko</span>
+        <span class="pc-mod">📋 IOF 19 Soal</span>
+        <span class="pc-mod">🧮 T-score & Kalsium</span>
+        <span class="pc-mod">🥛 Nutrisi Tulang</span>
+        <span class="pc-mod">🏃 Panduan Latihan</span>
+        <span class="pc-mod">📖 Edukasi</span>
+      </div>
+    </div>
+    <div class="pc-btn">🌸 Buka BONITA BidanKu</div>
+  </a>
+</div>
+
+<!-- ── ECOSYSTEM ── -->
+<div class="section" style="padding-top:0">
+  <div class="sec-label">FLORIS Series</div>
+  <div class="sec-title">Ekosistem 10 Platform</div>
+  <div class="sec-sub">Rencana pengembangan platform untuk seluruh siklus hidup kesehatan perempuan Indonesia.</div>
+
+  <div class="ecosystem">
+    <div class="eco-title">🌹 ERNAWATI BidanKu Ecosystem</div>
+    <div class="eco-sub">Evidence-based Digital Midwifery for Women's Lifecycle Health</div>
+    <div class="eco-grid">
+      <div class="eco-item active">
+        <span class="eco-flower">🌹</span>
+        <span class="eco-code">FL-01</span>
+        <span class="eco-name">FLORIS Rosa</span>
+        <span class="eco-status">★ Aktif</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-flower">🤍</span>
+        <span class="eco-code">FL-02</span>
+        <span class="eco-name">FLORIS Jasmine</span>
+        <span class="eco-status">Segera</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-flower">💜</span>
+        <span class="eco-code">FL-03</span>
+        <span class="eco-name">FLORIS Lavande</span>
+        <span class="eco-status">Segera</span>
+      </div>
+      <div class="eco-item active">
+        <span class="eco-flower">🌼</span>
+        <span class="eco-code">FL-04</span>
+        <span class="eco-name">FLORIS Camomile</span>
+        <span class="eco-status">★ Aktif</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-flower">🌸</span>
+        <span class="eco-code">FL-05</span>
+        <span class="eco-name">FLORIS Sakura</span>
+        <span class="eco-status">Segera</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-flower">🌟</span>
+        <span class="eco-code">FL-06</span>
+        <span class="eco-name">FLORIS Ylang</span>
+        <span class="eco-status">Segera</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-flower">🌺</span>
+        <span class="eco-code">FL-07</span>
+        <span class="eco-name">FLORIS Orchidea</span>
+        <span class="eco-status">Segera</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-flower">🪷</span>
+        <span class="eco-code">FL-08</span>
+        <span class="eco-name">FLORIS Lotus</span>
+        <span class="eco-status">Segera</span>
+      </div>
+      <div class="eco-item active">
+        <span class="eco-flower">🥀</span>
+        <span class="eco-code">FL-09</span>
+        <span class="eco-name">FLORIS Damask</span>
+        <span class="eco-status">★ Aktif</span>
+      </div>
+      <div class="eco-item">
+        <span class="eco-flower">✨</span>
+        <span class="eco-code">FL-10</span>
+        <span class="eco-name">FLORIS Aurora</span>
+        <span class="eco-status">AI Hub</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-val">3</div>
+      <div class="stat-lbl">Platform Aktif</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">21</div>
+      <div class="stat-lbl">Modul Interaktif</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">80+</div>
+      <div class="stat-lbl">Referensi Valid</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">100%</div>
+      <div class="stat-lbl">Offline Ready</div>
+    </div>
+  </div>
+
+  <!-- Ethics Badge -->
+  <div class="ethic-badge">
+    <span>🔒</span>
+    <div>
+      <strong>Ethical Clearance:</strong> No. 000542/KEP STIKes Karsa Husada Garut/V/2026<br>
+      Berlaku: 08 Mei 2026 – 08 Mei 2027 · Disetujui oleh KEP Institut Kesehatan Karsa Husada Garut<br>
+      Berdasarkan 7 Standar WHO 2011 · CIOMS 2016 Guidelines
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<div class="section" style="padding-top:0">
+  <div class="sec-label">Pengembang</div>
+  <div class="sec-title">Tentang Kami</div>
+
+  <div class="about-card">
+    <div class="about-header">
+      <div class="about-avatar">👩‍⚕️</div>
+      <div>
+        <div class="about-name">Ernawati, SST., Bdn., M.Kes</div>
+        <div class="about-role">
+          Pendidikan Profesi Bidan<br>
+          Fakultas Ilmu Kesehatan dan Keperawatan (FIKK)<br>
+          Institut Kesehatan Karsa Husada Garut (IKesKHG)
+        </div>
+        <div class="about-nidn">NIDN: 0407027302 · ernawatikoesendang@gmail.com</div>
+      </div>
+    </div>
+    <div class="about-desc">
+      Pengembang ekosistem ERNAWATI BidanKu — platform digital kebidanan berbasis evidence-based practice pertama di Indonesia yang komprehensif, dapat diakses offline, dan mengintegrasikan panduan internasional (WHO, ACOG, Cochrane, AAP) dengan regulasi nasional (Kemenkes RI) dalam satu ekosistem digital terintegrasi untuk siklus hidup kesehatan perempuan.
+    </div>
+    <div class="about-tags">
+      <span class="about-tag">Kebidanan Klinis</span>
+      <span class="about-tag">Kesehatan Reproduksi</span>
+      <span class="about-tag">Digital Health</span>
+      <span class="about-tag">Evidence-Based Practice</span>
+      <span class="about-tag">Gizi Ibu & Anak</span>
+      <span class="about-tag">Osteoporosis</span>
+      <span class="about-tag">Pendidikan Kebidanan</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">🌹 ERNAWATI BidanKu</div>
+    <div class="footer-sub">Evidence-based Reference for Neonatal And Women's Health Advancing Technology Innovation</div>
+    <div class="footer-links">
+      <a class="footer-link" href="floris-rosa-offline-1-1.html">🌹 FLORIS Rosa</a>
+      <a class="footer-link" href="floris-camomile-nutrigizi.html">🌼 FLORIS Camomile</a>
+      <a class="footer-link" href="floris-damask-bonita-2.html">🌸 FLORIS Damask</a>
+    </div>
+    <div class="footer-copy">
+      © 2026 Ernawati, SST., Bdn., M.Kes · FIKK Institut Kesehatan Karsa Husada Garut<br>
+      Garut, Jawa Barat, Indonesia · NIDN: 0407027302<br>
+      Ethical Clearance No: 000542/KEP STIKes Karsa Husada Garut/V/2026
+    </div>
+    <div class="footer-indonesia">
+      🇮🇩 Dari Garut untuk Indonesia Emas 2045
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
