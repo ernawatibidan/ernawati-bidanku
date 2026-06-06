@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLORIS Camomile — NUTRIGIZI BidanKu | Platform Digital Gizi</title>
+<style>
+:root {
+  --cam:    #C8860A;
+  --cam-d:  #8B5E07;
+  --cam-l:  #FFF8E6;
+  --cam-m:  #E8A020;
+  --teal:   #1D6B61;
+  --teal-l: #E6F7F5;
+  --navy:   #1A3556;
+  --rose:   #C44962;
+  --rose-l: #FFF0F3;
+  --green:  #15803D;
+  --green-l:#F0FDF4;
+  --purple: #6D28D9;
+  --purple-l:#F5F0FF;
+  --red:    #DC2626;
+  --red-l:  #FEF2F2;
+  --white:  #FFFFFF;
+  --cream:  #FAFAF8;
+  --text:   #1A1A1A;
+  --muted:  #6B7280;
+  --border: #E5E7EB;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100vh;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--cream);color:var(--text)}
+
+/* ── HEADER ── */
+header{background:linear-gradient(135deg,var(--cam-d) 0%,var(--navy) 60%,var(--cam) 100%);padding:18px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.25)}
+.header-inner{max-width:600px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.logo-icon{width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.3)}
+.logo-text h1{font-family:Georgia,'Times New Roman',serif;font-size:1.25rem;font-weight:700;color:#fff;line-height:1.1}
+.logo-text p{font-size:0.68rem;color:rgba(255,255,255,0.8);margin-top:2px}
+.header-badge{margin-left:auto;background:rgba(255,255,255,0.2);color:#FFD97D;font-size:0.65rem;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;border:1px solid rgba(255,215,125,0.4)}
+
+/* ── NAV TABS ── */
+.nav-wrap{background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:76px;z-index:99;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+.nav-wrap::-webkit-scrollbar{display:none}
+.nav-tabs{display:flex;min-width:max-content;padding:0 12px}
+.nav-tab{padding:11px 14px;font-size:0.75rem;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all 0.2s;display:flex;align-items:center;gap:5px}
+.nav-tab.active{color:var(--cam-d);border-bottom-color:var(--cam)}
+.nav-tab:hover{color:var(--cam-d)}
+
+/* ── CONTENT ── */
+.content{max-width:600px;margin:0 auto;padding:16px 14px 40px}
+.section{display:none}
+.section.active{display:block}
+
+/* ── CARDS ── */
+.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid var(--border)}
+.card-title{font-family:Georgia,serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.card-sub{font-size:0.73rem;color:var(--muted);margin-bottom:14px}
+
+/* ── FORM ELEMENTS ── */
+label{display:block;font-size:0.78rem;font-weight:600;color:var(--navy);margin-bottom:5px;margin-top:12px}
+input,select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:0.9rem;color:var(--text);background:#fff;outline:none;transition:border 0.2s}
+input:focus,select:focus{border-color:var(--cam)}
+.input-unit{position:relative}
+.input-unit input{padding-right:46px}
+.unit{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--muted);font-weight:600}
+
+/* ── BUTTONS ── */
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:14px;transition:all 0.2s}
+.btn-cam{background:linear-gradient(135deg,var(--cam),var(--cam-d));color:#fff;box-shadow:0 4px 14px rgba(200,134,10,0.35)}
+.btn-cam:hover{transform:translateY(-1px)}
+.btn-teal{background:linear-gradient(135deg,var(--teal),var(--navy));color:#fff}
+.btn-sm{width:auto;padding:7px 16px;font-size:0.8rem;border-radius:8px;margin-top:8px}
+
+/* ── RESULT BOX ── */
+.result-box{border-radius:14px;padding:16px;margin-top:14px;display:none}
+.rb-normal{background:var(--green-l);border:1.5px solid #BBF7D0}
+.rb-warning{background:#FFF7ED;border:1.5px solid #FED7AA}
+.rb-danger{background:var(--red-l);border:1.5px solid #FECACA}
+.rb-info{background:var(--cam-l);border:1.5px solid #FDE68A}
+.rb-teal{background:var(--teal-l);border:1.5px solid #A8E0D9}
+.result-value{font-size:2rem;font-weight:700;font-family:Georgia,serif;line-height:1.1}
+.result-label{font-size:0.75rem;font-weight:600;margin-top:3px;text-transform:uppercase;letter-spacing:0.5px}
+.result-desc{font-size:0.8rem;margin-top:8px;line-height:1.5}
+.rec-box{background:rgba(255,255,255,0.7);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:0.78rem;line-height:1.6}
+
+/* ── STATUS BADGE ── */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.68rem;font-weight:700}
+.badge-green{background:var(--green);color:#fff}
+.badge-yellow{background:#F59E0B;color:#fff}
+.badge-red{background:var(--red);color:#fff}
+.badge-blue{background:var(--teal);color:#fff}
+.badge-purple{background:var(--purple);color:#fff}
+
+/* ── PROGRESS BAR ── */
+.prog-wrap{background:#F3F4F6;border-radius:10px;height:10px;margin-top:6px;overflow:hidden}
+.prog-bar{height:10px;border-radius:10px;transition:width 0.8s ease}
+
+/* ── INFO GRID ── */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.info-item{background:var(--cam-l);border-radius:12px;padding:12px;text-align:center;border:1px solid #FDE68A}
+.info-item .val{font-size:1.3rem;font-weight:700;color:var(--cam-d);font-family:Georgia,serif}
+.info-item .lbl{font-size:0.65rem;color:var(--muted);margin-top:2px;font-weight:600}
+
+/* ── MODULE CARDS ── */
+.mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mod-card{background:#fff;border-radius:14px;padding:14px 12px;text-align:center;border:1.5px solid var(--border);cursor:pointer;transition:all 0.2s}
+.mod-card:hover,.mod-card.active{border-color:var(--cam);background:var(--cam-l)}
+.mod-card .icon{font-size:1.6rem;display:block;margin-bottom:6px}
+.mod-card .name{font-size:0.72rem;font-weight:700;color:var(--navy)}
+.mod-card .desc{font-size:0.62rem;color:var(--muted);margin-top:3px}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:0.78rem;margin-top:8px}
+.tbl th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+.tbl td{padding:7px 10px;border-bottom:1px solid var(--border)}
+.tbl tr:nth-child(even) td{background:var(--cam-l)}
+
+/* ── FOOD LOG ── */
+.food-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:8px}
+.food-del{background:var(--red-l);color:var(--red);border:none;border-radius:6px;padding:4px 10px;font-size:0.7rem;font-weight:700;cursor:pointer}
+
+/* ── GROWTH CHART ── */
+.chart-wrap{background:#fff;border-radius:14px;padding:16px;border:1px solid var(--border);margin-top:12px}
+.chart-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.chart-label{font-size:0.7rem;color:var(--muted);width:60px;flex-shrink:0}
+.chart-bar-bg{flex:1;background:#F3F4F6;border-radius:6px;height:18px;overflow:hidden}
+.chart-bar-fill{height:18px;border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:0.65rem;font-weight:700;color:#fff;transition:width 0.8s}
+
+/* ── EDUKASI CARDS ── */
+.edu-card{background:#fff;border-radius:14px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:12px}
+.edu-header{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.edu-icon{font-size:1.4rem;flex-shrink:0}
+.edu-title{font-size:0.88rem;font-weight:700;color:var(--navy)}
+.edu-sub{font-size:0.7rem;color:var(--muted)}
+.edu-body{padding:0 16px 14px;font-size:0.8rem;line-height:1.7;color:var(--text);display:none}
+.edu-body.show{display:block}
+.edu-chevron{margin-left:auto;color:var(--muted);transition:transform 0.2s;font-size:0.9rem}
+.edu-chevron.open{transform:rotate(180deg)}
+
+/* ── REFS ── */
+.ref-item{background:#fff;border-radius:12px;border:1px solid var(--border);padding:12px 14px;margin-bottom:8px}
+.ref-num{display:inline-block;background:var(--cam);color:#fff;font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:5px}
+.ref-title{font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:2px}
+.ref-source{font-size:0.7rem;color:var(--muted)}
+
+/* ── ALERT ── */
+.alert{border-radius:12px;padding:12px 14px;margin-top:10px;font-size:0.8rem;line-height:1.5;display:flex;gap:10px}
+.alert-warn{background:#FFF7ED;border:1.5px solid #FED7AA;color:#92400E}
+.alert-danger{background:var(--red-l);border:1.5px solid #FECACA;color:#991B1B}
+.alert-ok{background:var(--green-l);border:1.5px solid #BBF7D0;color:#14532D}
+.alert-info{background:var(--teal-l);border:1.5px solid #A8E0D9;color:var(--teal)}
+
+/* ── 1000 HPK TIMELINE ── */
+.hpk-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--border)}
+.hpk-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;margin-top:2px}
+.hpk-content .hpk-title{font-size:0.83rem;font-weight:700;color:var(--navy)}
+.hpk-content .hpk-desc{font-size:0.75rem;color:var(--muted);margin-top:3px;line-height:1.5}
+
+/* ── FOOTER ── */
+.brand-footer{text-align:center;padding:20px 16px;margin-top:10px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-icon">🌼</div>
+    <div class="logo-text">
+      <h1>FLORIS Camomile</h1>
+      <p>NUTRIGIZI BidanKu · Ernawati, SST., Bdn., M.Kes · FIKK IKKHG Garut</p>
+    </div>
+    <span class="header-badge">FL-04 v1.0</span>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showTab('beranda')">🏠 Beranda</div>
+    <div class="nav-tab" onclick="showTab('skrining')">📋 Skrining</div>
+    <div class="nav-tab" onclick="showTab('ibuhamil')">🤰 Ibu Hamil</div>
+    <div class="nav-tab" onclick="showTab('kalkulator')">🧮 Kalkulator</div>
+    <div class="nav-tab" onclick="showTab('balita')">👶 Balita</div>
+    <div class="nav-tab" onclick="showTab('menu')">🍽️ Menu & Gizi</div>
+    <div class="nav-tab" onclick="showTab('edukasi')">📖 1000 HPK</div>
+    <div class="nav-tab" onclick="showTab('referensi')">📚 Referensi</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- ═══ BERANDA ═══ -->
+<div id="s-beranda" class="section active">
+  <div class="card" style="background:linear-gradient(135deg,var(--cam-d),var(--navy));border:none">
+    <div style="font-size:2.2rem;margin-bottom:8px">🌼</div>
+    <h2 style="font-family:Georgia,serif;color:#fff;font-size:1.3rem;margin-bottom:4px">FLORIS Camomile</h2>
+    <p style="color:rgba(255,255,255,0.85);font-size:0.8rem;margin-bottom:6px">NUTRIGIZI BidanKu — Platform Digital Gizi Ibu & Anak</p>
+    <p style="color:rgba(255,255,255,0.65);font-size:0.7rem;font-style:italic">Nutrition Intelligent Guide for Indonesian Zero-Hunger Initiative</p>
+    <div style="margin-top:14px;padding:10px 14px;background:rgba(255,255,255,0.12);border-radius:10px;font-size:0.75rem;color:rgba(255,255,255,0.9);line-height:1.6">
+      📱 Versi Offline · Dapat digunakan tanpa internet · Dikembangkan oleh Ernawati, SST., Bdn., M.Kes · FIKK IKKHG Garut
+    </div>
+  </div>
+
+  <div class="mod-grid">
+    <div class="mod-card" onclick="showTab('skrining')">
+      <span class="icon">📋</span>
+      <div class="name">Skrining Gizi</div>
+      <div class="desc">IMT · LILA · KEK</div>
+    </div>
+    <div class="mod-card" onclick="showTab('ibuhamil')">
+      <span class="icon">🤰</span>
+      <div class="name">Ibu Hamil</div>
+      <div class="desc">Kenaikan BB · Grafik</div>
+    </div>
+    <div class="mod-card" onclick="showTab('kalkulator')">
+      <span class="icon">🧮</span>
+      <div class="name">Kalkulator Gizi</div>
+      <div class="desc">Kalori · Fe · Protein</div>
+    </div>
+    <div class="mod-card" onclick="showTab('balita')">
+      <span class="icon">👶</span>
+      <div class="name">Tumbuh Kembang</div>
+      <div class="desc">Stunting · BB/U · TB/U</div>
+    </div>
+    <div class="mod-card" onclick="showTab('menu')">
+      <span class="icon">🍽️</span>
+      <div class="name">Menu & Panduan</div>
+      <div class="desc">Isi Piringku · MPASI</div>
+    </div>
+    <div class="mod-card" onclick="showTab('edukasi')">
+      <span class="icon">📖</span>
+      <div class="name">1000 HPK</div>
+      <div class="desc">ASI · MPASI · Stunting</div>
+    </div>
+    <div class="mod-card" onclick="showTab('referensi')">
+      <span class="icon">📚</span>
+      <div class="name">Referensi</div>
+      <div class="desc">AKG 2019 · WHO · Kemenkes</div>
+    </div>
+    <div class="mod-card" style="background:var(--navy);border-color:var(--navy)">
+      <span class="icon">🌼</span>
+      <div class="name" style="color:#fff">FL-04 Series</div>
+      <div class="desc" style="color:rgba(255,255,255,0.7)">ERNAWATI BidanKu</div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="card">
+    <div class="card-title">📊 Fakta Gizi Indonesia</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+      <div class="info-item">
+        <div class="val">21,6%</div>
+        <div class="lbl">Stunting Balita 2022</div>
+      </div>
+      <div class="info-item">
+        <div class="val">16,3%</div>
+        <div class="lbl">Ibu Hamil KEK 2022</div>
+      </div>
+      <div class="info-item">
+        <div class="val">37%</div>
+        <div class="lbl">Anemia Ibu Hamil</div>
+      </div>
+      <div class="info-item">
+        <div class="val">56,9%</div>
+        <div class="lbl">Bayi ASI Eksklusif</div>
+      </div>
+    </div>
+    <div class="alert alert-info" style="margin-top:12px">
+      <span>📌</span>
+      <span>Target SDGs 2030: Zero Hunger. Indonesia masih memerlukan percepatan penurunan stunting menjadi <14% (Perpres No. 72/2021).</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SKRINING STATUS GIZI ═══ -->
+<div id="s-skrining" class="section">
+
+  <!-- IMT Umum -->
+  <div class="card">
+    <div class="card-title">📋 Indeks Massa Tubuh (IMT)</div>
+    <div class="card-sub">Skrining status gizi berdasarkan berat dan tinggi badan</div>
+    <label>Berat Badan (kg)</label>
+    <div class="input-unit"><input type="number" id="imt-bb" placeholder="Contoh: 55" min="20" max="200" oninput="hitungIMT()"><span class="unit">kg</span></div>
+    <label>Tinggi Badan (cm)</label>
+    <div class="input-unit"><input type="number" id="imt-tb" placeholder="Contoh: 158" min="100" max="220" oninput="hitungIMT()"><span class="unit">cm</span></div>
+    <label>Kondisi</label>
+    <select id="imt-kondisi" onchange="hitungIMT()">
+      <option value="umum">Tidak hamil</option>
+      <option value="hamil">Ibu hamil (gunakan IMT pra-hamil)</option>
+    </select>
+    <div id="imt-result" class="result-box"></div>
+  </div>
+
+  <!-- LILA -->
+  <div class="card">
+    <div class="card-title">💪 Lingkar Lengan Atas (LILA)</div>
+    <div class="card-sub">Deteksi Kurang Energi Kronik (KEK) pada ibu hamil & WUS</div>
+    <label>Ukuran LILA (cm)</label>
+    <div class="input-unit"><input type="number" id="lila-val" placeholder="Contoh: 23.5" min="10" max="50" step="0.1" oninput="hitungLILA()"><span class="unit">cm</span></div>
+    <label>Status</label>
+    <select id="lila-status" onchange="hitungLILA()">
+      <option value="wus">Wanita Usia Subur (WUS) / Tidak Hamil</option>
+      <option value="hamil">Ibu Hamil</option>
+    </select>
+    <div id="lila-result" class="result-box"></div>
+  </div>
+
+  <!-- Lingkar Perut -->
+  <div class="card">
+    <div class="card-title">📏 Lingkar Perut</div>
+    <div class="card-sub">Deteksi risiko penyakit metabolik (obesitas sentral)</div>
+    <label>Jenis Kelamin</label>
+    <select id="lp-jk" onchange="hitungLP()">
+      <option value="p">Perempuan</option>
+      <option value="l">Laki-laki</option>
+    </select>
+    <label>Lingkar Perut (cm)</label>
+    <div class="input-unit"><input type="number" id="lp-val" placeholder="Contoh: 80" min="40" max="200" oninput="hitungLP()"><span class="unit">cm</span></div>
+    <div id="lp-result" class="result-box"></div>
+  </div>
+
+  <!-- Anemia Screening -->
+  <div class="card">
+    <div class="card-title">🩸 Skrining Anemia Gizi Besi</div>
+    <div class="card-sub">Berdasarkan nilai Hemoglobin (Hb)</div>
+    <label>Kadar Hemoglobin (g/dL)</label>
+    <div class="input-unit"><input type="number" id="hb-val" placeholder="Contoh: 11.5" min="5" max="20" step="0.1" oninput="hitungHb()"><span class="unit">g/dL</span></div>
+    <label>Kondisi Pasien</label>
+    <select id="hb-kondisi" onchange="hitungHb()">
+      <option value="hamil">Ibu hamil</option>
+      <option value="tidak-hamil">Wanita tidak hamil</option>
+      <option value="balita">Balita (6-59 bulan)</option>
+      <option value="anak">Anak (5-11 tahun)</option>
+    </select>
+    <div id="hb-result" class="result-box"></div>
+  </div>
+</div>
+
+<!-- ═══ IBU HAMIL ═══ -->
+<div id="s-ibuhamil" class="section">
+
+  <!-- Kenaikan BB Ibu Hamil -->
+  <div class="card">
+    <div class="card-title">🤰 Rekomendasi Kenaikan BB Ibu Hamil</div>
+    <div class="card-sub">Berdasarkan IMT pra-hamil (IOM 2009 + AKG Kemenkes 2019)</div>
+    <label>BB Pra-Hamil (kg)</label>
+    <div class="input-unit"><input type="number" id="h-bb-pra" placeholder="Contoh: 52" min="30" max="150" oninput="hitungHamil()"><span class="unit">kg</span></div>
+    <label>Tinggi Badan (cm)</label>
+    <div class="input-unit"><input type="number" id="h-tb" placeholder="Contoh: 156" min="100" max="200" oninput="hitungHamil()"><span class="unit">cm</span></div>
+    <label>BB Saat Ini (kg)</label>
+    <div class="input-unit"><input type="number" id="h-bb-now" placeholder="Contoh: 58" min="30" max="200" oninput="hitungHamil()"><span class="unit">kg</span></div>
+    <label>Usia Kehamilan (minggu)</label>
+    <div class="input-unit"><input type="number" id="h-uk" placeholder="Contoh: 24" min="1" max="42" oninput="hitungHamil()"><span class="unit">mgg</span></div>
+    <label>Jumlah Janin</label>
+    <select id="h-janin" onchange="hitungHamil()">
+      <option value="1">Tunggal</option>
+      <option value="2">Kembar 2</option>
+      <option value="3">Kembar 3</option>
+    </select>
+    <div id="hamil-result" class="result-box"></div>
+  </div>
+
+  <!-- Kebutuhan tablet Fe -->
+  <div class="card">
+    <div class="card-title">💊 Panduan Tablet Fe & Suplemen</div>
+    <div class="card-sub">Rekomendasi Kemenkes RI & WHO untuk ibu hamil</div>
+    <div class="alert alert-info">
+      <span>💊</span>
+      <div>
+        <strong>Tablet Tambah Darah (TTD) Fe 60mg:</strong><br>
+        Minimal 90 tablet selama kehamilan<br>
+        1 tablet/hari diminum malam hari dengan air putih atau jus jeruk (Vit C meningkatkan absorpsi)<br>
+        <strong>HINDARI:</strong> Diminum bersama teh, kopi, susu, atau antasida (menghambat absorpsi)
+      </div>
+    </div>
+    <div class="alert alert-warn" style="margin-top:8px">
+      <span>🔆</span>
+      <div>
+        <strong>Asam Folat 400mcg:</strong> Sejak pra-konsepsi hingga trimester pertama — mencegah defek tabung saraf<br>
+        <strong>Kalsium 1.200mg/hari:</strong> Trimester 2-3 — tulang janin dan mencegah preeklampsia<br>
+        <strong>Yodium:</strong> Gunakan garam beriodium setiap hari
+      </div>
+    </div>
+  </div>
+
+  <!-- Tracker kenaikan BB -->
+  <div class="card">
+    <div class="card-title">📈 Grafik Kenaikan BB Ideal per Trimester</div>
+    <div class="card-sub">Berdasarkan IMT pra-hamil (IOM 2009)</div>
+    <div id="grafik-hamil">
+      <div style="font-size:0.78rem;color:var(--muted);margin-bottom:12px">Isi form di atas untuk melihat grafik personal Bu Ibu</div>
+      <table class="tbl">
+        <thead><tr><th>Kategori IMT</th><th>IMT (kg/m²)</th><th>Total Kenaikan</th><th>Per Minggu (T2-T3)</th></tr></thead>
+        <tbody>
+          <tr><td>Kurus (Underweight)</td><td>&lt; 18,5</td><td>12,5–18 kg</td><td>0,44–0,58 kg</td></tr>
+          <tr><td>Normal</td><td>18,5–24,9</td><td>11,5–16 kg</td><td>0,35–0,50 kg</td></tr>
+          <tr><td>Gemuk (Overweight)</td><td>25–29,9</td><td>7–11,5 kg</td><td>0,23–0,33 kg</td></tr>
+          <tr><td>Obesitas</td><td>≥ 30</td><td>5–9 kg</td><td>0,17–0,27 kg</td></tr>
+          <tr><td>Kembar 2</td><td>Normal</td><td>17–25 kg</td><td>0,58–0,68 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Tanda bahaya gizi -->
+  <div class="card">
+    <div class="card-title">🚨 Tanda Bahaya Gizi pada Ibu Hamil</div>
+    <div class="card-sub">Segera rujuk ke fasilitas kesehatan bila ditemukan</div>
+    <div class="alert alert-danger">
+      <span>🚨</span>
+      <div>
+        <strong>Rujuk SEGERA bila:</strong><br>
+        • LILA &lt; 23,5 cm (KEK berat)<br>
+        • Hb &lt; 8 g/dL (anemia berat)<br>
+        • Kenaikan BB &lt; 1 kg per bulan pada trimester 2-3<br>
+        • Edema tungkai berat + mual muntah tak terkontrol<br>
+        • Penurunan BB saat hamil
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ KALKULATOR GIZI ═══ -->
+<div id="s-kalkulator" class="section">
+
+  <!-- Kebutuhan Kalori -->
+  <div class="card">
+    <div class="card-title">🧮 Kalkulator Kebutuhan Kalori Harian</div>
+    <div class="card-sub">Rumus Harris-Benedict + Faktor Aktivitas (AKG 2019)</div>
+    <label>Jenis Kelamin</label>
+    <select id="kal-jk" onchange="hitungKalori()">
+      <option value="p">Perempuan</option>
+      <option value="l">Laki-laki</option>
+    </select>
+    <label>Usia (tahun)</label>
+    <div class="input-unit"><input type="number" id="kal-usia" placeholder="Contoh: 28" min="15" max="80" oninput="hitungKalori()"><span class="unit">thn</span></div>
+    <label>Berat Badan (kg)</label>
+    <div class="input-unit"><input type="number" id="kal-bb" placeholder="Contoh: 55" min="20" max="200" oninput="hitungKalori()"><span class="unit">kg</span></div>
+    <label>Tinggi Badan (cm)</label>
+    <div class="input-unit"><input type="number" id="kal-tb" placeholder="Contoh: 158" min="100" max="220" oninput="hitungKalori()"><span class="unit">cm</span></div>
+    <label>Tingkat Aktivitas</label>
+    <select id="kal-aktivitas" onchange="hitungKalori()">
+      <option value="1.2">Sangat ringan (tidur/berbaring)</option>
+      <option value="1.375">Ringan (kerja kantor, jalan kaki)</option>
+      <option value="1.55" selected>Sedang (aktif bergerak)</option>
+      <option value="1.725">Berat (olahraga rutin)</option>
+      <option value="1.9">Sangat berat (atlet/kerja fisik berat)</option>
+    </select>
+    <label>Kondisi Khusus</label>
+    <select id="kal-kondisi" onchange="hitungKalori()">
+      <option value="0">Tidak ada kondisi khusus</option>
+      <option value="300">Ibu hamil trimester 1 (+300 kkal)</option>
+      <option value="300">Ibu hamil trimester 2 (+300 kkal)</option>
+      <option value="300">Ibu hamil trimester 3 (+300 kkal)</option>
+      <option value="500">Ibu menyusui 0-6 bulan (+500 kkal)</option>
+      <option value="400">Ibu menyusui 7-12 bulan (+400 kkal)</option>
+    </select>
+    <div id="kalori-result" class="result-box"></div>
+  </div>
+
+  <!-- Kebutuhan Zat Gizi Mikro -->
+  <div class="card">
+    <div class="card-title">💊 Kebutuhan Zat Gizi Mikro Penting</div>
+    <div class="card-sub">Berdasarkan AKG 2019 Kemenkes RI</div>
+    <table class="tbl">
+      <thead><tr><th>Zat Gizi</th><th>Tidak Hamil</th><th>Hamil (+)</th><th>Menyusui (+)</th></tr></thead>
+      <tbody>
+        <tr><td>⚡ Zat Besi (Fe)</td><td>26 mg</td><td>+9 mg = 35 mg</td><td>+6 mg = 32 mg</td></tr>
+        <tr><td>🧠 Asam Folat</td><td>400 mcg</td><td>+200 mcg = 600 mcg</td><td>+100 mcg = 500 mcg</td></tr>
+        <tr><td>🦴 Kalsium</td><td>1.000 mg</td><td>+200 mg = 1.200 mg</td><td>+200 mg = 1.200 mg</td></tr>
+        <tr><td>🧬 Yodium</td><td>150 mcg</td><td>+70 mcg = 220 mcg</td><td>+100 mcg = 250 mcg</td></tr>
+        <tr><td>🛡️ Zinc</td><td>9,3 mg</td><td>+1,7 mg = 11 mg</td><td>+5,8 mg = 15,1 mg</td></tr>
+        <tr><td>☀️ Vit D</td><td>15 mcg</td><td>15 mcg</td><td>15 mcg</td></tr>
+        <tr><td>🍊 Vit C</td><td>75 mg</td><td>+10 mg = 85 mg</td><td>+25 mg = 100 mg</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-info" style="margin-top:12px">
+      <span>📌</span>
+      <span>Sumber: Permenkes RI No. 28 Tahun 2019 tentang Angka Kecukupan Gizi (AKG) yang Dianjurkan untuk Masyarakat Indonesia</span>
+    </div>
+  </div>
+
+  <!-- Food Log -->
+  <div class="card">
+    <div class="card-title">🍱 Catatan Makan Harian</div>
+    <div class="card-sub">Catat asupan makanan harian untuk pemantauan gizi</div>
+    <label>Nama Makanan/Minuman</label>
+    <input type="text" id="food-name" placeholder="Contoh: Nasi putih 1 centong">
+    <label>Estimasi Kalori (kkal)</label>
+    <div class="input-unit"><input type="number" id="food-kal" placeholder="Contoh: 135" min="0" max="2000"><span class="unit">kkal</span></div>
+    <label>Waktu Makan</label>
+    <select id="food-time">
+      <option value="Sarapan">Sarapan</option>
+      <option value="Selingan Pagi">Selingan Pagi</option>
+      <option value="Makan Siang">Makan Siang</option>
+      <option value="Selingan Sore">Selingan Sore</option>
+      <option value="Makan Malam">Makan Malam</option>
+    </select>
+    <button class="btn btn-cam" onclick="tambahMakanan()">➕ Tambah Makanan</button>
+    <div id="food-log" style="margin-top:14px"></div>
+    <div id="food-total" style="display:none;margin-top:10px;padding:12px;background:var(--cam-l);border-radius:10px;font-size:0.85rem;color:var(--cam-d);font-weight:700;text-align:center"></div>
+  </div>
+</div>
+
+<!-- ═══ BALITA ═══ -->
+<div id="s-balita" class="section">
+  <div class="card">
+    <div class="card-title">👶 Status Gizi Bayi & Balita</div>
+    <div class="card-sub">Berdasarkan Standar WHO Child Growth Standards & Permenkes No. 2/2020</div>
+    <label>Jenis Kelamin</label>
+    <select id="bal-jk" onchange="hitungBalita()">
+      <option value="p">Perempuan</option>
+      <option value="l">Laki-laki</option>
+    </select>
+    <label>📅 Tanggal Lahir Anak</label>
+    <input type="date" id="bal-tgl-lahir" oninput="hitungUsiaDariTanggal()">
+    <label>🏥 Tanggal Pemeriksaan</label>
+    <input type="date" id="bal-tgl-periksa" oninput="hitungUsiaDariTanggal()">
+    <div id="usia-display" style="display:none;background:var(--cam-l);border-radius:12px;padding:12px 14px;margin-top:6px;font-size:0.85rem;font-weight:600;color:var(--cam-d);line-height:1.7"></div>
+    <input type="hidden" id="bal-bulan" value="">
+    <input type="hidden" id="bal-hari" value="">
+    <label>Berat Badan (kg)</label>
+    <div class="input-unit"><input type="number" id="bal-bb" placeholder="Contoh: 8.5" min="1" max="30" step="0.1" oninput="hitungBalita()"><span class="unit">kg</span></div>
+    <label>Panjang/Tinggi Badan (cm)</label>
+    <div class="input-unit"><input type="number" id="bal-tb" placeholder="Contoh: 75" min="30" max="130" step="0.1" oninput="hitungBalita()"><span class="unit">cm</span></div>
+    <label>Lingkar Kepala (cm) <small style="color:var(--muted)">(opsional)</small></label>
+    <div class="input-unit"><input type="number" id="bal-lk" placeholder="Contoh: 44" min="25" max="65" step="0.1" oninput="hitungBalita()"><span class="unit">cm</span></div>
+    <div id="balita-result" class="result-box"></div>
+  </div>
+
+  <!-- MPASI Guide -->
+  <div class="card">
+    <div class="card-title">🥣 Panduan MPASI (Makanan Pendamping ASI)</div>
+    <div class="card-sub">Berdasarkan Kemenkes RI & WHO</div>
+    <table class="tbl">
+      <thead><tr><th>Usia</th><th>Tekstur</th><th>Frekuensi</th><th>Porsi</th></tr></thead>
+      <tbody>
+        <tr><td>6 bulan</td><td>Puree halus</td><td>2-3×/hari</td><td>2-3 sdm</td></tr>
+        <tr><td>7-8 bulan</td><td>Bubur kental</td><td>2-3×/hari</td><td>½ mangkok</td></tr>
+        <tr><td>9-11 bulan</td><td>Cincang kasar</td><td>3-4×/hari</td><td>¾ mangkok</td></tr>
+        <tr><td>12-23 bulan</td><td>Makanan keluarga</td><td>3-4×/hari + 2× selingan</td><td>1 mangkok penuh</td></tr>
+        <tr><td>>24 bulan</td><td>Makanan keluarga</td><td>3×/hari + 2× selingan</td><td>Porsi anak</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-ok" style="margin-top:12px">
+      <span>✅</span>
+      <div><strong>Prinsip MPASI:</strong> Tepat waktu (6 bulan), adekuat (zat gizi cukup), aman & higienis, responsif (sesuai sinyal lapar/kenyang anak)</div>
+    </div>
+    <div class="alert alert-danger" style="margin-top:8px">
+      <span>🚫</span>
+      <div><strong>HINDARI sebelum 1 tahun:</strong> Garam, gula, madu, susu sapi segar, makanan tinggi merkuri (ikan tertentu), makanan keras yang berisiko tersedak</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MENU & GIZI ═══ -->
+<div id="s-menu" class="section">
+  <div class="card">
+    <div class="card-title">🍽️ Isi Piringku — Panduan Porsi Makan</div>
+    <div class="card-sub">Pedoman Gizi Seimbang Kemenkes RI 2014</div>
+    <div style="background:var(--cam-l);border-radius:14px;padding:16px;border:1.5px dashed var(--cam);margin-bottom:12px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.5rem">🍚🍝</div>
+          <div style="font-weight:700;color:var(--cam-d);font-size:0.85rem;margin-top:4px">1/3 Piring</div>
+          <div style="font-size:0.72rem;color:var(--muted)">Makanan Pokok</div>
+          <div style="font-size:0.68rem;color:var(--text);margin-top:4px">Nasi, kentang, ubi, jagung, roti</div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.5rem">🥩🐟</div>
+          <div style="font-weight:700;color:var(--cam-d);font-size:0.85rem;margin-top:4px">1/6 Piring</div>
+          <div style="font-size:0.72rem;color:var(--muted)">Lauk Hewani</div>
+          <div style="font-size:0.68rem;color:var(--text);margin-top:4px">Ikan, daging, telur, ayam</div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.5rem">🥦🫘</div>
+          <div style="font-weight:700;color:var(--cam-d);font-size:0.85rem;margin-top:4px">1/6 Piring</div>
+          <div style="font-size:0.72rem;color:var(--muted)">Lauk Nabati</div>
+          <div style="font-size:0.68rem;color:var(--text);margin-top:4px">Tempe, tahu, kacang-kacangan</div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)">
+          <div style="font-size:1.5rem">🥬🍅</div>
+          <div style="font-weight:700;color:var(--cam-d);font-size:0.85rem;margin-top:4px">1/3 Piring</div>
+          <div style="font-size:0.72rem;color:var(--muted)">Sayur & Buah</div>
+          <div style="font-size:0.68rem;color:var(--text);margin-top:4px">Beragam warna, segar, lokal</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:0.72rem;color:var(--muted)">+ 1 gelas susu/minuman sehat · + buah 1-2 porsi/hari</div>
+    </div>
+  </div>
+
+  <!-- Sumber Makanan Tinggi Zat Besi -->
+  <div class="card">
+    <div class="card-title">⚡ Makanan Tinggi Zat Besi</div>
+    <div class="card-sub">Sumber Fe hewani (heme) lebih mudah diserap tubuh</div>
+    <table class="tbl">
+      <thead><tr><th>Makanan</th><th>Kandungan Fe</th><th>Per</th><th>Tipe</th></tr></thead>
+      <tbody>
+        <tr><td>Hati sapi</td><td>6,5 mg</td><td>100g</td><td><span class="badge badge-red">Heme ✓</span></td></tr>
+        <tr><td>Daging sapi</td><td>3,5 mg</td><td>100g</td><td><span class="badge badge-red">Heme ✓</span></td></tr>
+        <tr><td>Ikan teri</td><td>3,9 mg</td><td>100g</td><td><span class="badge badge-red">Heme ✓</span></td></tr>
+        <tr><td>Telur ayam</td><td>1,7 mg</td><td>1 butir</td><td><span class="badge badge-red">Heme ✓</span></td></tr>
+        <tr><td>Tempe</td><td>4,0 mg</td><td>100g</td><td><span class="badge badge-blue">Non-Heme</span></td></tr>
+        <tr><td>Bayam</td><td>3,5 mg</td><td>100g</td><td><span class="badge badge-blue">Non-Heme</span></td></tr>
+        <tr><td>Kacang merah</td><td>6,7 mg</td><td>100g</td><td><span class="badge badge-blue">Non-Heme</span></td></tr>
+        <tr><td>Kacang hijau</td><td>6,9 mg</td><td>100g</td><td><span class="badge badge-blue">Non-Heme</span></td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-info" style="margin-top:12px">
+      <span>💡</span>
+      <span>Konsumsi sumber Fe non-heme bersama Vitamin C (jeruk, jambu, tomat) untuk meningkatkan absorpsi hingga 3× lipat. Hindari teh/kopi 1 jam sebelum dan sesudah makan sumber Fe.</span>
+    </div>
+  </div>
+
+  <!-- Menu Ibu Hamil per Trimester -->
+  <div class="card">
+    <div class="card-title">🤰 Contoh Menu Ibu Hamil per Trimester</div>
+    <div class="card-sub">Disesuaikan dengan kebutuhan gizi per trimester</div>
+    <div id="menu-tabs" style="display:flex;gap:8px;margin-bottom:12px">
+      <button onclick="showMenu('t1')" id="btn-t1" class="btn btn-cam btn-sm" style="margin-top:0">Trimester 1</button>
+      <button onclick="showMenu('t2')" id="btn-t2" style="padding:7px 16px;font-size:0.8rem;border-radius:8px;border:1.5px solid var(--cam);background:#fff;color:var(--cam-d);font-weight:600;cursor:pointer">Trimester 2</button>
+      <button onclick="showMenu('t3')" id="btn-t3" style="padding:7px 16px;font-size:0.8rem;border-radius:8px;border:1.5px solid var(--cam);background:#fff;color:var(--cam-d);font-weight:600;cursor:pointer">Trimester 3</button>
+    </div>
+    <div id="menu-t1">
+      <div class="alert alert-info"><span>🌅</span><div><strong>Fokus T1:</strong> Asam folat, Vit B6 (atasi mual), zat besi, protein. Makan porsi kecil tapi sering.</div></div>
+      <table class="tbl" style="margin-top:10px">
+        <thead><tr><th>Waktu</th><th>Menu</th><th>Estimasi</th></tr></thead>
+        <tbody>
+          <tr><td>Sarapan</td><td>Roti gandum 2 lembar + telur dadar + susu ibu hamil</td><td>350 kkal</td></tr>
+          <tr><td>Selingan</td><td>Buah pisang/apel + biskuit gandum</td><td>150 kkal</td></tr>
+          <tr><td>Makan Siang</td><td>Nasi ¾ centong + ikan panggang + sayur bayam + tempe</td><td>500 kkal</td></tr>
+          <tr><td>Selingan</td><td>Yogurt + buah potong</td><td>150 kkal</td></tr>
+          <tr><td>Makan Malam</td><td>Nasi ¾ centong + ayam kukus + tumis kangkung + tahu</td><td>450 kkal</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>±1.900 kkal</strong></td><td><strong>+300 kkal vs normal</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="menu-t2" style="display:none">
+      <div class="alert alert-info"><span>🌿</span><div><strong>Fokus T2:</strong> Kalsium, Vit D, omega-3, zat besi, protein untuk pertumbuhan janin optimal.</div></div>
+      <table class="tbl" style="margin-top:10px">
+        <thead><tr><th>Waktu</th><th>Menu</th><th>Estimasi</th></tr></thead>
+        <tbody>
+          <tr><td>Sarapan</td><td>Nasi 1 centong + hati ayam/sapi + jus jeruk</td><td>400 kkal</td></tr>
+          <tr><td>Selingan</td><td>Susu ibu hamil + kurma 3 butir</td><td>200 kkal</td></tr>
+          <tr><td>Makan Siang</td><td>Nasi 1 centong + ikan salmon/tongkol + sup sayuran + tahu tempe</td><td>550 kkal</td></tr>
+          <tr><td>Selingan</td><td>Kacang merah rebus + buah pepaya</td><td>180 kkal</td></tr>
+          <tr><td>Makan Malam</td><td>Nasi ¾ centong + daging sapi + tumis brokoli + susu</td><td>470 kkal</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>±2.100 kkal</strong></td><td><strong>+300 kkal vs normal</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="menu-t3" style="display:none">
+      <div class="alert alert-info"><span>🌸</span><div><strong>Fokus T3:</strong> Zat besi (persiapan persalinan), kalsium, vitamin K, protein. Hindari makanan yang membuat kembung.</div></div>
+      <table class="tbl" style="margin-top:10px">
+        <thead><tr><th>Waktu</th><th>Menu</th><th>Estimasi</th></tr></thead>
+        <tbody>
+          <tr><td>Sarapan</td><td>Bubur ayam + telur rebus + jus tomat</td><td>380 kkal</td></tr>
+          <tr><td>Selingan</td><td>Susu + kurma 5 butir + kacang almond</td><td>250 kkal</td></tr>
+          <tr><td>Makan Siang</td><td>Nasi 1 centong + ikan kembung + sayur kelor + tempe goreng</td><td>520 kkal</td></tr>
+          <tr><td>Selingan</td><td>Puding susu + buah alpukat</td><td>200 kkal</td></tr>
+          <tr><td>Makan Malam</td><td>Nasi ¾ centong + ayam + sup bening bayam + tahu + susu</td><td>450 kkal</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>±2.100 kkal</strong></td><td><strong>+300 kkal vs normal</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 1000 HPK ═══ -->
+<div id="s-edukasi" class="section">
+  <div class="card">
+    <div class="card-title">📖 1000 Hari Pertama Kehidupan (1000 HPK)</div>
+    <div class="card-sub">Periode emas yang menentukan kualitas kesehatan sepanjang hayat</div>
+    <div class="alert alert-ok">
+      <span>⭐</span>
+      <div><strong>1000 HPK = 270 hari kehamilan + 730 hari (2 tahun pertama kehidupan)</strong><br>Intervensi pada periode ini memberikan dampak permanen terhadap pertumbuhan fisik, kecerdasan, dan produktivitas anak.</div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="card">
+    <div class="card-title">⏰ Timeline 1000 HPK & Intervensi Kunci</div>
+    <div style="margin-top:10px">
+      <div class="hpk-item">
+        <div class="hpk-dot" style="background:var(--purple-l)">🤰</div>
+        <div class="hpk-content">
+          <div class="hpk-title">Kehamilan (270 hari)</div>
+          <div class="hpk-desc">• Asam folat 400mcg sejak pra-konsepsi (cegah NTD)<br>• Tablet Fe 90 tablet selama hamil<br>• Kalsium 1.200mg/hari (trimester 2-3)<br>• IMT pra-hamil normal → target kenaikan BB sesuai IOM<br>• ANC minimal 6× selama kehamilan (Permenkes 21/2021)</div>
+        </div>
+      </div>
+      <div class="hpk-item">
+        <div class="hpk-dot" style="background:#FEF3C7">🍼</div>
+        <div class="hpk-content">
+          <div class="hpk-title">0 – 6 Bulan (ASI Eksklusif)</div>
+          <div class="hpk-desc">• IMD (Inisiasi Menyusu Dini) dalam 1 jam pertama lahir<br>• ASI eksklusif 0-6 bulan tanpa tambahan apapun<br>• ASI mengandung semua nutrisi + antibodi yang dibutuhkan<br>• Vit D 400 IU/hari untuk bayi ASI eksklusif<br>• Pantau BB setiap bulan di Posyandu</div>
+        </div>
+      </div>
+      <div class="hpk-item">
+        <div class="hpk-dot" style="background:var(--green-l)">🥣</div>
+        <div class="hpk-content">
+          <div class="hpk-title">6 – 12 Bulan (MPASI + ASI)</div>
+          <div class="hpk-desc">• MPASI dimulai tepat usia 6 bulan (tidak lebih awal/lambat)<br>• Tekstur puree → cincang halus → cincang kasar<br>• MPASI tinggi protein hewani SETIAP hari (telur, ikan, daging, hati)<br>• Lanjutkan ASI hingga 2 tahun<br>• Imunisasi lengkap sesuai jadwal Kemenkes RI</div>
+        </div>
+      </div>
+      <div class="hpk-item" style="border-bottom:none">
+        <div class="hpk-dot" style="background:var(--teal-l)">🧒</div>
+        <div class="hpk-content">
+          <div class="hpk-title">12 – 24 Bulan (Makanan Keluarga + ASI)</div>
+          <div class="hpk-desc">• Makanan keluarga bergizi seimbang 3×/hari + 2× selingan<br>• ASI tetap diberikan hingga usia 2 tahun<br>• Suplemen Vit A 200.000 IU (Februari & Agustus di Posyandu)<br>• Stimulasi tumbuh kembang optimal (bicara, bermain, membaca)<br>• Deteksi dini stunting di Posyandu setiap bulan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stunting -->
+  <div class="card">
+    <div class="card-title">🚨 Memahami Stunting</div>
+    <div class="card-sub">Pencegahan lebih efektif daripada penanganan</div>
+    <div class="alert alert-danger">
+      <span>📏</span>
+      <div><strong>Definisi Stunting:</strong> TB/U &lt; -2 SD dari median standar WHO. Bukan hanya "pendek" — stunting menandakan gagal tumbuh akibat kekurangan gizi kronis yang berdampak pada fungsi otak dan kecerdasan.</div>
+    </div>
+    <div style="margin-top:12px">
+      <div style="font-size:0.78rem;font-weight:700;color:var(--navy);margin-bottom:8px">Penyebab Utama Stunting:</div>
+      <div class="chart-bar-row"><span class="chart-label">Gizi buruk</span><div class="chart-bar-bg"><div class="chart-bar-fill" style="width:85%;background:var(--red)">85%</div></div></div>
+      <div class="chart-bar-row"><span class="chart-label">Infeksi berulang</span><div class="chart-bar-bg"><div class="chart-bar-fill" style="width:70%;background:var(--cam)">70%</div></div></div>
+      <div class="chart-bar-row"><span class="chart-label">BBLR</span><div class="chart-bar-bg"><div class="chart-bar-fill" style="width:55%;background:#F59E0B">55%</div></div></div>
+      <div class="chart-bar-row"><span class="chart-label">MPASI terlambat</span><div class="chart-bar-bg"><div class="chart-bar-fill" style="width:45%;background:var(--purple)">45%</div></div></div>
+      <div class="chart-bar-row"><span class="chart-label">Sanitasi buruk</span><div class="chart-bar-bg"><div class="chart-bar-fill" style="width:40%;background:var(--teal)">40%</div></div></div>
+    </div>
+    <div class="alert alert-ok" style="margin-top:12px">
+      <span>✅</span>
+      <div><strong>Strategi Pencegahan (Perpres 72/2021):</strong><br>
+      Intervensi Spesifik: TTD, PMT bumil, ASI eksklusif, MPASI adekuat, Vit A, stimulasi tumbuh kembang<br>
+      Intervensi Sensitif: Air bersih & sanitasi, KB, pendidikan, pengentasan kemiskinan</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REFERENSI ═══ -->
+<div id="s-referensi" class="section">
+  <div class="card" style="background:linear-gradient(135deg,var(--cam-d),var(--navy));border:none;margin-bottom:14px">
+    <div style="color:#fff;font-size:0.8rem;margin-bottom:4px;opacity:0.8">📚 Perpustakaan Referensi</div>
+    <div style="color:#fff;font-weight:700;font-family:Georgia,serif;font-size:1.1rem">FLORIS Camomile — NUTRIGIZI BidanKu</div>
+    <div style="color:rgba(255,255,255,0.7);font-size:0.7rem;margin-top:4px">25 Referensi Valid · Terindeks Online · Dapat Diakses Gratis</div>
+  </div>
+
+  <div class="card-sub" style="margin-bottom:10px;font-weight:700;color:var(--navy)">🇮🇩 Regulasi & Kebijakan Nasional</div>
+  <div class="ref-item"><span class="ref-num">1</span><div class="ref-title">Permenkes RI No. 28 Tahun 2019: Angka Kecukupan Gizi (AKG)</div><div class="ref-source">Kementerian Kesehatan RI · gizi.kemkes.go.id</div></div>
+  <div class="ref-item"><span class="ref-num">2</span><div class="ref-title">Permenkes RI No. 21 Tahun 2021: Pelayanan Kesehatan Masa Hamil & Persalinan</div><div class="ref-source">Kementerian Kesehatan RI · hukor.kemkes.go.id</div></div>
+  <div class="ref-item"><span class="ref-num">3</span><div class="ref-title">Permenkes RI No. 2 Tahun 2020: Standar Antropometri Anak</div><div class="ref-source">Kementerian Kesehatan RI · bit.ly/permenkes2-2020</div></div>
+  <div class="ref-item"><span class="ref-num">4</span><div class="ref-title">Perpres No. 72 Tahun 2021: Percepatan Penurunan Stunting</div><div class="ref-source">Sekretariat Negara RI · jdih.setneg.go.id</div></div>
+  <div class="ref-item"><span class="ref-num">5</span><div class="ref-title">Pedoman Gizi Seimbang (PGS) — Isi Piringku</div><div class="ref-source">Kemenkes RI, 2014 · gizi.kemkes.go.id</div></div>
+
+  <div class="card-sub" style="margin:14px 0 10px;font-weight:700;color:var(--navy)">🌍 WHO & Panduan Internasional</div>
+  <div class="ref-item"><span class="ref-num">6</span><div class="ref-title">WHO Child Growth Standards</div><div class="ref-source">WHO, 2006 · who.int/tools/child-growth-standards</div></div>
+  <div class="ref-item"><span class="ref-num">7</span><div class="ref-title">WHO Recommendations on Antenatal Care for a Positive Pregnancy Experience</div><div class="ref-source">WHO, 2016 · who.int/publications</div></div>
+  <div class="ref-item"><span class="ref-num">8</span><div class="ref-title">WHO Global Targets 2025: To Improve Maternal, Infant and Young Child Nutrition</div><div class="ref-source">WHO, 2014 · who.int/publications</div></div>
+  <div class="ref-item"><span class="ref-num">9</span><div class="ref-title">Guideline: Daily Iron and Folic Acid Supplementation in Pregnant Women</div><div class="ref-source">WHO, 2012 · who.int/publications</div></div>
+  <div class="ref-item"><span class="ref-num">10</span><div class="ref-title">Guideline: Optimal Serum and Red Blood Cell Folate Concentrations in Women of Reproductive Age for Prevention of Neural Tube Defects</div><div class="ref-source">WHO, 2015 · who.int/publications</div></div>
+
+  <div class="card-sub" style="margin:14px 0 10px;font-weight:700;color:var(--navy)">📊 Panduan Gizi Kehamilan</div>
+  <div class="ref-item"><span class="ref-num">11</span><div class="ref-title">Weight Gain During Pregnancy: Reexamining the Guidelines (IOM Report)</div><div class="ref-source">Institute of Medicine (IOM), 2009 · nap.edu</div></div>
+  <div class="ref-item"><span class="ref-num">12</span><div class="ref-title">Nutrition During Pregnancy and the First 1000 Days</div><div class="ref-source">WHO/UNICEF, 2020 · who.int</div></div>
+  <div class="ref-item"><span class="ref-num">13</span><div class="ref-title">Iron Deficiency Anaemia: Assessment, Prevention and Control</div><div class="ref-source">WHO, 2001 · who.int/publications</div></div>
+
+  <div class="card-sub" style="margin:14px 0 10px;font-weight:700;color:var(--navy)">👶 Gizi Bayi & Balita</div>
+  <div class="ref-item"><span class="ref-num">14</span><div class="ref-title">Guideline: Updates on HIV and Infant Feeding / Breastfeeding Promotion</div><div class="ref-source">WHO, 2016 · who.int/publications</div></div>
+  <div class="ref-item"><span class="ref-num">15</span><div class="ref-title">Complementary Feeding: Family Foods for Breastfed Children</div><div class="ref-source">WHO, 2000 · who.int/publications</div></div>
+  <div class="ref-item"><span class="ref-num">16</span><div class="ref-title">Guideline: Vitamin D Supplementation in Pregnant Women</div><div class="ref-source">WHO, 2012 · who.int/publications</div></div>
+
+  <div class="card-sub" style="margin:14px 0 10px;font-weight:700;color:var(--navy)">✍️ Publikasi Ernawati</div>
+  <div class="ref-item"><span class="ref-num">17</span><div class="ref-title">The Effect of Polyethylene Swaddle in Hypothermia Prevention Among Low Birth Weight Neonates</div><div class="ref-source">Ernawati et al. · NMS Journal, 2022 · nmsjournal.com</div></div>
+  <div class="ref-item"><span class="ref-num">18</span><div class="ref-title">Labor Position and Its Impact on the Birth Process: A Literature Review</div><div class="ref-source">Ahmar H, Sofyana S, Suciati S, Ernawati E, Liantanty F · JCHS, 2025 · doi:10.47679/jchs.2025115</div></div>
+
+  <div class="brand-footer">
+    <div style="font-size:0.9rem;font-weight:700;color:var(--cam-d);margin-bottom:3px">🌼 FLORIS Camomile — NUTRIGIZI BidanKu</div>
+    <div style="font-size:0.68rem;color:var(--muted);font-style:italic;margin-bottom:6px">Nutrition Intelligent Guide for Indonesian Zero-Hunger Initiative · FL-04</div>
+    <div style="font-size:0.82rem;font-weight:700;color:var(--navy)">Ernawati, SST., Bdn., M.Kes</div>
+    <div style="font-size:0.72rem;color:var(--muted)">Dosen Kebidanan — FIKK Institut Kesehatan Karsa Husada Garut</div>
+    <div style="font-size:0.65rem;color:var(--muted);margin-top:6px">📱 Versi Offline — Dapat digunakan tanpa internet</div>
+    <div style="font-size:0.62rem;color:#bbb;margin-top:4px">© 2026 Ernawati, SST., Bdn., M.Kes · FLORIS Series FL-04 · ERNAWATI BidanKu</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ── TAB NAVIGATION ────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  const tabs = ['beranda','skrining','ibuhamil','kalkulator','balita','menu','edukasi','referensi'];
+  const idx = tabs.indexOf(id);
+  document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── IMT CALCULATOR ────────────────────────────────────────────────
+function hitungIMT() {
+  const bb = parseFloat(document.getElementById('imt-bb').value);
+  const tb = parseFloat(document.getElementById('imt-tb').value);
+  const res = document.getElementById('imt-result');
+  if (!bb || !tb || tb < 100) { res.style.display='none'; return; }
+
+  const imt = bb / Math.pow(tb/100, 2);
+  let kat='', warna='rb-normal', rec='', color='';
+
+  if (imt < 17.0)      { kat='Kurus Tingkat Berat';   warna='rb-danger';  color='#DC2626'; rec='⚠️ Risiko KEK tinggi. Perlu konseling gizi intensif dan pemantauan ketat. Rujuk ke ahli gizi.'; }
+  else if (imt < 18.5) { kat='Kurus Tingkat Ringan';  warna='rb-warning'; color='#D97706'; rec='💡 Tingkatkan asupan kalori dan protein. Konsumsi makanan bergizi padat kalori 5-6×/hari.'; }
+  else if (imt < 25.0) { kat='Normal';                warna='rb-normal';  color='#15803D'; rec='✅ Status gizi baik! Pertahankan dengan diet seimbang dan aktivitas fisik teratur.'; }
+  else if (imt < 27.0) { kat='Gemuk (Overweight)';   warna='rb-warning'; color='#D97706'; rec='💡 Batasi makanan tinggi lemak dan gula. Tingkatkan konsumsi sayur, buah, dan aktivitas fisik.'; }
+  else                 { kat='Obesitas';              warna='rb-danger';  color='#DC2626'; rec='⚠️ Risiko penyakit metabolik meningkat. Konsultasi dengan dokter/ahli gizi untuk program penurunan BB.'; }
+
+  res.className = `result-box ${warna}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+      <div>
+        <div class="result-value" style="color:${color}">${imt.toFixed(1)}</div>
+        <div class="result-label" style="color:${color}">kg/m² — ${kat}</div>
+      </div>
+      <div style="text-align:right;font-size:0.72rem;color:var(--muted)">BB: ${bb}kg<br>TB: ${tb}cm</div>
+    </div>
+    <div class="prog-wrap" style="margin-top:10px">
+      <div class="prog-bar" style="width:${Math.min(imt/40*100,100)}%;background:${color}"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:0.62rem;color:var(--muted);margin-top:3px">
+      <span>Kurus &lt;18,5</span><span>Normal 18,5–24,9</span><span>Gemuk ≥25</span>
+    </div>
+    <div class="rec-box">${rec}</div>`;
+}
+
+// ── LILA ─────────────────────────────────────────────────────────
+function hitungLILA() {
+  const lila = parseFloat(document.getElementById('lila-val').value);
+  const status = document.getElementById('lila-status').value;
+  const res = document.getElementById('lila-result');
+  if (!lila) { res.style.display='none'; return; }
+
+  const batas = 23.5;
+  const kek = lila < batas;
+  res.className = `result-box ${kek ? 'rb-danger' : 'rb-normal'}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div class="result-value" style="color:${kek?'#DC2626':'#15803D'}">${lila} cm</div>
+    <div class="result-label" style="color:${kek?'#DC2626':'#15803D'}">${kek ? '⚠️ BERISIKO KEK (Kurang Energi Kronik)' : '✅ Normal — Tidak Berisiko KEK'}</div>
+    <div class="prog-wrap" style="margin-top:10px">
+      <div class="prog-bar" style="width:${Math.min(lila/30*100,100)}%;background:${kek?'#DC2626':'#15803D'}"></div>
+    </div>
+    <div class="rec-box">
+      ${kek
+        ? '🚨 LILA < 23,5 cm menandakan Kurang Energi Kronik (KEK). Pada ibu hamil, KEK meningkatkan risiko BBLR, prematur, dan stunting pada anak. <strong>Berikan PMT (Pemberian Makanan Tambahan) dan rujuk ke ahli gizi.</strong>'
+        : '✅ LILA ≥ 23,5 cm — tidak berisiko KEK. Pertahankan pola makan bergizi seimbang dan pemantauan rutin di Posyandu.'}
+    </div>
+    <div style="font-size:0.72rem;color:var(--muted);margin-top:8px">Batas normal: ≥ 23,5 cm (Kemenkes RI · WHO)</div>`;
+}
+
+// ── LINGKAR PERUT ────────────────────────────────────────────────
+function hitungLP() {
+  const lp = parseFloat(document.getElementById('lp-val').value);
+  const jk = document.getElementById('lp-jk').value;
+  const res = document.getElementById('lp-result');
+  if (!lp) { res.style.display='none'; return; }
+
+  const batas = jk === 'p' ? 80 : 90;
+  const risiko = lp >= batas;
+  res.className = `result-box ${risiko ? 'rb-danger' : 'rb-normal'}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div class="result-value" style="color:${risiko?'#DC2626':'#15803D'}">${lp} cm</div>
+    <div class="result-label" style="color:${risiko?'#DC2626':'#15803D'}">${risiko ? '⚠️ Obesitas Sentral — Risiko Metabolik Tinggi' : '✅ Normal'}</div>
+    <div class="rec-box">
+      ${risiko
+        ? `⚠️ Lingkar perut ≥ ${batas}cm pada ${jk==='p'?'perempuan':'laki-laki'} menandakan obesitas sentral yang meningkatkan risiko diabetes, hipertensi, dan penyakit jantung. Anjurkan modifikasi gaya hidup dan konsultasi dokter.`
+        : `✅ Lingkar perut dalam batas normal. Batas ${jk==='p'?'perempuan: <80cm':'laki-laki: <90cm'} (IDF Consensus 2006).`}
+    </div>`;
+}
+
+// ── HEMOGLOBIN ───────────────────────────────────────────────────
+function hitungHb() {
+  const hb = parseFloat(document.getElementById('hb-val').value);
+  const kondisi = document.getElementById('hb-kondisi').value;
+  const res = document.getElementById('hb-result');
+  if (!hb) { res.style.display='none'; return; }
+
+  const batas = {hamil:11, 'tidak-hamil':12, balita:11, anak:11.5};
+  const cut = batas[kondisi];
+  let kat='', warna='', rec='', color='';
+
+  if (hb >= cut)           { kat='Normal — Tidak Anemia'; warna='rb-normal';  color='#15803D'; rec='✅ Kadar Hb normal. Pertahankan konsumsi makanan kaya zat besi dan Vit C.'; }
+  else if (hb >= cut - 2)  { kat='Anemia Ringan';         warna='rb-warning'; color='#D97706'; rec='💡 Anemia ringan. Tingkatkan asupan Fe dari makanan dan pastikan minum TTD secara teratur. Cek diet dan kepatuhan minum tablet Fe.'; }
+  else if (hb >= cut - 4)  { kat='Anemia Sedang';         warna='rb-danger';  color='#DC2626'; rec='⚠️ Anemia sedang. Rujuk ke fasilitas kesehatan untuk evaluasi lebih lanjut. Kemungkinan perlu suplementasi Fe dosis tinggi atau injeksi.'; }
+  else                     { kat='Anemia Berat';          warna='rb-danger';  color='#991B1B'; rec='🚨 ANEMIA BERAT! Segera rujuk ke rumah sakit. Berisiko kematian ibu, BBLR, gangguan tumbuh kembang anak.'; }
+
+  res.className = `result-box ${warna}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div class="result-value" style="color:${color}">${hb} g/dL</div>
+    <div class="result-label" style="color:${color}">${kat}</div>
+    <div style="font-size:0.72rem;color:var(--muted);margin-top:5px">Batas normal: ≥ ${cut} g/dL (WHO)</div>
+    <div class="rec-box">${rec}</div>`;
+}
+
+// ── HAMIL ─────────────────────────────────────────────────────────
+function hitungHamil() {
+  const bbPra = parseFloat(document.getElementById('h-bb-pra').value);
+  const tb    = parseFloat(document.getElementById('h-tb').value);
+  const bbNow = parseFloat(document.getElementById('h-bb-now').value);
+  const uk    = parseFloat(document.getElementById('h-uk').value);
+  const janin = parseInt(document.getElementById('h-janin').value);
+  const res   = document.getElementById('hamil-result');
+
+  if (!bbPra || !tb || !bbNow || !uk) { res.style.display='none'; return; }
+
+  const imt = bbPra / Math.pow(tb/100, 2);
+  let katIMT='', rekMin=0, rekMax=0, rekPerMgg=[0,0];
+
+  if (janin === 1) {
+    if      (imt < 18.5) { katIMT='Kurus';    rekMin=12.5; rekMax=18;   rekPerMgg=[0.44,0.58]; }
+    else if (imt < 25)   { katIMT='Normal';   rekMin=11.5; rekMax=16;   rekPerMgg=[0.35,0.50]; }
+    else if (imt < 30)   { katIMT='Gemuk';    rekMin=7;    rekMax=11.5; rekPerMgg=[0.23,0.33]; }
+    else                 { katIMT='Obesitas'; rekMin=5;    rekMax=9;    rekPerMgg=[0.17,0.27]; }
+  } else if (janin === 2) {
+    katIMT = 'Kembar 2';
+    if      (imt < 18.5) { rekMin=23; rekMax=28; rekPerMgg=[0.68,0.79]; }
+    else if (imt < 25)   { rekMin=17; rekMax=25; rekPerMgg=[0.58,0.68]; }
+    else if (imt < 30)   { rekMin=14; rekMax=23; rekPerMgg=[0.47,0.57]; }
+    else                 { rekMin=11; rekMax=19; rekPerMgg=[0.37,0.47]; }
+  } else {
+    katIMT='Kembar 3'; rekMin=23; rekMax=30; rekPerMgg=[0.68,0.90];
+  }
+
+  const naik = bbNow - bbPra;
+  let ekspMin=0, ekspMax=0;
+  if (uk <= 12)    { ekspMin=0.5; ekspMax=2; }
+  else             { ekspMin=rekMin*0.5+rekPerMgg[0]*(uk-13); ekspMax=rekMax*0.5+rekPerMgg[1]*(uk-13); }
+
+  const status = naik < ekspMin ? 'kurang' : naik > ekspMax ? 'lebih' : 'normal';
+  const warna = status==='normal' ? 'rb-normal' : status==='kurang' ? 'rb-warning' : 'rb-danger';
+  const icon  = status==='normal' ? '✅' : status==='kurang' ? '⚠️' : '🚨';
+
+  res.className = `result-box ${warna}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="val">${imt.toFixed(1)}</div><div class="lbl">IMT Pra-Hamil</div></div>
+      <div class="info-item"><div class="val">${naik>0?'+':''}${naik.toFixed(1)} kg</div><div class="lbl">Kenaikan BB</div></div>
+      <div class="info-item"><div class="val">${rekMin}–${rekMax} kg</div><div class="lbl">Target Total</div></div>
+      <div class="info-item"><div class="val">${rekPerMgg[0]}–${rekPerMgg[1]}</div><div class="lbl">kg/mgg (T2-T3)</div></div>
+    </div>
+    <div class="rec-box" style="margin-top:10px">
+      ${icon} <strong>UK ${uk} mgg · IMT ${katIMT}:</strong><br>
+      Ekspektasi kenaikan BB saat ini: ${ekspMin.toFixed(1)}–${ekspMax.toFixed(1)} kg<br>
+      ${status==='normal' ? '✅ Kenaikan BB Anda normal dan sesuai rekomendasi.' :
+        status==='kurang' ? '⚠️ Kenaikan BB kurang dari target. Tingkatkan asupan gizi dan konsultasi bidan/dokter.' :
+        '🚨 Kenaikan BB melebihi target. Batasi makanan tinggi lemak/gula, tingkatkan aktivitas fisik ringan, konsultasi dokter.'}
+    </div>
+    <div style="font-size:0.68rem;color:var(--muted);margin-top:8px">Sumber: IOM 2009 + AKG Kemenkes 2019</div>`;
+}
+
+// ── KALORI ───────────────────────────────────────────────────────
+function hitungKalori() {
+  const jk  = document.getElementById('kal-jk').value;
+  const usia= parseFloat(document.getElementById('kal-usia').value);
+  const bb  = parseFloat(document.getElementById('kal-bb').value);
+  const tb  = parseFloat(document.getElementById('kal-tb').value);
+  const akt = parseFloat(document.getElementById('kal-aktivitas').value);
+  const kond= parseFloat(document.getElementById('kal-kondisi').value) || 0;
+  const res = document.getElementById('kalori-result');
+
+  if (!usia || !bb || !tb) { res.style.display='none'; return; }
+
+  // Harris-Benedict
+  let bmr = jk==='p'
+    ? 655.1 + (9.563*bb) + (1.850*tb) - (4.676*usia)
+    : 66.47 + (13.752*bb) + (5.003*tb) - (6.755*usia);
+  const tdee = Math.round(bmr * akt + kond);
+  const protein = Math.round(bb * 1.2); // 1.2g/kgBB
+  const lemak   = Math.round(tdee * 0.25 / 9);
+  const karbo   = Math.round((tdee - protein*4 - lemak*9) / 4);
+
+  res.className = 'result-box rb-teal';
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div class="result-value" style="color:var(--teal)">${tdee.toLocaleString('id')}</div>
+    <div class="result-label" style="color:var(--teal)">kkal/hari (Total Kebutuhan Energi)</div>
+    <div class="info-grid" style="margin-top:12px">
+      <div class="info-item"><div class="val">${protein}g</div><div class="lbl">Protein/hari</div></div>
+      <div class="info-item"><div class="val">${lemak}g</div><div class="lbl">Lemak/hari</div></div>
+      <div class="info-item"><div class="val">${karbo}g</div><div class="lbl">Karbohidrat/hari</div></div>
+      <div class="info-item"><div class="val">${Math.round(bmr)}</div><div class="lbl">BMR (kkal)</div></div>
+    </div>
+    <div class="rec-box" style="margin-top:10px;font-size:0.75rem">
+      💡 Distribusi makan: Sarapan 25% · Selingan pagi 10% · Makan siang 30% · Selingan sore 10% · Makan malam 25%<br>
+      <span style="font-size:0.68rem;color:var(--muted)">Rumus Harris-Benedict + AKG Kemenkes 2019</span>
+    </div>`;
+}
+
+// ── BALITA ───────────────────────────────────────────────────────
+function hitungBalita() {
+  const jk    = document.getElementById('bal-jk').value;
+  const bulan = parseInt(document.getElementById('bal-bulan').value)||0;
+  const bb    = parseFloat(document.getElementById('bal-bb').value);
+  const tb    = parseFloat(document.getElementById('bal-tb').value);
+  const res   = document.getElementById('balita-result');
+
+  if (!bb || !tb || isNaN(bulan)) { res.style.display='none'; return; }
+
+  // WHO median reference values (simplified, 0-59 months)
+  const refBBU_p=[3.2,4.2,5.1,5.8,6.4,6.9,7.3,7.6,7.9,8.2,8.5,8.7,8.9,9.2,9.4,9.6,9.8,9.9,10.1,10.3,10.4,10.6,10.7,10.9,11.0,11.1,11.3,11.4,11.6,11.7,11.9,12.0,12.1,12.3,12.4,12.6,12.7,12.8,13.0,13.1,13.3,13.4,13.5,13.7,13.8,14.0,14.1,14.3,14.4,14.5,14.7,14.8,15.0,15.1,15.3,15.4,15.6,15.7,15.9,16.0];
+  const refBBU_l=[3.3,4.5,5.6,6.4,7.0,7.5,7.9,8.3,8.6,8.9,9.2,9.4,9.6,9.9,10.1,10.3,10.5,10.7,10.9,11.1,11.3,11.5,11.8,12.0,12.2,12.4,12.6,12.7,12.9,13.1,13.3,13.5,13.7,13.8,14.0,14.2,14.3,14.5,14.7,14.9,15.1,15.3,15.4,15.6,15.7,15.9,16.1,16.3,16.4,16.6,16.8,17.0,17.2,17.3,17.5,17.7,17.9,18.1,18.2,18.4];
+  const refTBU_p=[49.1,53.7,57.1,59.8,62.1,64.0,65.7,67.3,68.7,70.1,71.5,72.8,74.0,75.2,76.4,77.5,78.6,79.7,80.7,81.7,82.7,83.7,84.6,85.5,86.4,87.4,88.3,89.1,90.0,90.8,91.7,92.5,93.3,94.1,94.9,95.7,96.4,97.2,97.9,98.7,99.4,100.1,100.8,101.5,102.2,102.9,103.5,104.2,104.8,105.5,106.1,106.7,107.3,107.9,108.5,109.1,109.6,110.2,110.8,111.3];
+  const refTBU_l=[49.9,54.7,58.4,61.4,63.9,65.9,67.6,69.2,70.6,72.0,73.3,74.5,75.7,76.9,78.0,79.1,80.2,81.2,82.3,83.2,84.2,85.1,86.0,86.9,87.8,88.7,89.6,90.4,91.2,92.1,92.9,93.7,94.5,95.3,96.1,96.9,97.6,98.4,99.1,99.8,100.6,101.3,102.0,102.7,103.3,104.0,104.7,105.4,106.0,106.7,107.3,107.9,108.5,109.2,109.8,110.4,110.9,111.5,112.1,112.7];
+
+  const idx    = Math.min(bulan, 59);
+  const refBB  = jk==='p' ? refBBU_p[idx] : refBBU_l[idx];
+  const refTB  = jk==='p' ? refTBU_p[idx] : refTBU_l[idx];
+  const zBBU   = (bb - refBB)  / (refBB  * 0.13);
+  const zTBU   = (tb - refTB)  / (refTB  * 0.045);
+  const bbTB   = bb / Math.pow(tb/100, 2);
+
+  const getStatus = (z) => {
+    if (z < -3)      return {label:'Sangat Kurang/Buruk', color:'#991B1B', bg:'#FEF2F2'};
+    else if (z < -2) return {label:'Kurang (Masalah)',    color:'#DC2626', bg:'#FFF5F5'};
+    else if (z <= 2) return {label:'Normal (Baik)',       color:'#15803D', bg:'#F0FDF4'};
+    else if (z <= 3) return {label:'Lebih',               color:'#D97706', bg:'#FFFBEB'};
+    else             return {label:'Obesitas',            color:'#991B1B', bg:'#FEF2F2'};
+  };
+
+  const stBBU    = getStatus(zBBU);
+  const stTBU    = getStatus(zTBU);
+  const stunting = zTBU < -2;
+  const wasting  = zBBU < -2;
+  const giziBuruk= zBBU < -3;
+  const overweight= zBBU > 2;
+
+  // ── REKOMENDASI NUTRISI BERDASARKAN USIA & STATUS GIZI ──────────
+  function getRekomendasi() {
+    let makan='', nutrisi='', khusus='', darurat='';
+
+    // POLA MAKAN PER USIA
+    if (bulan < 6) {
+      makan = `<strong>0–5 Bulan: ASI Eksklusif</strong><br>
+      • ASI saja — TIDAK ada makanan/minuman tambahan apapun termasuk air putih<br>
+      • Susui sesering mungkin (8–12×/hari) sesuai permintaan bayi (on demand)<br>
+      • Pastikan perlekatan (latch-on) yang benar untuk produksi ASI optimal<br>
+      • Vit D 400 IU/hari untuk bayi ASI eksklusif (terutama kurang paparan sinar matahari)`;
+    } else if (bulan < 9) {
+      makan = `<strong>6–8 Bulan: MPASI Awal + ASI</strong><br>
+      • Tekstur: <strong>puree/bubur halus</strong> yang licin dan lembut<br>
+      • Frekuensi: <strong>2–3×/hari</strong> makanan utama + 1–2× selingan<br>
+      • Porsi mulai: <strong>2–3 sdm</strong> → bertahap naik ke ½ mangkok (125ml)<br>
+      • Lanjutkan ASI sesering mungkin<br>
+      • Mulai dengan satu bahan dulu, tunggu 3 hari, baru kombinasi`;
+    } else if (bulan < 12) {
+      makan = `<strong>9–11 Bulan: MPASI Berkembang + ASI</strong><br>
+      • Tekstur: <strong>cincang halus/kasar, finger food</strong> lunak<br>
+      • Frekuensi: <strong>3–4×/hari</strong> makanan utama + 1–2× selingan<br>
+      • Porsi: <strong>½–¾ mangkok (125–175ml)</strong><br>
+      • Latih makan sendiri (self-feeding) dengan finger food<br>
+      • Lanjutkan ASI minimal 2–3×/hari`;
+    } else if (bulan < 24) {
+      makan = `<strong>12–23 Bulan: Makanan Keluarga + ASI</strong><br>
+      • Tekstur: <strong>makanan keluarga</strong> yang tidak terlalu keras/pedas/asin<br>
+      • Frekuensi: <strong>3–4×/hari</strong> + 2× selingan bergizi<br>
+      • Porsi: <strong>¾–1 mangkok penuh (175–250ml)</strong><br>
+      • ASI tetap diberikan hingga usia 2 tahun<br>
+      • Variasi warna dan jenis makanan setiap hari`;
+    } else {
+      makan = `<strong>24–60 Bulan: Makanan Keluarga Bergizi</strong><br>
+      • Frekuensi: <strong>3×/hari</strong> makan utama + 2× selingan sehat<br>
+      • Porsi anak: sesuai nafsu makan, tidak perlu dipaksa<br>
+      • Prinsip Isi Piringku: ½ piring sayur+buah, ¼ lauk protein, ¼ makanan pokok<br>
+      • Batasi gula, garam, dan lemak jenuh<br>
+      • Biasakan sarapan sebelum berangkat ke PAUD/TK`;
+    }
+
+    // KEBUTUHAN NUTRISI SPESIFIK
+    const feKebutuhan = bulan < 6 ? '0.27 mg (dari ASI)' : bulan < 12 ? '11 mg/hari' : bulan < 36 ? '7 mg/hari' : '10 mg/hari';
+    const kalsiumKebutuhan = bulan < 6 ? '200 mg (dari ASI)' : bulan < 12 ? '260 mg/hari' : bulan < 36 ? '700 mg/hari' : '1000 mg/hari';
+    const vitAKebutuhan = bulan < 6 ? '400 mcg' : bulan < 12 ? '500 mcg' : '300–400 mcg/hari';
+    const kaloriKebutuhan = bulan < 6 ? '~500 kkal (dari ASI)' : bulan < 12 ? '~700–900 kkal' : bulan < 36 ? '~1000–1200 kkal' : '~1200–1400 kkal';
+
+    nutrisi = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+        <div style="background:rgba(255,255,255,0.8);border-radius:8px;padding:8px;text-align:center">
+          <div style="font-size:0.65rem;color:var(--muted);font-weight:600">⚡ ZAT BESI</div>
+          <div style="font-size:0.8rem;font-weight:700;color:#DC2626">${feKebutuhan}</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.8);border-radius:8px;padding:8px;text-align:center">
+          <div style="font-size:0.65rem;color:var(--muted);font-weight:600">🦴 KALSIUM</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--teal)">${kalsiumKebutuhan}</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.8);border-radius:8px;padding:8px;text-align:center">
+          <div style="font-size:0.65rem;color:var(--muted);font-weight:600">🍊 VIT A</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--cam-d)">${vitAKebutuhan}</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.8);border-radius:8px;padding:8px;text-align:center">
+          <div style="font-size:0.65rem;color:var(--muted);font-weight:600">🔥 KALORI</div>
+          <div style="font-size:0.8rem;font-weight:700;color:var(--navy)">${kaloriKebutuhan}</div>
+        </div>
+      </div>`;
+
+    // STATUS GIZI KHUSUS
+    if (giziBuruk) {
+      khusus = `<div style="background:#FEF2F2;border-left:4px solid #991B1B;border-radius:0 10px 10px 0;padding:10px 12px;margin-top:8px">
+        <strong style="color:#991B1B">🚨 GIZI BURUK — TINDAKAN DARURAT!</strong><br>
+        <span style="font-size:0.78rem">• Segera rujuk ke Puskesmas/RS untuk tata laksana gizi buruk<br>
+        • Pemberian F-75 → F-100 (formula WHO) di bawah pengawasan tenaga kesehatan<br>
+        • Tangani infeksi penyerta, dehidrasi, hipoglikemia<br>
+        • Program Pemberian Makanan Terapeutik Siap Saji (RUTF) bila tersedia<br>
+        • Rawat Inap bila ada komplikasi (BB/PB z-score < -3 + penyakit)</span>
+      </div>`;
+    } else if (wasting) {
+      khusus = `<div style="background:#FFF5F5;border-left:4px solid #DC2626;border-radius:0 10px 10px 0;padding:10px 12px;margin-top:8px">
+        <strong style="color:#DC2626">⚠️ GIZI KURANG — PERLU PENANGANAN SEGERA</strong><br>
+        <span style="font-size:0.78rem">• Berikan PMT (Pemberian Makanan Tambahan) pemulihan 90 hari<br>
+        • Tingkatkan frekuensi makan menjadi 5–6×/hari<br>
+        • Pilih makanan padat kalori dan kaya protein: telur, ikan, daging, kacang<br>
+        • Tambah 1–2 sdm minyak/mentega di setiap porsi makanan<br>
+        • Pantau BB setiap 2 minggu · Rujuk bila tidak ada perbaikan dalam 1 bulan</span>
+      </div>`;
+    } else if (stunting) {
+      khusus = `<div style="background:#FFF5F5;border-left:4px solid #DC2626;border-radius:0 10px 10px 0;padding:10px 12px;margin-top:8px">
+        <strong style="color:#DC2626">⚠️ STUNTING TERDETEKSI</strong><br>
+        <span style="font-size:0.78rem">• Konsultasi ke ahli gizi/dokter anak di Puskesmas<br>
+        • Pastikan protein hewani SETIAP hari: telur, ikan, daging, hati<br>
+        • Optimalkan kualitas MPASI/makanan dengan Isi Piringku<br>
+        • Cek penyakit infeksi berulang (diare, ISPA) — sering menjadi penyebab<br>
+        • Stimulasi tumbuh kembang intensif: bermain, membaca, berinteraksi<br>
+        • Suplemen Zinc 10mg/hari selama 2–3 bulan di bawah pengawasan dokter<br>
+        • Pantau TB/U setiap bulan di Posyandu</span>
+      </div>`;
+    } else if (overweight) {
+      khusus = `<div style="background:#FFFBEB;border-left:4px solid #D97706;border-radius:0 10px 10px 0;padding:10px 12px;margin-top:8px">
+        <strong style="color:#D97706">💡 BERAT BADAN LEBIH/OBESITAS</strong><br>
+        <span style="font-size:0.78rem">• Kurangi makanan/minuman manis, gorengan, dan makanan cepat saji<br>
+        • Perbanyak buah, sayuran, dan sumber protein tanpa lemak<br>
+        • Tingkatkan aktivitas fisik: bermain aktif minimal 60 menit/hari<br>
+        • JANGAN membatasi makan secara drastis pada anak — konsultasi dokter<br>
+        • Target: pertahankan BB, bukan menurunkan BB secara agresif</span>
+      </div>`;
+    } else {
+      khusus = `<div style="background:#F0FDF4;border-left:4px solid #15803D;border-radius:0 10px 10px 0;padding:10px 12px;margin-top:8px">
+        <strong style="color:#15803D">✅ STATUS GIZI BAIK — PERTAHANKAN!</strong><br>
+        <span style="font-size:0.78rem">• Lanjutkan pola makan bergizi seimbang dan beragam<br>
+        • Pastikan protein hewani minimal 1× sehari<br>
+        • Variasi warna makanan = variasi zat gizi<br>
+        • Suplemen Vit A setiap Februari & Agustus di Posyandu<br>
+        • Timbang BB dan ukur TB setiap bulan untuk deteksi dini<br>
+        • Stimulasi tumbuh kembang sesuai usia (bermain, baca, sosial)</span>
+      </div>`;
+    }
+
+    return { makan, nutrisi, khusus };
+  }
+
+  const rek = getRekomendasi();
+
+  res.className = `result-box ${(stunting||wasting||giziBuruk) ? 'rb-danger' : overweight ? 'rb-warning' : 'rb-normal'}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <!-- Status Gizi Summary -->
+    <div style="margin-bottom:12px">
+      <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">📊 Hasil Penilaian Status Gizi</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+        <div style="text-align:center;padding:10px 6px;background:${stBBU.bg};border-radius:10px;border:1px solid ${stBBU.color}40">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--muted)">BB/U</div>
+          <div style="font-size:0.85rem;font-weight:700;color:${stBBU.color};line-height:1.2">${stBBU.label}</div>
+          <div style="font-size:0.65rem;color:var(--muted)">z = ${zBBU.toFixed(1)}</div>
+        </div>
+        <div style="text-align:center;padding:10px 6px;background:${stTBU.bg};border-radius:10px;border:1px solid ${stTBU.color}40">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--muted)">TB/U</div>
+          <div style="font-size:0.85rem;font-weight:700;color:${stTBU.color};line-height:1.2">${stTBU.label}</div>
+          <div style="font-size:0.65rem;color:var(--muted)">z = ${zTBU.toFixed(1)}</div>
+        </div>
+        <div style="text-align:center;padding:10px 6px;background:var(--cam-l);border-radius:10px;border:1px solid #FDE68A">
+          <div style="font-size:0.62rem;font-weight:700;color:var(--muted)">IMT</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--cam-d);line-height:1.2">${bbTB.toFixed(1)}</div>
+          <div style="font-size:0.65rem;color:var(--muted)">kg/m²</div>
+        </div>
+      </div>
+      <!-- Referensi median -->
+      <div style="margin-top:8px;font-size:0.68rem;color:var(--muted);text-align:center">
+        Median WHO usia ${bulan} bln: BB ref ${(jk==='p'?[3.2,4.2,5.1,5.8,6.4,6.9,7.3,7.6,7.9,8.2,8.5,8.7,8.9,9.2,9.4,9.6,9.8,9.9,10.1,10.3,10.4,10.6,10.7,10.9,11.0,11.1,11.3,11.4,11.6,11.7,11.9,12.0,12.1,12.3,12.4,12.6,12.7,12.8,13.0,13.1,13.3,13.4,13.5,13.7,13.8,14.0,14.1,14.3,14.4,14.5,14.7,14.8,15.0,15.1,15.3,15.4,15.6,15.7,15.9,16.0]:[3.3,4.5,5.6,6.4,7.0,7.5,7.9,8.3,8.6,8.9,9.2,9.4,9.6,9.9,10.1,10.3,10.5,10.7,10.9,11.1,11.3,11.5,11.8,12.0,12.2,12.4,12.6,12.7,12.9,13.1,13.3,13.5,13.7,13.8,14.0,14.2,14.3,14.5,14.7,14.9,15.1,15.3,15.4,15.6,15.7,15.9,16.1,16.3,16.4,16.6,16.8,17.0,17.2,17.3,17.5,17.7,17.9,18.1,18.2,18.4])[Math.min(bulan,59)]} kg · TB ref ${(jk==='p'?[49.1,53.7,57.1,59.8,62.1,64.0,65.7,67.3,68.7,70.1,71.5,72.8,74.0,75.2,76.4,77.5,78.6,79.7,80.7,81.7,82.7,83.7,84.6,85.5,86.4,87.4,88.3,89.1,90.0,90.8,91.7,92.5,93.3,94.1,94.9,95.7,96.4,97.2,97.9,98.7,99.4,100.1,100.8,101.5,102.2,102.9,103.5,104.2,104.8,105.5,106.1,106.7,107.3,107.9,108.5,109.1,109.6,110.2,110.8,111.3]:[49.9,54.7,58.4,61.4,63.9,65.9,67.6,69.2,70.6,72.0,73.3,74.5,75.7,76.9,78.0,79.1,80.2,81.2,82.3,83.2,84.2,85.1,86.0,86.9,87.8,88.7,89.6,90.4,91.2,92.1,92.9,93.7,94.5,95.3,96.1,96.9,97.6,98.4,99.1,99.8,100.6,101.3,102.0,102.7,103.3,104.0,104.7,105.4,106.0,106.7,107.3,107.9,108.5,109.2,109.8,110.4,110.9,111.5,112.1,112.7])[Math.min(bulan,59)]} cm
+        (WHO Child Growth Standards 2006)
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div style="height:1px;background:var(--border);margin:12px 0"></div>
+
+    <!-- Rekomendasi Pola Makan -->
+    <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">🍽️ Rekomendasi Pola Makan</div>
+    <div style="font-size:0.8rem;line-height:1.7;color:var(--text)">${rek.makan}</div>
+
+    <!-- Kebutuhan Nutrisi -->
+    <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-top:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">💊 Kebutuhan Nutrisi Kunci (AKG 2019)</div>
+    ${rek.nutrisi}
+
+    <!-- Rekomendasi Khusus per Status Gizi -->
+    <div style="font-size:0.72rem;font-weight:700;color:var(--navy);margin-top:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">🎯 Tindak Lanjut Klinis</div>
+    ${rek.khusus}
+
+    <!-- Jadwal Kontrol -->
+    <div style="margin-top:10px;padding:8px 12px;background:rgba(255,255,255,0.7);border-radius:8px;font-size:0.72rem;color:var(--muted)">
+      📅 <strong>Jadwal Pemantauan:</strong> ${giziBuruk||wasting ? 'Setiap 2 minggu hingga status normal' : stunting ? 'Setiap bulan di Posyandu' : 'Setiap bulan di Posyandu (timbang + ukur TB)'}<br>
+      📌 <strong>Sumber:</strong> WHO Child Growth Standards · Permenkes RI No. 2/2020 · AKG Kemenkes 2019
+    </div>`;
+}
+
+
+// ── HITUNG USIA DARI TANGGAL LAHIR ──────────────────────────────
+function hitungUsiaDariTanggal() {
+  const tglLahir   = document.getElementById('bal-tgl-lahir').value;
+  const tglPeriksa = document.getElementById('bal-tgl-periksa').value;
+  const display    = document.getElementById('usia-display');
+
+  if (!tglLahir) { display.style.display='none'; return; }
+
+  const lahir   = new Date(tglLahir);
+  // Gunakan tanggal pemeriksaan jika diisi, atau hari ini
+  const periksa = tglPeriksa ? new Date(tglPeriksa) : new Date();
+
+  // Validasi: tanggal lahir tidak boleh lebih dari tanggal periksa
+  if (lahir > periksa) {
+    display.style.display = 'block';
+    display.style.background = '#FFF0F3';
+    display.style.color = '#C44962';
+    display.innerHTML = '⚠️ Tanggal lahir tidak boleh lebih dari tanggal pemeriksaan!';
+    return;
+  }
+
+  // Hitung usia detail
+  let tahun = periksa.getFullYear() - lahir.getFullYear();
+  let bulan = periksa.getMonth()    - lahir.getMonth();
+  let hari  = periksa.getDate()     - lahir.getDate();
+
+  if (hari < 0) {
+    bulan--;
+    // Hari dalam bulan sebelumnya
+    const lastMonth = new Date(periksa.getFullYear(), periksa.getMonth(), 0);
+    hari += lastMonth.getDate();
+  }
+  if (bulan < 0) {
+    tahun--;
+    bulan += 12;
+  }
+
+  const totalBulan = tahun * 12 + bulan;
+  const totalHari  = Math.floor((periksa - lahir) / (1000*60*60*24));
+
+  // Simpan ke hidden inputs
+  document.getElementById('bal-bulan').value = totalBulan;
+  document.getElementById('bal-hari').value  = hari;
+
+  // Format tanggal untuk display
+  const optTgl = {day:'numeric', month:'long', year:'numeric'};
+  const strLahir   = lahir.toLocaleDateString('id-ID', optTgl);
+  const strPeriksa = periksa.toLocaleDateString('id-ID', optTgl);
+
+  // Format usia
+  let usiaText = '';
+  if (totalHari < 30) {
+    usiaText = `<span style="font-size:1.1rem">${totalHari} hari</span>`;
+  } else if (totalBulan < 12) {
+    usiaText = `<span style="font-size:1.1rem">${totalBulan} bulan ${hari} hari</span>`;
+  } else {
+    usiaText = `<span style="font-size:1.1rem">${tahun} tahun ${bulan} bulan ${hari} hari</span>
+                <span style="font-size:0.75rem;color:var(--muted)"> (${totalBulan} bulan total)</span>`;
+  }
+
+  // Cek batas usia chart
+  let warningUsia = '';
+  if (totalHari < 0) { display.style.display='none'; return; }
+  if (totalBulan > 60) {
+    warningUsia = '<br><span style="color:#C44962;font-size:0.72rem">⚠️ Usia > 5 tahun — grafik WHO 0-5 tahun tidak berlaku. Gunakan rujukan anak usia sekolah.</span>';
+  }
+
+  display.style.display  = 'block';
+  display.style.background = 'var(--cam-l)';
+  display.style.color    = 'var(--cam-d)';
+  display.innerHTML = `
+    <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap">
+      <div>
+        <div style="font-size:0.68rem;color:var(--muted);font-weight:600">TANGGAL LAHIR</div>
+        <div style="font-size:0.78rem;color:var(--navy)">${strLahir}</div>
+      </div>
+      <div style="color:var(--cam);font-size:1.2rem;padding-top:8px">→</div>
+      <div>
+        <div style="font-size:0.68rem;color:var(--muted);font-weight:600">TGL PEMERIKSAAN</div>
+        <div style="font-size:0.78rem;color:var(--navy)">${strPeriksa}</div>
+      </div>
+    </div>
+    <div style="margin-top:8px;padding-top:8px;border-top:1px dashed rgba(200,134,10,0.3)">
+      <span style="font-size:0.72rem;color:var(--muted)">USIA ANAK: </span>${usiaText}
+      ${warningUsia}
+    </div>`;
+
+  // Auto trigger calculation if BB dan TB sudah diisi
+  const bb = document.getElementById('bal-bb').value;
+  const tb = document.getElementById('bal-tb').value;
+  if (bb && tb) hitungBalita();
+}
+
+
+// ── FOOD LOG ─────────────────────────────────────────────────────
+let foodItems = [];
+
+function tambahMakanan() {
+  const name = document.getElementById('food-name').value.trim();
+  const kal  = parseFloat(document.getElementById('food-kal').value);
+  const time = document.getElementById('food-time').value;
+  if (!name) return;
+
+  foodItems.push({ name, kal: kal||0, time });
+  document.getElementById('food-name').value = '';
+  document.getElementById('food-kal').value  = '';
+  renderFoodLog();
+}
+
+function hapusMakanan(i) {
+  foodItems.splice(i,1);
+  renderFoodLog();
+}
+
+function renderFoodLog() {
+  const log = document.getElementById('food-log');
+  const tot = document.getElementById('food-total');
+  if (!foodItems.length) { log.innerHTML=''; tot.style.display='none'; return; }
+
+  const total = foodItems.reduce((s,f)=>s+f.kal,0);
+  log.innerHTML = foodItems.map((f,i)=>`
+    <div class="food-item">
+      <div>
+        <div style="font-size:0.82rem;font-weight:600;color:var(--navy)">${f.name}</div>
+        <div style="font-size:0.7rem;color:var(--muted)">${f.time} · ${f.kal} kkal</div>
+      </div>
+      <button class="food-del" onclick="hapusMakanan(${i})">Hapus</button>
+    </div>`).join('');
+
+  tot.style.display='block';
+  tot.innerHTML = `Total Kalori Hari Ini: <span style="font-size:1.1rem">${total.toLocaleString('id')} kkal</span>`;
+}
+
+// ── MENU TRIMESTER ───────────────────────────────────────────────
+// Set max date for birth date input to today
+document.addEventListener('DOMContentLoaded', function() {
+  const today = new Date().toISOString().split('T')[0];
+  // Set tanggal pemeriksaan = hari ini sebagai default
+  const periksaInp = document.getElementById('bal-tgl-periksa');
+  if (periksaInp) periksaInp.value = today;
+});
+
+function showMenu(t) {
+  ['t1','t2','t3'].forEach(x=>{
+    document.getElementById('menu-'+x).style.display = x===t ? 'block' : 'none';
+    const btn = document.getElementById('btn-'+x);
+    if (btn) {
+      if (x===t) {
+        btn.style.background = 'linear-gradient(135deg,var(--cam),var(--cam-d))';
+        btn.style.color = '#fff';
+        btn.style.border = 'none';
+      } else {
+        btn.style.background = '#fff';
+        btn.style.color = 'var(--cam-d)';
+        btn.style.border = '1.5px solid var(--cam)';
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
