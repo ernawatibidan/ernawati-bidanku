@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLORIS Damask — BONITA BidanKu | Platform Digital Osteoporosis</title>
+<style>
+:root {
+  --dam:    #9B2D6F;
+  --dam-d:  #6B1D4F;
+  --dam-l:  #FDF0F7;
+  --dam-m:  #C4558A;
+  --teal:   #1D6B61;
+  --teal-l: #E6F7F5;
+  --navy:   #1A3556;
+  --navy-l: #EEF3F8;
+  --gold:   #B07B00;
+  --gold-l: #FFF8E6;
+  --green:  #15803D;
+  --green-l:#F0FDF4;
+  --orange: #C2410C;
+  --orange-l:#FFF7ED;
+  --red:    #DC2626;
+  --red-l:  #FEF2F2;
+  --blue:   #1D4ED8;
+  --blue-l: #EFF6FF;
+  --white:  #FFFFFF;
+  --cream:  #FAFAF8;
+  --text:   #1A1A1A;
+  --muted:  #6B7280;
+  --border: #E5E7EB;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100vh;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--cream);color:var(--text)}
+
+/* HEADER */
+header{background:linear-gradient(135deg,var(--dam-d) 0%,var(--navy) 55%,var(--dam) 100%);padding:18px 16px 14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.25)}
+.header-inner{max-width:600px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.logo-icon{width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.3)}
+.logo-text h1{font-family:Georgia,'Times New Roman',serif;font-size:1.2rem;font-weight:700;color:#fff;line-height:1.1}
+.logo-text p{font-size:0.67rem;color:rgba(255,255,255,0.8);margin-top:2px}
+.header-badge{margin-left:auto;background:rgba(255,255,255,0.2);color:#FFD97D;font-size:0.63rem;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;border:1px solid rgba(255,215,125,0.4)}
+
+/* NAV */
+.nav-wrap{background:#fff;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:76px;z-index:99;box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+.nav-wrap::-webkit-scrollbar{display:none}
+.nav-tabs{display:flex;min-width:max-content;padding:0 12px}
+.nav-tab{padding:11px 14px;font-size:0.74rem;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all 0.2s;display:flex;align-items:center;gap:5px}
+.nav-tab.active{color:var(--dam-d);border-bottom-color:var(--dam)}
+.nav-tab:hover{color:var(--dam-d)}
+
+/* CONTENT */
+.content{max-width:600px;margin:0 auto;padding:16px 14px 40px}
+.section{display:none}
+.section.active{display:block}
+
+/* CARDS */
+.card{background:#fff;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border:1px solid var(--border)}
+.card-title{font-family:Georgia,serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.card-sub{font-size:0.72rem;color:var(--muted);margin-bottom:14px}
+
+/* FORM */
+label{display:block;font-size:0.78rem;font-weight:600;color:var(--navy);margin-bottom:5px;margin-top:12px}
+input,select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:0.9rem;color:var(--text);background:#fff;outline:none;transition:border 0.2s}
+input:focus,select:focus{border-color:var(--dam)}
+.input-unit{position:relative}
+.input-unit input{padding-right:50px}
+.unit{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:0.73rem;color:var(--muted);font-weight:600}
+
+/* BUTTONS */
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:14px;transition:all 0.2s}
+.btn-dam{background:linear-gradient(135deg,var(--dam),var(--dam-d));color:#fff;box-shadow:0 4px 14px rgba(155,45,111,0.3)}
+.btn-dam:active{transform:translateY(1px)}
+.btn-sm{width:auto;padding:7px 16px;font-size:0.78rem;border-radius:8px;margin-top:0}
+
+/* RESULT BOX */
+.result-box{border-radius:14px;padding:16px;margin-top:14px;display:none}
+.rb-green {background:var(--green-l);border:1.5px solid #BBF7D0}
+.rb-yellow{background:var(--gold-l);border:1.5px solid #FDE68A}
+.rb-orange{background:var(--orange-l);border:1.5px solid #FED7AA}
+.rb-red   {background:var(--red-l);border:1.5px solid #FECACA}
+.rb-dam   {background:var(--dam-l);border:1.5px solid #F0A0CC}
+.rb-teal  {background:var(--teal-l);border:1.5px solid #A8E0D9}
+
+/* ALERT */
+.alert{border-radius:12px;padding:11px 14px;margin-top:10px;font-size:0.78rem;line-height:1.6;display:flex;gap:10px;align-items:flex-start}
+.al-green {background:var(--green-l);border:1.5px solid #BBF7D0;color:#14532D}
+.al-yellow{background:var(--gold-l);border:1.5px solid #FDE68A;color:#78350F}
+.al-orange{background:var(--orange-l);border:1.5px solid #FED7AA;color:#9A3412}
+.al-red   {background:var(--red-l);border:1.5px solid #FECACA;color:#991B1B}
+.al-dam   {background:var(--dam-l);border:1.5px solid #F0A0CC;color:var(--dam-d)}
+.al-blue  {background:var(--blue-l);border:1.5px solid #BFCBDC;color:var(--navy)}
+.al-teal  {background:var(--teal-l);border:1.5px solid #A8E0D9;color:var(--teal)}
+
+/* BADGE */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.67rem;font-weight:700}
+.bg-green {background:var(--green);color:#fff}
+.bg-yellow{background:#F59E0B;color:#fff}
+.bg-orange{background:var(--orange);color:#fff}
+.bg-red   {background:var(--red);color:#fff}
+.bg-dam   {background:var(--dam);color:#fff}
+
+/* PROG BAR */
+.prog-wrap{background:#F3F4F6;border-radius:10px;height:10px;margin-top:6px;overflow:hidden}
+.prog-bar{height:10px;border-radius:10px;transition:width 0.8s ease}
+
+/* INFO GRID */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.info-item{background:var(--dam-l);border-radius:12px;padding:12px;text-align:center;border:1px solid #F0A0CC}
+.info-item .val{font-size:1.25rem;font-weight:700;color:var(--dam-d);font-family:Georgia,serif}
+.info-item .lbl{font-size:0.63rem;color:var(--muted);margin-top:2px;font-weight:600}
+
+/* MODULE GRID */
+.mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mod-card{background:#fff;border-radius:14px;padding:14px 12px;text-align:center;border:1.5px solid var(--border);cursor:pointer;transition:all 0.2s}
+.mod-card:hover,.mod-card.active-mod{border-color:var(--dam);background:var(--dam-l)}
+.mod-icon{font-size:1.6rem;display:block;margin-bottom:6px}
+.mod-name{font-size:0.72rem;font-weight:700;color:var(--navy)}
+.mod-desc{font-size:0.62rem;color:var(--muted);margin-top:3px}
+
+/* IOF QUESTION */
+.iof-q{background:#fff;border-radius:12px;padding:14px;border:1.5px solid var(--border);margin-bottom:8px}
+.iof-q-text{font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.4}
+.iof-opts{display:flex;gap:8px}
+.iof-btn{flex:1;padding:9px;border:1.5px solid var(--border);border-radius:10px;font-size:0.8rem;font-weight:600;background:#fff;cursor:pointer;transition:all 0.2s;color:var(--muted)}
+.iof-btn.yes{border-color:var(--dam);background:var(--dam-l);color:var(--dam-d)}
+.iof-btn.no{border-color:var(--teal);background:var(--teal-l);color:var(--teal)}
+.iof-btn:hover{transform:translateY(-1px)}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:0.77rem;margin-top:8px}
+.tbl th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+.tbl td{padding:7px 10px;border-bottom:1px solid var(--border)}
+.tbl tr:nth-child(even) td{background:var(--dam-l)}
+
+/* FOOD LIST */
+.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.food-card{background:#fff;border-radius:10px;padding:10px;border:1px solid var(--border);text-align:center}
+.food-icon{font-size:1.4rem;display:block;margin-bottom:4px}
+.food-name{font-size:0.72rem;font-weight:700;color:var(--navy)}
+.food-ca{font-size:0.68rem;color:var(--dam-d);font-weight:600}
+.food-note{font-size:0.62rem;color:var(--muted);margin-top:2px}
+
+/* EXERCISE CARD */
+.ex-card{background:#fff;border-radius:12px;padding:14px;border:1.5px solid var(--border);margin-bottom:10px}
+.ex-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ex-icon{font-size:1.5rem}
+.ex-title{font-size:0.85rem;font-weight:700;color:var(--navy)}
+.ex-badge{font-size:0.65rem;padding:2px 8px;border-radius:6px;font-weight:700}
+.ex-desc{font-size:0.77rem;color:var(--muted);line-height:1.6}
+
+/* EDU ACCORDION */
+.edu-card{background:#fff;border-radius:14px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:10px}
+.edu-header{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background 0.2s}
+.edu-header:hover{background:var(--dam-l)}
+.edu-icon{font-size:1.3rem;flex-shrink:0}
+.edu-title{font-size:0.86rem;font-weight:700;color:var(--navy)}
+.edu-sub{font-size:0.69rem;color:var(--muted)}
+.edu-body{padding:0 16px 14px;font-size:0.78rem;line-height:1.7;color:var(--text);display:none}
+.edu-body.show{display:block}
+.edu-chev{margin-left:auto;color:var(--muted);transition:transform 0.2s}
+.edu-chev.open{transform:rotate(180deg)}
+
+/* REF */
+.ref-item{background:#fff;border-radius:12px;border:1px solid var(--border);padding:12px 14px;margin-bottom:8px}
+.ref-num{display:inline-block;background:var(--dam);color:#fff;font-size:0.63rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:5px}
+.ref-title{font-size:0.77rem;font-weight:700;color:var(--navy);margin-bottom:2px}
+.ref-src{font-size:0.68rem;color:var(--muted)}
+
+/* BRAND FOOTER */
+.brand-footer{text-align:center;padding:20px 16px;border-top:1px solid var(--border);margin-top:10px}
+
+/* RISK METER */
+.risk-meter{margin:12px 0;position:relative}
+.risk-bar{height:18px;border-radius:10px;background:linear-gradient(90deg,#15803D 0%,#F59E0B 40%,#C2410C 70%,#991B1B 100%);position:relative}
+.risk-pointer{position:absolute;top:-6px;width:4px;height:30px;background:var(--navy);border-radius:2px;transform:translateX(-50%);transition:left 0.8s ease}
+.risk-labels{display:flex;justify-content:space-between;font-size:0.62rem;color:var(--muted);margin-top:4px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-icon">🌸</div>
+    <div class="logo-text">
+      <h1>FLORIS Damask — BONITA</h1>
+      <p>BidanKu · Ernawati, SST., Bdn., M.Kes · FIKK IKKHG Garut</p>
+    </div>
+    <span class="header-badge">FL-09 v1.0</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showTab('beranda')">🏠 Beranda</div>
+    <div class="nav-tab" onclick="showTab('skrining')">🔍 Skrining</div>
+    <div class="nav-tab" onclick="showTab('iof')">📋 IOF Test</div>
+    <div class="nav-tab" onclick="showTab('kalkulator')">🧮 Kalkulator</div>
+    <div class="nav-tab" onclick="showTab('nutrisi')">🥛 Nutrisi</div>
+    <div class="nav-tab" onclick="showTab('latihan')">🏃 Latihan</div>
+    <div class="nav-tab" onclick="showTab('edukasi')">📖 Edukasi</div>
+    <div class="nav-tab" onclick="showTab('referensi')">📚 Referensi</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════ BERANDA ══════ -->
+<div id="s-beranda" class="section active">
+  <div class="card" style="background:linear-gradient(135deg,var(--dam-d),var(--navy));border:none">
+    <div style="font-size:2rem;margin-bottom:8px">🌸</div>
+    <div style="font-family:Georgia,serif;color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:2px">FLORIS Damask — BONITA BidanKu</div>
+    <div style="color:rgba(255,255,255,0.85);font-size:0.78rem;margin-bottom:4px">Bone Intelligence for Indonesian Women</div>
+    <div style="color:rgba(255,255,255,0.65);font-size:0.68rem;font-style:italic;margin-bottom:14px">Platform Digital Skrining Osteoporosis & Kesehatan Tulang</div>
+    <div style="padding:10px 14px;background:rgba(255,255,255,0.12);border-radius:10px;font-size:0.73rem;color:rgba(255,255,255,0.9);line-height:1.6">
+      🦴 Tulang Kuat · Perempuan Tangguh · Indonesia Emas 2045<br>
+      <span style="font-size:0.67rem;opacity:0.7">Dikembangkan oleh Ernawati, SST., Bdn., M.Kes · FIKK IKKHG Garut</span>
+    </div>
+  </div>
+
+  <!-- Fakta -->
+  <div class="card">
+    <div class="card-title">📊 Fakta Osteoporosis Indonesia</div>
+    <div class="info-grid">
+      <div class="info-item"><div class="val">10,3 Jt</div><div class="lbl">Penderita Osteoporosis RI</div></div>
+      <div class="info-item"><div class="val">1 : 3</div><div class="lbl">Perempuan berisiko pasca menopause</div></div>
+      <div class="info-item"><div class="val">80%</div><div class="lbl">Kasus pada perempuan</div></div>
+      <div class="info-item"><div class="val">#2</div><div class="lbl">Asia — prevalensi tertinggi</div></div>
+    </div>
+    <div class="alert al-dam" style="margin-top:12px">
+      <span>🌸</span>
+      <span>Osteoporosis disebut <strong>"Silent Disease"</strong> — tidak ada gejala hingga terjadi patah tulang. Skrining dini adalah kunci pencegahan!</span>
+    </div>
+  </div>
+
+  <!-- Module Grid -->
+  <div class="mod-grid">
+    <div class="mod-card" onclick="showTab('skrining')">
+      <span class="mod-icon">🔍</span>
+      <div class="mod-name">Skrining Risiko</div>
+      <div class="mod-desc">Faktor risiko lengkap</div>
+    </div>
+    <div class="mod-card" onclick="showTab('iof')">
+      <span class="mod-icon">📋</span>
+      <div class="mod-name">IOF One-Minute Test</div>
+      <div class="mod-desc">Tes cepat osteoporosis</div>
+    </div>
+    <div class="mod-card" onclick="showTab('kalkulator')">
+      <span class="mod-icon">🧮</span>
+      <div class="mod-name">Kalkulator Tulang</div>
+      <div class="mod-desc">T-score · Kalsium · BMI</div>
+    </div>
+    <div class="mod-card" onclick="showTab('nutrisi')">
+      <span class="mod-icon">🥛</span>
+      <div class="mod-name">Nutrisi Tulang</div>
+      <div class="mod-desc">Ca · Vit D · Protein</div>
+    </div>
+    <div class="mod-card" onclick="showTab('latihan')">
+      <span class="mod-icon">🏃</span>
+      <div class="mod-name">Panduan Latihan</div>
+      <div class="mod-desc">Senam · Weight-bearing</div>
+    </div>
+    <div class="mod-card" onclick="showTab('edukasi')">
+      <span class="mod-icon">📖</span>
+      <div class="mod-name">Edukasi</div>
+      <div class="mod-desc">Siklus hidup & tulang</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ SKRINING ══════ -->
+<div id="s-skrining" class="section">
+  <div class="card">
+    <div class="card-title">🔍 Skrining Faktor Risiko Osteoporosis</div>
+    <div class="card-sub">Berdasarkan panduan WHO, IOF, dan PERWATUSI Indonesia</div>
+
+    <label>Jenis Kelamin</label>
+    <select id="sk-jk" onchange="hitungSkrining()">
+      <option value="p">Perempuan</option>
+      <option value="l">Laki-laki</option>
+    </select>
+
+    <label>Usia (tahun)</label>
+    <div class="input-unit"><input type="number" id="sk-usia" placeholder="Contoh: 52" min="20" max="100" oninput="hitungSkrining()"><span class="unit">thn</span></div>
+
+    <label>Berat Badan (kg)</label>
+    <div class="input-unit"><input type="number" id="sk-bb" placeholder="Contoh: 50" min="25" max="150" oninput="hitungSkrining()"><span class="unit">kg</span></div>
+
+    <label>Tinggi Badan (cm)</label>
+    <div class="input-unit"><input type="number" id="sk-tb" placeholder="Contoh: 155" min="100" max="220" oninput="hitungSkrining()"><span class="unit">cm</span></div>
+
+    <label>Status Menopause (Perempuan)</label>
+    <select id="sk-menopause" onchange="hitungSkrining()">
+      <option value="0">Belum menopause</option>
+      <option value="1">Menopause dini (&lt;45 tahun)</option>
+      <option value="2">Menopause normal (45–55 tahun)</option>
+      <option value="1">Pasca menopause &gt;5 tahun</option>
+    </select>
+
+    <label>Riwayat Keluarga Osteoporosis/Patah Tulang</label>
+    <select id="sk-riwayat" onchange="hitungSkrining()">
+      <option value="0">Tidak ada</option>
+      <option value="2">Ada (orang tua/saudara)</option>
+    </select>
+
+    <label>Kebiasaan Merokok</label>
+    <select id="sk-rokok" onchange="hitungSkrining()">
+      <option value="0">Tidak merokok</option>
+      <option value="1">Pernah merokok</option>
+      <option value="2">Masih merokok aktif</option>
+    </select>
+
+    <label>Konsumsi Alkohol</label>
+    <select id="sk-alkohol" onchange="hitungSkrining()">
+      <option value="0">Tidak pernah</option>
+      <option value="1">Jarang (&lt;3×/minggu)</option>
+      <option value="2">Sering (≥3×/minggu)</option>
+    </select>
+
+    <label>Aktivitas Fisik</label>
+    <select id="sk-aktivitas" onchange="hitungSkrining()">
+      <option value="0">Aktif (olahraga rutin ≥3×/minggu)</option>
+      <option value="1">Sedang (1–2×/minggu)</option>
+      <option value="2">Tidak aktif (jarang/tidak pernah)</option>
+    </select>
+
+    <label>Paparan Sinar Matahari</label>
+    <select id="sk-surya" onchange="hitungSkrining()">
+      <option value="0">Cukup (≥15 menit/hari)</option>
+      <option value="1">Kurang (&lt;15 menit/hari)</option>
+    </select>
+
+    <label>Konsumsi Kalsium Harian</label>
+    <select id="sk-kalsium" onchange="hitungSkrining()">
+      <option value="0">Cukup (susu/produk susu setiap hari)</option>
+      <option value="1">Kadang-kadang</option>
+      <option value="2">Jarang/tidak pernah</option>
+    </select>
+
+    <label>Riwayat Penggunaan Obat</label>
+    <select id="sk-obat" onchange="hitungSkrining()">
+      <option value="0">Tidak ada</option>
+      <option value="1">Kortikosteroid jangka panjang</option>
+      <option value="1">Antikonvulsan/antiepilepsi</option>
+      <option value="1">Obat penekan hormon (aromatase inhibitor, GnRH)</option>
+    </select>
+
+    <label>Penyakit Penyerta</label>
+    <select id="sk-penyakit" onchange="hitungSkrining()">
+      <option value="0">Tidak ada</option>
+      <option value="1">Diabetes mellitus</option>
+      <option value="1">Hipertiroidisme/hiperparatiroidisme</option>
+      <option value="1">Rheumatoid arthritis</option>
+      <option value="1">Penyakit ginjal/hati kronis</option>
+      <option value="2">Kanker (terutama payudara/prostat)</option>
+    </select>
+
+    <label>Riwayat Patah Tulang Sebelumnya</label>
+    <select id="sk-patah" onchange="hitungSkrining()">
+      <option value="0">Tidak pernah</option>
+      <option value="2">Pernah patah tulang minor (trauma ringan)</option>
+      <option value="3">Pernah patah tulang pinggul/tulang belakang</option>
+    </select>
+
+    <div id="skrining-result" class="result-box"></div>
+  </div>
+</div>
+
+<!-- ══════ IOF ONE-MINUTE TEST ══════ -->
+<div id="s-iof" class="section">
+  <div class="card">
+    <div class="card-title">📋 IOF One-Minute Osteoporosis Risk Test</div>
+    <div class="card-sub">International Osteoporosis Foundation — Tes skrining cepat 19 pertanyaan</div>
+    <div class="alert al-dam">
+      <span>ℹ️</span>
+      <span>Jawab setiap pertanyaan dengan <strong>Ya</strong> atau <strong>Tidak</strong>. Satu jawaban "Ya" saja sudah cukup untuk mengindikasikan risiko — segera konsultasi ke dokter untuk pemeriksaan BMD.</span>
+    </div>
+  </div>
+
+  <div id="iof-questions"></div>
+
+  <div class="card" style="display:none" id="iof-result-card">
+    <div id="iof-result"></div>
+  </div>
+
+  <button class="btn btn-dam" onclick="hitungIOF()">🔍 Lihat Hasil IOF Test</button>
+  <button class="btn" style="background:#fff;border:1.5px solid var(--dam);color:var(--dam-d);margin-top:8px" onclick="resetIOF()">🔄 Mulai Ulang</button>
+</div>
+
+<!-- ══════ KALKULATOR ══════ -->
+<div id="s-kalkulator" class="section">
+
+  <!-- T-score Estimator -->
+  <div class="card">
+    <div class="card-title">🦴 Estimasi Kepadatan Tulang (T-score)</div>
+    <div class="card-sub">Berdasarkan faktor risiko — konfirmasi dengan DXA scan</div>
+    <label>Usia (tahun)</label>
+    <div class="input-unit"><input type="number" id="ts-usia" placeholder="Contoh: 55" min="20" max="100" oninput="hitungTscore()"><span class="unit">thn</span></div>
+    <label>Jenis Kelamin</label>
+    <select id="ts-jk" onchange="hitungTscore()">
+      <option value="p">Perempuan</option>
+      <option value="l">Laki-laki</option>
+    </select>
+    <label>Berat Badan (kg)</label>
+    <div class="input-unit"><input type="number" id="ts-bb" placeholder="Contoh: 52" min="25" max="200" oninput="hitungIMTotomatis()"><span class="unit">kg</span></div>
+    <label>Tinggi Badan (cm)</label>
+    <div class="input-unit"><input type="number" id="ts-tb" placeholder="Contoh: 155" min="100" max="220" oninput="hitungIMTotomatis()"><span class="unit">cm</span></div>
+    <div id="imt-auto" style="display:none;background:var(--dam-l);border-radius:10px;padding:9px 14px;margin-top:6px;font-size:0.82rem;font-weight:600;color:var(--dam-d)"></div>
+    <input type="hidden" id="ts-imt" value="">
+    <label>Status Menopause</label>
+    <select id="ts-meno" onchange="hitungTscore()">
+      <option value="0">Belum menopause / Premenopause</option>
+      <option value="1">Perimenopause (1–5 tahun)</option>
+      <option value="2">Pasca menopause &gt;5 tahun</option>
+      <option value="3">Pasca menopause &gt;10 tahun</option>
+    </select>
+    <div id="tscore-result" class="result-box"></div>
+
+    <!-- WHO Classification -->
+    <div style="margin-top:14px">
+      <div style="font-size:0.75rem;font-weight:700;color:var(--navy);margin-bottom:8px">📊 Klasifikasi WHO Kepadatan Tulang (T-score):</div>
+      <table class="tbl">
+        <thead><tr><th>Kategori</th><th>T-score</th><th>Interpretasi</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge bg-green">Normal</span></td><td>≥ -1.0</td><td>Kepadatan tulang normal</td></tr>
+          <tr><td><span class="badge bg-yellow">Osteopenia</span></td><td>-1.0 s/d -2.5</td><td>Tulang mulai menipis — waspadai</td></tr>
+          <tr><td><span class="badge bg-orange">Osteoporosis</span></td><td>≤ -2.5</td><td>Tulang rapuh — intervensi segera</td></tr>
+          <tr><td><span class="badge bg-red">Osteoporosis Berat</span></td><td>≤ -2.5 + patah tulang</td><td>Risiko sangat tinggi — rujuk SpPD</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Kalsium Calculator -->
+  <div class="card">
+    <div class="card-title">🥛 Kalkulator Kebutuhan Kalsium Harian</div>
+    <div class="card-sub">Berdasarkan AKG 2019 Kemenkes RI & IOF Guidelines</div>
+    <label>Usia (tahun)</label>
+    <div class="input-unit"><input type="number" id="ca-usia" placeholder="Contoh: 45" min="10" max="90" oninput="hitungKalsium()"><span class="unit">thn</span></div>
+    <label>Kondisi Khusus</label>
+    <select id="ca-kondisi" onchange="hitungKalsium()">
+      <option value="normal">Tidak ada kondisi khusus</option>
+      <option value="hamil">Ibu hamil (trimester 2–3)</option>
+      <option value="laktasi">Ibu menyusui</option>
+      <option value="menopause">Pasca menopause</option>
+      <option value="osteopenia">Osteopenia/Osteoporosis</option>
+    </select>
+    <label>Konsumsi Kalsium Harian Saat Ini</label>
+    <div class="input-unit"><input type="number" id="ca-intake" placeholder="Estimasi dalam mg" min="0" max="3000" oninput="hitungKalsium()"><span class="unit">mg</span></div>
+    <div id="kalsium-result" class="result-box"></div>
+  </div>
+
+  <!-- Vit D Tracker -->
+  <div class="card">
+    <div class="card-title">☀️ Kebutuhan Vitamin D & Paparan Sinar Matahari</div>
+    <div class="card-sub">Vitamin D esensial untuk absorpsi kalsium tulang</div>
+    <table class="tbl">
+      <thead><tr><th>Kelompok</th><th>Kebutuhan Vit D</th><th>Durasi Sinar Matahari</th></tr></thead>
+      <tbody>
+        <tr><td>Dewasa &lt;50 tahun</td><td>600 IU/hari</td><td>15 mnt/hari (10.00–14.00)</td></tr>
+        <tr><td>Dewasa 50–70 tahun</td><td>800 IU/hari</td><td>20–30 mnt/hari</td></tr>
+        <tr><td>Lansia &gt;70 tahun</td><td>800–1000 IU/hari</td><td>30 mnt/hari + suplemen</td></tr>
+        <tr><td>Ibu hamil/menyusui</td><td>600 IU/hari</td><td>15–20 mnt/hari</td></tr>
+        <tr><td>Osteoporosis</td><td>800–2000 IU/hari</td><td>+ suplementasi dokter</td></tr>
+      </tbody>
+    </table>
+    <div class="alert al-teal" style="margin-top:10px">
+      <span>☀️</span>
+      <div>Paparan sinar matahari pukul <strong>10.00–14.00</strong> selama 15–30 menit pada <strong>lengan dan kaki</strong> (tanpa tabir surya) cukup untuk memenuhi kebutuhan Vit D harian. Di Indonesia, ini sangat mudah dilakukan!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ NUTRISI ══════ -->
+<div id="s-nutrisi" class="section">
+  <div class="card">
+    <div class="card-title">🥛 Makanan Tinggi Kalsium untuk Tulang Sehat</div>
+    <div class="card-sub">Sumber kalsium terbaik yang mudah didapat di Indonesia</div>
+    <div class="food-grid">
+      <div class="food-card"><span class="food-icon">🥛</span><div class="food-name">Susu Sapi</div><div class="food-ca">300 mg/250ml</div><div class="food-note">Sumber terbaik, mudah diserap</div></div>
+      <div class="food-card"><span class="food-icon">🧀</span><div class="food-name">Keju</div><div class="food-ca">200–300 mg/30g</div><div class="food-note">Padat kalsium</div></div>
+      <div class="food-card"><span class="food-icon">🐟</span><div class="food-name">Ikan Teri</div><div class="food-ca">1.200 mg/100g</div><div class="food-note">Tertinggi! Makan dengan tulangnya</div></div>
+      <div class="food-card"><span class="food-icon">🐠</span><div class="food-name">Ikan Salmon</div><div class="food-ca">180 mg/100g</div><div class="food-note">+ Vit D alami</div></div>
+      <div class="food-card"><span class="food-icon">🥦</span><div class="food-name">Brokoli</div><div class="food-ca">47 mg/100g</div><div class="food-note">+ Vit K untuk tulang</div></div>
+      <div class="food-card"><span class="food-icon">🥬</span><div class="food-name">Bayam</div><div class="food-ca">99 mg/100g</div><div class="food-note">Rebus untuk penyerapan optimal</div></div>
+      <div class="food-card"><span class="food-icon">🫘</span><div class="food-name">Tempe</div><div class="food-ca">155 mg/100g</div><div class="food-note">Sumber kalsium nabati lokal</div></div>
+      <div class="food-card"><span class="food-icon">🌿</span><div class="food-name">Daun Kelor</div><div class="food-ca">440 mg/100g</div><div class="food-note">Superfood lokal Indonesia!</div></div>
+      <div class="food-card"><span class="food-icon">🦐</span><div class="food-name">Udang Kering</div><div class="food-ca">1.209 mg/100g</div><div class="food-note">Sumber lokal terbaik</div></div>
+      <div class="food-card"><span class="food-icon">🥚</span><div class="food-name">Telur</div><div class="food-ca">56 mg/butir</div><div class="food-note">+ Vit D di kuning telur</div></div>
+      <div class="food-card"><span class="food-icon">🫙</span><div class="food-name">Yogurt</div><div class="food-ca">415 mg/240ml</div><div class="food-note">Lebih tinggi dari susu!</div></div>
+      <div class="food-card"><span class="food-icon">🌰</span><div class="food-name">Almond</div><div class="food-ca">75 mg/30g</div><div class="food-note">Selingan sehat bergizi</div></div>
+    </div>
+  </div>
+
+  <!-- Makanan yang merusak tulang -->
+  <div class="card">
+    <div class="card-title">🚫 Makanan yang Merusak Kesehatan Tulang</div>
+    <div class="card-sub">Batasi atau hindari untuk mencegah pengeroposan tulang</div>
+    <table class="tbl">
+      <thead><tr><th>Makanan/Minuman</th><th>Dampak</th><th>Rekomendasi</th></tr></thead>
+      <tbody>
+        <tr><td>☕ Kopi &gt;3 cangkir/hari</td><td>Meningkatkan ekskresi kalsium lewat urin</td><td>Batasi ≤2 cangkir/hari</td></tr>
+        <tr><td>🧂 Garam berlebih (&gt;5g/hari)</td><td>Meningkatkan kehilangan kalsium melalui ginjal</td><td>Batasi sodium &lt;2.300mg/hari</td></tr>
+        <tr><td>🥤 Minuman bersoda</td><td>Asam fosfat mengurangi absorpsi kalsium</td><td>Hindari atau batasi</td></tr>
+        <tr><td>🍺 Alkohol</td><td>Mengganggu metabolisme Vit D dan kalsium</td><td>Hindari sepenuhnya</td></tr>
+        <tr><td>🚬 Rokok/nikotin</td><td>Menurunkan estrogen → kehilangan tulang lebih cepat</td><td>Berhenti merokok</td></tr>
+        <tr><td>🍬 Gula berlebih</td><td>Menghambat absorpsi kalsium dan Vit D</td><td>Batasi gula tambahan</td></tr>
+        <tr><td>🥩 Protein hewani berlebih</td><td>Meningkatkan keasaman tubuh → kalsium keluar dari tulang</td><td>Protein seimbang saja</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Nutrisi lain untuk tulang -->
+  <div class="card">
+    <div class="card-title">💊 Nutrisi Penting Lain untuk Tulang</div>
+    <div class="card-sub">Selain kalsium dan Vitamin D</div>
+    <table class="tbl">
+      <thead><tr><th>Nutrisi</th><th>Fungsi</th><th>Sumber Makanan</th></tr></thead>
+      <tbody>
+        <tr><td>🌿 Vitamin K2</td><td>Mengarahkan kalsium ke tulang (bukan arteri)</td><td>Natto, keju, kuning telur, hati</td></tr>
+        <tr><td>🔵 Magnesium</td><td>Membantu konversi Vit D aktif</td><td>Kacang-kacangan, biji-bijian, coklat hitam</td></tr>
+        <tr><td>🟡 Zinc</td><td>Pembentukan matriks tulang</td><td>Daging, kacang mete, biji labu</td></tr>
+        <tr><td>🔴 Protein</td><td>Kolagen sebagai kerangka tulang</td><td>Ikan, daging, telur, tahu, tempe</td></tr>
+        <tr><td>🟣 Boron</td><td>Membantu retensi kalsium dan Vit D</td><td>Buah-buahan, kacang-kacangan</td></tr>
+        <tr><td>🟢 Vitamin C</td><td>Sintesis kolagen tulang</td><td>Jeruk, jambu, paprika, brokoli</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Suplemen -->
+  <div class="card">
+    <div class="card-title">💊 Panduan Suplementasi Kalsium</div>
+    <div class="card-sub">Bila asupan dari makanan tidak mencukupi</div>
+    <div class="alert al-blue">
+      <span>💊</span>
+      <div>
+        <strong>Calcium Carbonate vs Calcium Citrate:</strong><br>
+        • <strong>Ca Carbonate</strong>: lebih murah, absorpsi terbaik diminum BERSAMA makanan<br>
+        • <strong>Ca Citrate</strong>: lebih mahal, bisa diminum kapan saja, lebih baik untuk lansia<br>
+        • <strong>Dosis maksimal per sekali minum: 500mg</strong> — lebih dari itu tidak terserap<br>
+        • Jangan minum bersama zat besi (saling menghambat absorpsi)
+      </div>
+    </div>
+    <div class="alert al-orange" style="margin-top:8px">
+      <span>⚠️</span>
+      <span>Konsultasi dokter sebelum menggunakan suplemen kalsium dosis tinggi. Kelebihan kalsium dapat meningkatkan risiko batu ginjal dan kalsifikasi arteri.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ LATIHAN ══════ -->
+<div id="s-latihan" class="section">
+  <div class="card">
+    <div class="card-title">🏃 Panduan Latihan untuk Kesehatan Tulang</div>
+    <div class="card-sub">Olahraga yang tepat dapat meningkatkan kepadatan tulang hingga 2–8% per tahun</div>
+    <div class="alert al-green">
+      <span>✅</span>
+      <div><strong>Prinsip Utama:</strong> Weight-bearing exercise (latihan menahan beban tubuh) adalah yang paling efektif untuk membangun kekuatan tulang. Lakukan minimal <strong>30 menit, 3–5×/minggu.</strong></div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-header">
+      <span class="ex-icon">🚶</span>
+      <div>
+        <div class="ex-title">Jalan Kaki & Jalan Cepat</div>
+        <span class="ex-badge bg-green">Sangat Dianjurkan</span>
+      </div>
+    </div>
+    <div class="ex-desc">
+      <strong>Durasi:</strong> 30–45 menit/hari · <strong>Frekuensi:</strong> 5×/minggu<br>
+      <strong>Manfaat:</strong> Meningkatkan kepadatan tulang kaki, pinggul, dan tulang belakang bawah<br>
+      <strong>Tips:</strong> Gunakan sepatu dengan bantalan baik. Mulai dari 10 menit, tingkatkan bertahap. Lakukan di pagi hari sambil dapat paparan sinar matahari untuk Vitamin D!
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-header">
+      <span class="ex-icon">💃</span>
+      <div>
+        <div class="ex-title">Senam Osteoporosis & Aerobik</div>
+        <span class="ex-badge bg-green">Sangat Dianjurkan</span>
+      </div>
+    </div>
+    <div class="ex-desc">
+      <strong>Durasi:</strong> 30 menit/sesi · <strong>Frekuensi:</strong> 3×/minggu<br>
+      <strong>Manfaat:</strong> Melatih keseimbangan, koordinasi, dan kekuatan otot pendukung tulang<br>
+      <strong>Tips:</strong> Senam Osteoporosis dari PERWATUSI Indonesia tersedia di YouTube. Cocok untuk semua usia, mulai dari yang ringan hingga sedang.
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-header">
+      <span class="ex-icon">🏋️</span>
+      <div>
+        <div class="ex-title">Latihan Beban (Resistance Training)</div>
+        <span class="ex-badge bg-green">Sangat Dianjurkan</span>
+      </div>
+    </div>
+    <div class="ex-desc">
+      <strong>Durasi:</strong> 20–30 menit/sesi · <strong>Frekuensi:</strong> 2–3×/minggu<br>
+      <strong>Manfaat:</strong> Merangsang pembentukan tulang baru, meningkatkan massa otot<br>
+      <strong>Tips:</strong> Mulai dengan beban ringan (dumbell 1–2kg atau resistance band). Fokus pada gerakan squat, leg press, dan latihan punggung. Konsultasi fisioterapis bila baru mulai.
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-header">
+      <span class="ex-icon">🧘</span>
+      <div>
+        <div class="ex-title">Yoga & Tai Chi</div>
+        <span class="ex-badge bg-yellow">Dianjurkan</span>
+      </div>
+    </div>
+    <div class="ex-desc">
+      <strong>Durasi:</strong> 30–60 menit/sesi · <strong>Frekuensi:</strong> 3×/minggu<br>
+      <strong>Manfaat:</strong> Meningkatkan keseimbangan, fleksibilitas, dan mengurangi risiko jatuh<br>
+      <strong>Tips:</strong> Tai Chi terbukti mengurangi risiko jatuh hingga 47% pada lansia. Pilih kelas khusus osteoporosis — hindari gerakan membungkuk ekstrem.
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-header">
+      <span class="ex-icon">🚫</span>
+      <div>
+        <div class="ex-title">Latihan yang DIHINDARI</div>
+        <span class="ex-badge bg-red">Hati-hati</span>
+      </div>
+    </div>
+    <div class="ex-desc">
+      <strong>Hindari bila sudah ada osteoporosis:</strong><br>
+      ❌ Sit-up / crunches (tekanan berlebih pada tulang belakang)<br>
+      ❌ Membungkuk ke depan secara ekstrem<br>
+      ❌ Melompat dengan intensitas tinggi (risiko patah tulang)<br>
+      ❌ Olahraga berisiko jatuh (ski, sepatu roda)<br>
+      ❌ Gerakan memutar tulang belakang secara paksa
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚖️ Panduan Pencegahan Jatuh</div>
+    <div class="card-sub">Jatuh adalah penyebab utama patah tulang pada penderita osteoporosis</div>
+    <table class="tbl">
+      <thead><tr><th>Area</th><th>Tindakan Pencegahan</th></tr></thead>
+      <tbody>
+        <tr><td>🏠 Di rumah</td><td>Keset anti-slip · Pegangan di kamar mandi · Pencahayaan cukup malam hari</td></tr>
+        <tr><td>👟 Alas kaki</td><td>Sepatu ber-sol karet · Hindari sandal licin · Tidak berjalan tanpa alas</td></tr>
+        <tr><td>👁️ Penglihatan</td><td>Periksa mata rutin · Gunakan kacamata bila perlu</td></tr>
+        <tr><td>💊 Obat-obatan</td><td>Beritahu dokter bila konsumsi obat yang menyebabkan pusing/kantuk</td></tr>
+        <tr><td>🏋️ Kekuatan</td><td>Latihan keseimbangan rutin (berdiri satu kaki 10 detik tiap hari)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════ EDUKASI ══════ -->
+<div id="s-edukasi" class="section">
+  <div class="card">
+    <div class="card-title">📖 Memahami Osteoporosis</div>
+    <div class="card-sub">Edukasi komprehensif untuk perempuan Indonesia</div>
+  </div>
+
+  <!-- Accordion items -->
+  <div class="edu-card">
+    <div class="edu-header" onclick="toggleEdu(this)">
+      <span class="edu-icon">🦴</span>
+      <div><div class="edu-title">Apa itu Osteoporosis?</div><div class="edu-sub">Definisi, patofisiologi, dan fakta kunci</div></div>
+      <span class="edu-chev">▼</span>
+    </div>
+    <div class="edu-body">
+      Osteoporosis adalah kondisi di mana kepadatan dan kualitas tulang berkurang secara signifikan, menjadikan tulang rapuh dan mudah patah. Kata "osteoporosis" berasal dari bahasa Yunani: <em>osteon</em> (tulang) + <em>poros</em> (pori) — tulang menjadi berpori seperti spons.<br><br>
+      <strong>Mekanisme:</strong> Tulang adalah jaringan hidup yang terus-menerus mengalami remodeling — sel osteoklas memecah tulang lama, sementara osteoblas membangun tulang baru. Pada osteoporosis, proses pemecahan lebih cepat dari pembentukan, sehingga kepadatan tulang menurun.<br><br>
+      <strong>Fakta Penting:</strong><br>
+      • Puncak massa tulang (peak bone mass) dicapai pada usia 25–30 tahun<br>
+      • Setelah usia 35 tahun, mulai terjadi penurunan massa tulang perlahan<br>
+      • Pada perempuan, penurunan dipercepat drastis setelah menopause (hingga 3–5%/tahun dalam 5 tahun pertama)<br>
+      • Patah tulang akibat osteoporosis paling sering terjadi di pergelangan tangan, tulang belakang, dan pinggul
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-header" onclick="toggleEdu(this)">
+      <span class="edu-icon">🌸</span>
+      <div><div class="edu-title">Perempuan & Osteoporosis</div><div class="edu-sub">Mengapa perempuan lebih berisiko?</div></div>
+      <span class="edu-chev">▼</span>
+    </div>
+    <div class="edu-body">
+      Perempuan memiliki risiko osteoporosis 4× lebih tinggi dibanding laki-laki, dengan 80% dari total kasus osteoporosis terjadi pada perempuan. Beberapa alasan utama:<br><br>
+      <strong>1. Massa Tulang Lebih Rendah:</strong> Secara alami, perempuan memiliki massa tulang lebih kecil dan lebih ringan dibanding laki-laki sejak lahir.<br><br>
+      <strong>2. Penurunan Estrogen saat Menopause:</strong> Estrogen memiliki peran protektif pada tulang dengan menghambat aktivitas osteoklas (sel pemecah tulang). Saat kadar estrogen turun drastis pasca menopause, kehilangan massa tulang meningkat pesat.<br><br>
+      <strong>3. Kehamilan dan Laktasi:</strong> Selama kehamilan dan menyusui, tubuh memerlukan kalsium ekstra untuk janin dan produksi ASI. Bila asupan tidak cukup, kalsium diambil dari tulang ibu.<br><br>
+      <strong>4. Umur Harapan Hidup Lebih Panjang:</strong> Perempuan hidup lebih lama, sehingga lebih lama terekspos penurunan massa tulang pasca menopause.
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-header" onclick="toggleEdu(this)">
+      <span class="edu-icon">📅</span>
+      <div><div class="edu-title">Siklus Hidup Tulang Perempuan</div><div class="edu-sub">Dari remaja hingga lansia</div></div>
+      <span class="edu-chev">▼</span>
+    </div>
+    <div class="edu-body">
+      <strong>🌱 Remaja (10–20 tahun) — Fase Investasi Tulang:</strong><br>
+      90% massa tulang dewasa dibangun pada fase ini. Asupan kalsium dan Vit D yang cukup, serta olahraga aktif, menentukan "modal tulang" seumur hidup.<br><br>
+      <strong>🌸 Dewasa Muda (20–35 tahun) — Puncak Massa Tulang:</strong><br>
+      Massa tulang mencapai puncaknya. Pertahankan dengan diet seimbang dan olahraga teratur.<br><br>
+      <strong>🤰 Kehamilan & Laktasi:</strong><br>
+      Kebutuhan kalsium meningkat 200mg/hari. Konsumsi suplemen bila perlu. Tulang akan pulih setelah berhenti menyusui bila kalsium mencukupi.<br><br>
+      <strong>🌿 Perimenopause (40–50 tahun) — Fase Kritis:</strong><br>
+      Kadar estrogen mulai turun. Kehilangan massa tulang mulai meningkat 0.5–1%/tahun. Ini saat terbaik untuk skrining dan intervensi dini.<br><br>
+      <strong>🍂 Pasca Menopause (50+ tahun) — Fase Akselerasi:</strong><br>
+      Kehilangan massa tulang 3–5%/tahun pada 5–7 tahun pertama pasca menopause. Intervensi medis (suplementasi, terapi hormonal bila diindikasikan) sangat penting.<br><br>
+      <strong>🌙 Lansia (65+ tahun):</strong><br>
+      Risiko patah tulang pinggul tertinggi. Fokus pada pencegahan jatuh, suplementasi kalsium + Vit D, dan latihan keseimbangan.
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-header" onclick="toggleEdu(this)">
+      <span class="edu-icon">🔬</span>
+      <div><div class="edu-title">Diagnosis & Pemeriksaan</div><div class="edu-sub">Kapan dan bagaimana periksa kepadatan tulang?</div></div>
+      <span class="edu-chev">▼</span>
+    </div>
+    <div class="edu-body">
+      <strong>DXA Scan (Dual-energy X-ray Absorptiometry)</strong> adalah standar emas diagnosis osteoporosis. Mengukur kepadatan mineral tulang (BMD) di tulang belakang dan pinggul.<br><br>
+      <strong>Siapa yang perlu DXA Scan?</strong><br>
+      • Semua perempuan ≥65 tahun<br>
+      • Perempuan &lt;65 tahun pasca menopause dengan faktor risiko<br>
+      • Menopause dini (&lt;45 tahun)<br>
+      • Pernah patah tulang tanpa trauma berarti<br>
+      • Pengguna kortikosteroid jangka panjang<br>
+      • Riwayat keluarga osteoporosis<br>
+      • IMT &lt;18.5 kg/m²<br><br>
+      <strong>Pemeriksaan Lain:</strong><br>
+      • Laboratorium: Ca serum, Vit D, hormon paratiroid, penanda remodeling tulang<br>
+      • Rontgen tulang belakang: untuk deteksi fraktur vertebra<br>
+      • FRAX Score: kalkulator risiko fraktur 10 tahun (tersedia online di frax.shef.ac.uk)
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-header" onclick="toggleEdu(this)">
+      <span class="edu-icon">💊</span>
+      <div><div class="edu-title">Pengobatan Osteoporosis</div><div class="edu-sub">Pilihan terapi medis yang tersedia</div></div>
+      <span class="edu-chev">▼</span>
+    </div>
+    <div class="edu-body">
+      <strong>⚠️ Selalu konsultasi dokter spesialis (SpPD/Sp. Reumatologi) sebelum memulai pengobatan.</strong><br><br>
+      <strong>1. Bisphosphonates (Lini Pertama):</strong><br>
+      Alendronate, Risedronate, Ibandronate, Zoledronic acid — menghambat aktivitas osteoklas. Efektif mengurangi risiko patah tulang 40–70%.<br><br>
+      <strong>2. Terapi Hormonal (HRT):</strong><br>
+      Estrogen/progestin untuk perempuan pasca menopause. Efektif namun perlu pertimbangan risiko kardiovaskular dan kanker payudara.<br><br>
+      <strong>3. Selective Estrogen Receptor Modulators (SERMs):</strong><br>
+      Raloxifene — manfaat estrogen pada tulang tanpa efek pada rahim dan payudara.<br><br>
+      <strong>4. Denosumab:</strong><br>
+      Injeksi setiap 6 bulan — inhibitor RANKL yang sangat efektif.<br><br>
+      <strong>5. Teriparatide:</strong><br>
+      Hormon paratiroid sintetis — merangsang pembentukan tulang baru (bukan hanya mencegah kerusakan). Untuk kasus berat.
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-header" onclick="toggleEdu(this)">
+      <span class="edu-icon">🌿</span>
+      <div><div class="edu-title">Pencegahan sejak Dini</div><div class="edu-sub">Investasi tulang untuk masa depan</div></div>
+      <span class="edu-chev">▼</span>
+    </div>
+    <div class="edu-body">
+      Pencegahan osteoporosis jauh lebih efektif dan murah daripada pengobatan. Mulai dari usia remaja:<br><br>
+      <strong>✅ Nutrisi Optimal:</strong><br>
+      • Kalsium 1.000–1.200mg/hari dari makanan (prioritas) + suplemen bila perlu<br>
+      • Vitamin D 600–800 IU/hari (sinar matahari + makanan + suplemen)<br>
+      • Protein cukup (1g/kgBB/hari)<br>
+      • Batasi kafein, garam, dan alkohol<br><br>
+      <strong>✅ Gaya Hidup Aktif:</strong><br>
+      • Olahraga weight-bearing 30 menit, 3–5×/minggu<br>
+      • Hindari duduk terlalu lama (lebih dari 2 jam berturut-turut)<br>
+      • Paparan sinar matahari 15–30 menit/hari<br><br>
+      <strong>✅ Hindari Faktor Risiko:</strong><br>
+      • Tidak merokok<br>
+      • Tidak konsumsi alkohol<br>
+      • Jaga berat badan ideal (IMT 18.5–24.9)<br><br>
+      <strong>✅ Skrining Rutin:</strong><br>
+      • DXA scan mulai usia 65 tahun (lebih awal bila ada faktor risiko)<br>
+      • IOF One-Minute Test setiap tahun setelah usia 40 tahun
+    </div>
+  </div>
+</div>
+
+<!-- ══════ REFERENSI ══════ -->
+<div id="s-referensi" class="section">
+  <div class="card" style="background:linear-gradient(135deg,var(--dam-d),var(--navy));border:none;margin-bottom:14px">
+    <div style="color:#fff;font-size:0.78rem;opacity:0.8;margin-bottom:4px">📚 Referensi Ilmiah</div>
+    <div style="color:#fff;font-weight:700;font-family:Georgia,serif;font-size:1.05rem">FLORIS Damask — BONITA BidanKu</div>
+    <div style="color:rgba(255,255,255,0.7);font-size:0.68rem;margin-top:4px">20 Referensi Valid · Terindeks Online · Evidence-Based</div>
+  </div>
+
+  <div style="font-size:0.75rem;font-weight:700;color:var(--navy);margin-bottom:8px">🌍 WHO & Panduan Internasional</div>
+  <div class="ref-item"><span class="ref-num">1</span><div class="ref-title">WHO Scientific Group on the Assessment of Osteoporosis at Primary Health Care Level</div><div class="ref-src">WHO, Geneva, 2004 · who.int</div></div>
+  <div class="ref-item"><span class="ref-num">2</span><div class="ref-title">International Osteoporosis Foundation (IOF) — One-Minute Osteoporosis Risk Test</div><div class="ref-src">IOF, 2022 · iofbonehealth.org</div></div>
+  <div class="ref-item"><span class="ref-num">3</span><div class="ref-title">FRAX® WHO Fracture Risk Assessment Tool</div><div class="ref-src">Kanis JA et al. · University of Sheffield · frax.shef.ac.uk</div></div>
+  <div class="ref-item"><span class="ref-num">4</span><div class="ref-title">IOF — Calcium & Vitamin D: What You Need to Know</div><div class="ref-src">International Osteoporosis Foundation · iofbonehealth.org</div></div>
+  <div class="ref-item"><span class="ref-num">5</span><div class="ref-title">Osteoporosis Prevention, Diagnosis and Therapy — NIH Consensus Statement</div><div class="ref-src">NIH, 2001 · consensus.nih.gov</div></div>
+
+  <div style="font-size:0.75rem;font-weight:700;color:var(--navy);margin:14px 0 8px">🇮🇩 Panduan Nasional</div>
+  <div class="ref-item"><span class="ref-num">6</span><div class="ref-title">Permenkes RI No. 28 Tahun 2019 tentang Angka Kecukupan Gizi (AKG)</div><div class="ref-src">Kemenkes RI · gizi.kemkes.go.id</div></div>
+  <div class="ref-item"><span class="ref-num">7</span><div class="ref-title">Pedoman Pengendalian Osteoporosis — Kementerian Kesehatan RI</div><div class="ref-src">Kemenkes RI, 2008 · kemkes.go.id</div></div>
+  <div class="ref-item"><span class="ref-num">8</span><div class="ref-title">PERWATUSI — Perhimpunan Osteoporosis Indonesia: Panduan Diagnosis dan Tatalaksana Osteoporosis</div><div class="ref-src">PERWATUSI Indonesia · perwatusi.or.id</div></div>
+
+  <div style="font-size:0.75rem;font-weight:700;color:var(--navy);margin:14px 0 8px">📊 Jurnal Ilmiah</div>
+  <div class="ref-item"><span class="ref-num">9</span><div class="ref-title">Kanis JA et al. (2019). SCOPE 2021: A new scorecard for osteoporosis in Europe. Archives of Osteoporosis</div><div class="ref-src">doi:10.1007/s11657-020-00871-9</div></div>
+  <div class="ref-item"><span class="ref-num">10</span><div class="ref-title">Compston JE et al. (2019). Osteoporosis. The Lancet, 393(10169), 364–376</div><div class="ref-src">doi:10.1016/S0140-6736(18)32112-3</div></div>
+  <div class="ref-item"><span class="ref-num">11</span><div class="ref-title">Eastell R et al. (2016). Postmenopausal osteoporosis. Nature Reviews Disease Primers, 2, 16069</div><div class="ref-src">doi:10.1038/nrdp.2016.69</div></div>
+  <div class="ref-item"><span class="ref-num">12</span><div class="ref-title">Weaver CM et al. (2016). Calcium plus vitamin D supplementation and risk of fractures. Osteoporosis International</div><div class="ref-src">doi:10.1007/s00198-015-3386-5</div></div>
+  <div class="ref-item"><span class="ref-num">13</span><div class="ref-title">Kelley GA & Kelley KS (2013). Exercise and bone mineral density at the femoral neck in postmenopausal women. Osteoporosis International</div><div class="ref-src">doi:10.1007/s00198-012-2109-y</div></div>
+
+  <div class="brand-footer">
+    <div style="font-size:0.88rem;font-weight:700;color:var(--dam-d);margin-bottom:3px">🌸 FLORIS Damask — BONITA BidanKu</div>
+    <div style="font-size:0.67rem;color:var(--muted);font-style:italic;margin-bottom:6px">Bone Intelligence for Indonesian Women · FL-09 · ERNAWATI BidanKu Ecosystem</div>
+    <div style="font-size:0.82rem;font-weight:700;color:var(--navy)">Ernawati, SST., Bdn., M.Kes</div>
+    <div style="font-size:0.7rem;color:var(--muted)">Dosen Kebidanan — FIKK Institut Kesehatan Karsa Husada Garut</div>
+    <div style="font-size:0.62rem;color:#bbb;margin-top:6px">© 2026 Ernawati, SST., Bdn., M.Kes · FLORIS Damask FL-09 · Versi Offline</div>
+    <div style="font-size:0.6rem;color:#ccc;margin-top:2px">Tulang Kuat · Perempuan Tangguh · Indonesia Emas 2045 🇮🇩</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ── TAB NAVIGATION ────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  const tabs=['beranda','skrining','iof','kalkulator','nutrisi','latihan','edukasi','referensi'];
+  const idx=tabs.indexOf(id);
+  if(idx>=0) document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── SKRINING ──────────────────────────────────────────────────────
+function hitungSkrining() {
+  const usia = parseFloat(document.getElementById('sk-usia').value)||0;
+  const bb   = parseFloat(document.getElementById('sk-bb').value)||0;
+  const tb   = parseFloat(document.getElementById('sk-tb').value)||0;
+  const res  = document.getElementById('skrining-result');
+  if (!usia) { res.style.display='none'; return; }
+
+  let skor = 0;
+
+  // Usia
+  if      (usia >= 70) skor += 4;
+  else if (usia >= 65) skor += 3;
+  else if (usia >= 55) skor += 2;
+  else if (usia >= 45) skor += 1;
+
+  // IMT
+  const imt = tb>0 ? bb/Math.pow(tb/100,2) : 0;
+  if (imt < 18.5) skor += 3;
+  else if (imt < 20) skor += 2;
+
+  // Faktor lain
+  skor += parseInt(document.getElementById('sk-menopause').value)||0;
+  skor += parseInt(document.getElementById('sk-riwayat').value)||0;
+  skor += parseInt(document.getElementById('sk-rokok').value)||0;
+  skor += parseInt(document.getElementById('sk-alkohol').value)||0;
+  skor += parseInt(document.getElementById('sk-aktivitas').value)||0;
+  skor += parseInt(document.getElementById('sk-surya').value)||0;
+  skor += parseInt(document.getElementById('sk-kalsium').value)||0;
+  skor += parseInt(document.getElementById('sk-obat').value)||0;
+  skor += parseInt(document.getElementById('sk-penyakit').value)||0;
+  skor += parseInt(document.getElementById('sk-patah').value)||0;
+
+  let level='', warna='', icon='', rec='', color='';
+  if      (skor <= 2)  { level='Risiko Rendah';      warna='rb-green';  icon='✅'; color='#15803D'; rec='Pertahankan gaya hidup sehat. Konsumsi kalsium dan Vit D cukup. Skrining ulang setiap 2 tahun.'; }
+  else if (skor <= 5)  { level='Risiko Sedang';      warna='rb-yellow'; icon='⚠️'; color='#D97706'; rec='Tingkatkan asupan kalsium dan Vit D. Olahraga weight-bearing rutin. Pertimbangkan DXA scan.'; }
+  else if (skor <= 9)  { level='Risiko Tinggi';      warna='rb-orange'; icon='🚨'; color='#C2410C'; rec='Sangat dianjurkan DXA scan segera. Konsultasi dokter untuk evaluasi menyeluruh dan rencana terapi.'; }
+  else                 { level='Risiko Sangat Tinggi';warna='rb-red';   icon='🆘'; color:'#991B1B'; rec='SEGERA konsultasi dokter spesialis (SpPD/Reumatologi). DXA scan wajib. Kemungkinan perlu terapi medis.'; }
+
+  res.className = `result-box ${warna}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div>
+        <div style="font-size:0.7rem;color:var(--muted);font-weight:600;text-transform:uppercase">Skor Risiko Anda</div>
+        <div style="font-size:2rem;font-weight:700;color:${color};font-family:Georgia,serif">${skor}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:1.1rem;font-weight:700;color:${color}">${icon} ${level}</div>
+        <div style="font-size:0.68rem;color:var(--muted);margin-top:3px">IMT: ${imt>0?imt.toFixed(1):'—'} kg/m²</div>
+      </div>
+    </div>
+    <div class="risk-meter">
+      <div class="risk-bar"><div class="risk-pointer" style="left:${Math.min(skor/15*100,98)}%"></div></div>
+      <div class="risk-labels"><span>Rendah</span><span>Sedang</span><span>Tinggi</span><span>Sangat Tinggi</span></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:10px 12px;margin-top:12px;font-size:0.8rem;line-height:1.6">
+      <strong>Rekomendasi:</strong><br>${rec}
+    </div>
+    <div style="font-size:0.68rem;color:var(--muted);margin-top:8px">Sumber: IOF Risk Assessment · WHO Guidelines · PERWATUSI Indonesia</div>`;
+}
+
+// ── IOF ONE-MINUTE TEST ──────────────────────────────────────────
+const iofQuestions = [
+  {q:"Apakah Anda memiliki orang tua yang pernah mengalami patah tulang pinggul setelah benturan ringan atau jatuh?", cat:"Riwayat Keluarga"},
+  {q:"Apakah Anda pernah mengalami patah tulang setelah benturan ringan atau jatuh?", cat:"Riwayat Fraktur"},
+  {q:"Apakah Anda pernah mengonsumsi kortikosteroid (kortison, prednison) secara terus-menerus selama lebih dari 3 bulan?", cat:"Pengobatan"},
+  {q:"Apakah tinggi badan Anda berkurang lebih dari 3 cm?", cat:"Perubahan Fisik"},
+  {q:"Apakah Anda sering mengonsumsi alkohol secara berlebihan?", cat:"Gaya Hidup"},
+  {q:"Apakah Anda merokok atau pernah merokok?", cat:"Gaya Hidup"},
+  {q:"Apakah Anda sering mengalami diare (akibat penyakit seperti penyakit Crohn atau celiac)?", cat:"Kondisi Medis"},
+  {q:"Apakah Anda (perempuan) telah mengalami menopause sebelum usia 45 tahun?", cat:"Hormon"},
+  {q:"Apakah Anda (perempuan) pernah tidak menstruasi selama lebih dari 12 bulan selain karena kehamilan?", cat:"Hormon"},
+  {q:"Apakah Anda (laki-laki) pernah mengalami impotensi, kurang libido, atau gejala kekurangan testosteron?", cat:"Hormon"},
+  {q:"Apakah Anda menderita osteoporosis atau berpostur bungkuk (kyphosis)?", cat:"Kondisi Medis"},
+  {q:"Apakah Anda sering jatuh, atau khawatir jatuh karena merasa lemah?", cat:"Keseimbangan"},
+  {q:"Apakah Anda (perempuan berusia di atas 65 tahun) belum pernah melakukan pemeriksaan kepadatan tulang (DXA)?", cat:"Skrining"},
+  {q:"Apakah Anda (laki-laki berusia di atas 70 tahun) belum pernah melakukan pemeriksaan kepadatan tulang?", cat:"Skrining"},
+  {q:"Apakah Anda memiliki indeks massa tubuh (IMT) kurang dari 19 kg/m²?", cat:"Berat Badan"},
+  {q:"Apakah Anda pernah didiagnosis hipertiroidisme, hiperparatiroidisme, sindrom Cushing, atau penyakit serupa?", cat:"Kondisi Medis"},
+  {q:"Apakah Anda saat ini sedang menjalani terapi untuk kanker payudara dengan aromatase inhibitor atau kanker prostat dengan pengobatan antiandrogen?", cat:"Pengobatan"},
+  {q:"Apakah Anda menghindari produk susu atau memiliki alergi susu dan tidak mengonsumsi suplemen kalsium?", cat:"Nutrisi"},
+  {q:"Apakah Anda menghabiskan kurang dari 10 menit di luar ruangan setiap hari (paparan sinar matahari) dan tidak mengonsumsi suplemen Vitamin D?", cat:"Nutrisi/Paparan"},
+];
+
+let iofAnswers = {};
+
+function renderIOF() {
+  const container = document.getElementById('iof-questions');
+  container.innerHTML = iofQuestions.map((item,i)=>`
+    <div class="iof-q">
+      <div style="font-size:0.65rem;font-weight:700;color:var(--dam);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">${i+1}. ${item.cat}</div>
+      <div class="iof-q-text">${item.q}</div>
+      <div class="iof-opts">
+        <button class="iof-btn ${iofAnswers[i]==='ya'?'yes':''}" onclick="setIOF(${i},'ya',this)">✅ Ya</button>
+        <button class="iof-btn ${iofAnswers[i]==='tidak'?'no':''}" onclick="setIOF(${i},'tidak',this)">❌ Tidak</button>
+      </div>
+    </div>`).join('');
+}
+
+function setIOF(idx, val, btn) {
+  iofAnswers[idx] = val;
+  const q = btn.closest('.iof-q');
+  q.querySelectorAll('.iof-btn').forEach(b=>{b.classList.remove('yes','no');});
+  btn.classList.add(val==='ya'?'yes':'no');
+}
+
+function hitungIOF() {
+  const risiko = Object.values(iofAnswers).includes('ya');
+  const dijawab = Object.keys(iofAnswers).length;
+  const card = document.getElementById('iof-result-card');
+  const res  = document.getElementById('iof-result');
+  card.style.display = 'block';
+
+  if (dijawab < 19) {
+    res.innerHTML = `<div class="alert al-dam"><span>⚠️</span><span>Jawab semua ${19-dijawab} pertanyaan yang tersisa untuk hasil yang akurat!</span></div>`;
+    return;
+  }
+
+  const yaCount = Object.values(iofAnswers).filter(v=>v==='ya').length;
+  if (risiko) {
+    res.innerHTML = `
+      <div style="text-align:center;padding:10px 0">
+        <div style="font-size:2.5rem">🚨</div>
+        <div style="font-size:1.2rem;font-weight:700;color:#991B1B;font-family:Georgia,serif;margin-top:6px">Anda BERISIKO Osteoporosis</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:4px">${yaCount} dari 19 pertanyaan dijawab "Ya"</div>
+      </div>
+      <div class="alert al-red" style="margin-top:12px">
+        <span>🦴</span>
+        <div><strong>Hasil IOF: POSITIF RISIKO</strong><br>
+        Satu atau lebih jawaban "Ya" mengindikasikan bahwa Anda mungkin berisiko osteoporosis.<br><br>
+        <strong>Langkah Selanjutnya:</strong><br>
+        1. Konsultasi dengan dokter umum atau spesialis penyakit dalam (SpPD)<br>
+        2. Minta pemeriksaan kepadatan tulang (DXA scan)<br>
+        3. Evaluasi kadar Vitamin D dan kalsium darah<br>
+        4. Mulai intervensi nutrisi dan olahraga segera</div>
+      </div>
+      <div class="alert al-dam" style="margin-top:8px">
+        <span>💡</span>
+        <span>IOF One-Minute Test adalah skrining awal — bukan diagnosis. Diagnosis definitif memerlukan pemeriksaan DXA scan oleh dokter.</span>
+      </div>`;
+  } else {
+    res.innerHTML = `
+      <div style="text-align:center;padding:10px 0">
+        <div style="font-size:2.5rem">✅</div>
+        <div style="font-size:1.2rem;font-weight:700;color:#15803D;font-family:Georgia,serif;margin-top:6px">Risiko Rendah</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:4px">Semua pertanyaan dijawab "Tidak"</div>
+      </div>
+      <div class="alert al-green" style="margin-top:12px">
+        <span>✅</span>
+        <div><strong>Hasil IOF: Tidak Ditemukan Faktor Risiko Utama</strong><br>
+        Pertahankan gaya hidup sehat:<br>
+        • Konsumsi kalsium 1.000–1.200mg/hari<br>
+        • Vitamin D cukup (sinar matahari 15–30 mnt/hari)<br>
+        • Olahraga weight-bearing 3–5×/minggu<br>
+        • Skrining ulang setiap tahun setelah usia 40 tahun</div>
+      </div>`;
+  }
+  card.scrollIntoView({behavior:'smooth'});
+}
+
+function resetIOF() {
+  iofAnswers={};
+  document.getElementById('iof-result-card').style.display='none';
+  renderIOF();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── HITUNG IMT OTOMATIS ─────────────────────────────────────────
+function hitungIMTotomatis() {
+  const bb  = parseFloat(document.getElementById('ts-bb').value)||0;
+  const tb  = parseFloat(document.getElementById('ts-tb').value)||0;
+  const display = document.getElementById('imt-auto');
+  const imtInput = document.getElementById('ts-imt');
+
+  if (!bb || !tb || tb < 100) {
+    display.style.display = 'none';
+    imtInput.value = '';
+    return;
+  }
+
+  const imt = bb / Math.pow(tb/100, 2);
+  imtInput.value = imt.toFixed(1);
+
+  let kat='', color='';
+  if      (imt < 18.5) { kat='Kurus (Underweight)';   color='#DC2626'; }
+  else if (imt < 25.0) { kat='Normal';                 color='#15803D'; }
+  else if (imt < 27.0) { kat='Gemuk (Overweight)';    color='#D97706'; }
+  else                 { kat='Obesitas';               color:'#991B1B'; }
+
+  display.style.display = 'block';
+  display.innerHTML = `
+    ⚖️ IMT Terhitung: <span style="font-size:1.1rem;color:${color}"><strong>${imt.toFixed(1)} kg/m²</strong></span>
+    &nbsp;—&nbsp; <span style="color:${color}">${kat}</span>
+    <span style="font-size:0.68rem;color:var(--muted);display:block;margin-top:2px">BB ${bb}kg ÷ (TB ${tb}cm)² = ${imt.toFixed(1)} kg/m²</span>`;
+
+  // Auto trigger T-score calculation
+  hitungTscore();
+}
+
+// ── T-SCORE ESTIMASI ─────────────────────────────────────────────
+function hitungTscore() {
+  const usia = parseFloat(document.getElementById('ts-usia').value)||0;
+  const jk   = document.getElementById('ts-jk').value;
+  const imt  = parseFloat(document.getElementById('ts-imt').value)||0;
+  const meno = parseInt(document.getElementById('ts-meno').value)||0;
+  const res  = document.getElementById('tscore-result');
+  if (!usia || !imt) { res.style.display='none'; return; }
+
+  // Simplified T-score estimation based on risk factors
+  let tscore = 0;
+  // Base: usia
+  if      (jk==='p') tscore = -(usia-25)*0.012 - meno*0.4;
+  else               tscore = -(usia-30)*0.008;
+  // IMT adjustment
+  if (imt<18.5)      tscore -= 0.8;
+  else if (imt<20)   tscore -= 0.4;
+  else if (imt>27)   tscore += 0.3;
+
+  tscore = Math.max(-4.0, Math.min(1.5, tscore));
+
+  let kat='', warna='', icon='', color='', rec='';
+  if      (tscore >= -1.0) { kat='Normal';            warna='rb-green';  icon='✅'; color='#15803D'; rec='Kepadatan tulang normal. Pertahankan dengan nutrisi dan olahraga yang baik.'; }
+  else if (tscore >= -2.5) { kat='Osteopenia';        warna='rb-yellow'; icon='⚠️'; color='#D97706'; rec='Tulang mulai menipis. Tingkatkan kalsium, Vit D, dan olahraga. Pertimbangkan DXA scan.'; }
+  else                     { kat='Kemungkinan Osteoporosis'; warna='rb-red'; icon='🚨'; color:'#991B1B'; rec='Sangat disarankan DXA scan segera. Konsultasi dokter untuk rencana terapi.'; }
+
+  res.className = `result-box ${warna}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;font-weight:600">Estimasi T-score</div>
+        <div style="font-size:2rem;font-weight:700;color:${color};font-family:Georgia,serif">${tscore.toFixed(1)}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:1rem;font-weight:700;color:${color}">${icon} ${kat}</div>
+        <div style="font-size:0.67rem;color:var(--muted);margin-top:3px">IMT: ${imt} kg/m²</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:0.78rem;line-height:1.5"><strong>Rekomendasi:</strong> ${rec}</div>
+    <div style="font-size:0.67rem;color:var(--muted);margin-top:8px">⚠️ Estimasi ini BUKAN pengganti DXA scan. Konfirmasi dengan pemeriksaan medis oleh dokter.</div>`;
+}
+
+// ── KALSIUM ──────────────────────────────────────────────────────
+function hitungKalsium() {
+  const usia    = parseFloat(document.getElementById('ca-usia').value)||0;
+  const kondisi = document.getElementById('ca-kondisi').value;
+  const intake  = parseFloat(document.getElementById('ca-intake').value)||0;
+  const res     = document.getElementById('kalsium-result');
+  if (!usia) { res.style.display='none'; return; }
+
+  let kebutuhan = 1000;
+  if      (usia < 18)                      kebutuhan = 1300;
+  else if (usia < 50)                      kebutuhan = 1000;
+  else if (usia < 70 && kondisi!=='menopause') kebutuhan = 1000;
+  else                                     kebutuhan = 1200;
+
+  if (kondisi==='hamil')      kebutuhan = 1200;
+  else if (kondisi==='laktasi')    kebutuhan = 1300;
+  else if (kondisi==='menopause')  kebutuhan = 1200;
+  else if (kondisi==='osteopenia') kebutuhan = 1200;
+
+  const kurang = Math.max(0, kebutuhan - intake);
+  const persen = intake>0 ? Math.min(Math.round(intake/kebutuhan*100),100) : 0;
+  const cukup  = intake >= kebutuhan;
+
+  res.className = `result-box ${cukup ? 'rb-green' : 'rb-orange'}`;
+  res.style.display = 'block';
+  res.innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="val">${kebutuhan}</div><div class="lbl">Kebutuhan/hari (mg)</div></div>
+      <div class="info-item"><div class="val">${intake||'—'}</div><div class="lbl">Asupan saat ini (mg)</div></div>
+    </div>
+    ${intake>0?`
+    <div style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px">
+        <span>Pemenuhan kebutuhan kalsium</span><span>${persen}%</span>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" style="width:${persen}%;background:${cukup?'#15803D':'#C2410C'}"></div></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:0.8rem;line-height:1.5">
+      ${cukup
+        ? '✅ Asupan kalsium Anda sudah mencukupi kebutuhan harian!'
+        : `⚠️ Kekurangan <strong>${kurang}mg/hari</strong>. Tambahkan sumber kalsium: ${kurang<300?'1 gelas susu (300mg)':kurang<600?'2 gelas susu atau 100g teri':'suplemen kalsium + perbanyak produk susu dan ikan bertulang'}.`}
+    </div>`:''}
+    <div style="font-size:0.67rem;color:var(--muted);margin-top:8px">Sumber: AKG Kemenkes 2019 · IOF Guidelines · NIH</div>`;
+}
+
+// ── EDUKASI ACCORDION ────────────────────────────────────────────
+function toggleEdu(header) {
+  const body  = header.nextElementSibling;
+  const chev  = header.querySelector('.edu-chev');
+  const isOpen= body.classList.contains('show');
+  document.querySelectorAll('.edu-body').forEach(b=>b.classList.remove('show'));
+  document.querySelectorAll('.edu-chev').forEach(c=>c.classList.remove('open'));
+  if (!isOpen) { body.classList.add('show'); chev.classList.add('open'); }
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  renderIOF();
+});
+</script>
+</body>
+</html>
