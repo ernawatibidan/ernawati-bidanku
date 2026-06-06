@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buku Asuhan Persalinan Digital — Ernawati BidanKu</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,900;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+:root{
+  --navy:#1A3556;--teal:#1D6B61;--gold:#C8860A;--rose:#C44962;
+  --white:#fff;--cream:#FFF8F3;--mist:#F0F7F5;--text:#1A2535;--muted:#5A6B7A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:#F0F4F8;color:var(--text);}
+
+/* COVER */
+.cover{background:linear-gradient(160deg,var(--navy) 0%,#1D5B61 40%,var(--teal) 70%,#2D4A6A 100%);
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 24px;text-align:center;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;
+  background:rgba(255,255,255,0.04);top:-100px;right:-100px;}
+.cover::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;
+  background:rgba(200,134,10,0.08);bottom:-50px;left:-50px;}
+.cover-badge{background:rgba(200,134,10,0.2);border:1px solid rgba(200,134,10,0.4);
+  border-radius:20px;padding:6px 16px;font-size:0.65rem;font-weight:600;color:#FFD97D;
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;display:inline-block;}
+.cover-rose{font-size:4rem;margin-bottom:16px;filter:drop-shadow(0 4px 12px rgba(196,73,98,0.4));}
+.cover h1{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;
+  line-height:1.2;margin-bottom:8px;}
+.cover h1 span{color:#FFD97D;}
+.cover-sub{font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:24px;}
+.cover-author{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  border-radius:12px;padding:14px 20px;margin-bottom:28px;}
+.cover-author strong{display:block;font-size:1rem;color:#fff;margin-bottom:4px;}
+.cover-author span{font-size:0.72rem;color:rgba(255,255,255,0.65);line-height:1.6;}
+.cover-chapters{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px;margin-bottom:28px;}
+.cover-ch{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+  border-radius:10px;padding:10px;text-align:left;cursor:pointer;transition:all 0.2s;}
+.cover-ch:hover,.cover-ch:active{background:rgba(255,255,255,0.16);transform:translateY(-1px);}
+.cover-ch-icon{font-size:1.2rem;margin-bottom:4px;}
+.cover-ch-title{font-size:0.7rem;font-weight:600;color:#fff;line-height:1.3;}
+.cover-ch-sub{font-size:0.6rem;color:rgba(255,255,255,0.5);margin-top:2px;}
+.btn-start{background:linear-gradient(135deg,var(--gold),#E8A020);color:#fff;border:none;
+  border-radius:12px;padding:14px 32px;font-size:0.85rem;font-weight:600;cursor:pointer;
+  font-family:'DM Sans',sans-serif;width:100%;max-width:280px;box-shadow:0 8px 24px rgba(200,134,10,0.3);}
+
+/* MAIN APP */
+.app{display:none;flex-direction:column;min-height:100vh;}
+.app.show{display:flex;}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--navy),#1D5B61);padding:12px 16px;
+  display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;
+  box-shadow:0 4px 20px rgba(26,53,86,0.25);}
+.hdr-back{width:36px;height:36px;background:rgba(255,255,255,0.12);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;
+  border:none;color:#fff;flex-shrink:0;}
+.hdr-info{flex:1;}
+.hdr-info h2{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;
+  color:#fff;line-height:1.2;}
+.hdr-info p{font-size:0.6rem;color:rgba(255,255,255,0.6);}
+.hdr-badge{background:rgba(200,134,10,0.25);border-radius:8px;padding:3px 8px;
+  font-size:0.6rem;font-weight:700;color:#FFD97D;}
+
+/* CHAPTER NAV */
+.ch-nav{background:var(--navy);overflow-x:auto;scrollbar-width:none;padding:0 4px;}
+.ch-nav::-webkit-scrollbar{display:none;}
+.ch-tabs{display:flex;gap:0;min-width:max-content;}
+.ch-tab{padding:9px 13px;font-size:0.65rem;font-weight:500;color:rgba(255,255,255,0.5);
+  cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap;transition:all 0.2s;
+  display:flex;align-items:center;gap:4px;}
+.ch-tab.on{color:#FFD97D;border-bottom-color:#FFD97D;}
+.ch-tab:hover{color:rgba(255,255,255,0.85);}
+
+/* CONTENT */
+.content{flex:1;padding-bottom:60px;}
+.page{display:none;animation:fadeIn 0.2s ease;}
+.page.on{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO SECTION */
+.hero{padding:22px 16px;background:linear-gradient(135deg,var(--navy),#1D5B61);
+  text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,0.05);bottom:-60px;right:-40px;}
+.hero-badge{display:inline-block;background:rgba(200,134,10,0.2);border:1px solid rgba(200,134,10,0.35);
+  border-radius:16px;padding:3px 10px;font-size:0.6rem;font-weight:600;color:#FFD97D;
+  letter-spacing:1px;margin-bottom:8px;}
+.hero h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:#fff;
+  margin-bottom:5px;line-height:1.2;position:relative;z-index:1;}
+.hero p{font-size:0.72rem;color:rgba(255,255,255,0.7);line-height:1.6;position:relative;z-index:1;}
+
+/* CARDS */
+.card{background:#fff;border-radius:14px;margin:12px 14px;
+  box-shadow:0 2px 12px rgba(26,53,86,0.08);overflow:hidden;}
+.card-hdr{padding:12px 14px;display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid rgba(0,0,0,0.05);}
+.card-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.card-title{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--navy);}
+.card-sub{font-size:0.62rem;color:var(--muted);margin-top:1px;}
+.card-body{padding:14px;}
+
+/* TYPOGRAPHY */
+.section-label{font-size:0.62rem;font-weight:700;color:var(--teal);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+.prose{font-size:0.75rem;color:var(--muted);line-height:1.8;}
+.prose strong{color:var(--text);font-weight:600;}
+
+/* ACCORDION */
+.acc{border:1.5px solid #E8EFF5;border-radius:11px;margin-bottom:7px;overflow:hidden;}
+.acc-hdr{padding:11px 13px;display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;background:#fff;transition:background 0.15s;}
+.acc-hdr:hover{background:#F8FBFF;}
+.acc-title{font-size:0.78rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:7px;}
+.acc-arrow{font-size:0.65rem;color:var(--muted);transition:transform 0.25s;}
+.acc-body{display:none;padding:12px 14px;background:#FAFCFF;border-top:1px solid #EEF3F8;
+  font-size:0.73rem;color:var(--muted);line-height:1.8;}
+.acc.open .acc-arrow{transform:rotate(180deg);}
+.acc.open .acc-body{display:block;}
+
+/* STEPS */
+.step{display:flex;gap:12px;margin-bottom:12px;}
+.step-num{width:28px;height:28px;background:var(--teal);border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;flex-shrink:0;}
+.step-body{}
+.step-title{font-size:0.8rem;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.step-desc{font-size:0.72rem;color:var(--muted);line-height:1.7;}
+
+/* PARTOGRAPH */
+.parto-container{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.parto-grid{min-width:500px;background:#fff;}
+.parto-row{display:flex;align-items:stretch;border-bottom:1px solid #E8EFF5;}
+.parto-label{width:110px;flex-shrink:0;padding:8px 10px;font-size:0.65rem;font-weight:600;
+  color:var(--navy);background:#F8FBFF;border-right:1px solid #E8EFF5;display:flex;align-items:center;}
+.parto-cells{display:flex;flex:1;}
+.parto-cell{width:32px;height:32px;flex-shrink:0;border-right:1px solid #EEF3F8;
+  display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--muted);}
+.parto-cell.alert-line{background:#FFF1F2;}
+.parto-cell.action-line{background:#FFFBEB;}
+.parto-dot{width:10px;height:10px;border-radius:50%;background:var(--navy);margin:auto;}
+.parto-dot.x{background:var(--rose);}
+.parto-header-cell{background:var(--navy);color:#fff !important;font-weight:600;font-size:0.6rem;}
+
+/* FORMS */
+.form-group{margin-bottom:12px;}
+.form-label{display:block;font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.form-hint{font-size:0.62rem;color:var(--muted);margin-bottom:4px;}
+.form-ctrl{width:100%;padding:9px 11px;border:1.5px solid #DDE8F0;border-radius:9px;
+  font-size:0.8rem;font-family:'DM Sans',sans-serif;color:var(--text);
+  background:#fff;transition:border-color 0.2s;-webkit-appearance:none;}
+.form-ctrl:focus{outline:none;border-color:var(--teal);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;
+  border-radius:9px;font-size:0.77rem;font-weight:600;cursor:pointer;border:none;
+  font-family:'DM Sans',sans-serif;transition:all 0.2s;width:100%;}
+.btn-teal{background:linear-gradient(135deg,var(--teal),#2D8B6F);color:#fff;}
+.btn-teal:hover{opacity:0.92;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#E8A020);color:#fff;}
+
+/* RESULT BOX */
+.result{border-radius:11px;padding:12px;margin-top:10px;display:none;}
+.result.show{display:block;}
+.result.ok{background:#F0FDF4;border:1.5px solid #86EFAC;}
+.result.warn{background:#FFFBEB;border:1.5px solid #FCD34D;}
+.result.danger{background:#FFF1F2;border:1.5px solid #FDA4AF;}
+.result.info{background:#EFF6FF;border:1.5px solid #93C5FD;}
+.result-title{font-size:0.78rem;font-weight:700;margin-bottom:6px;}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;}
+.rg-item{background:rgba(255,255,255,0.8);border-radius:8px;padding:8px 9px;}
+.rg-label{font-size:0.6rem;color:var(--muted);margin-bottom:2px;}
+.rg-value{font-size:0.82rem;font-weight:700;color:var(--navy);}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.chip{background:#E6F7F5;border-radius:16px;padding:3px 10px;font-size:0.65rem;
+  font-weight:600;color:var(--teal);}
+.chip.red{background:#FFF1F2;color:var(--rose);}
+.chip.gold{background:#FFFBEB;color:var(--gold);}
+.chip.navy{background:#EFF6FF;color:var(--navy);}
+
+/* DANGER ITEM */
+.danger-item{background:#fff;border-radius:11px;padding:11px;margin-bottom:7px;
+  border-left:4px solid var(--rose);box-shadow:0 1px 6px rgba(26,53,86,0.06);}
+.danger-title{font-size:0.8rem;font-weight:700;color:var(--rose);margin-bottom:3px;}
+.danger-desc{font-size:0.7rem;color:var(--muted);line-height:1.6;}
+.danger-action{font-size:0.68rem;font-weight:600;color:var(--navy);margin-top:4px;}
+
+/* REF ITEM */
+.ref-item{background:#fff;border-radius:11px;padding:11px;margin-bottom:7px;
+  display:flex;gap:9px;border:1px solid #E8EFF5;}
+.ref-num{width:26px;height:26px;background:var(--navy);border-radius:7px;display:flex;
+  align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:#fff;flex-shrink:0;}
+.ref-title{font-size:0.73rem;font-weight:600;color:var(--navy);line-height:1.4;}
+.ref-source{font-size:0.62rem;color:var(--muted);margin-top:2px;}
+.ref-doi{font-size:0.6rem;color:var(--teal);margin-top:2px;}
+.badge{display:inline-block;border-radius:5px;padding:1px 7px;font-size:0.57rem;
+  font-weight:700;margin-top:3px;}
+.badge.scopus{background:#EFF6FF;color:var(--navy);}
+.badge.who{background:#F0FDF4;color:var(--teal);}
+.badge.km{background:#FFFBEB;color:var(--gold);}
+
+/* TIMER */
+.timer-display{background:linear-gradient(135deg,var(--teal),#2D8B6F);border-radius:16px;
+  padding:20px;text-align:center;margin-bottom:12px;}
+.timer-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;
+  color:#fff;letter-spacing:2px;line-height:1;}
+.timer-label{font-size:0.7rem;color:rgba(255,255,255,0.7);margin-top:5px;}
+.timer-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.t-btn{padding:10px;border-radius:9px;font-size:0.75rem;font-weight:600;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.t-btn.start{background:var(--teal);color:#fff;}
+.t-btn.stop{background:var(--rose);color:#fff;}
+.t-btn.reset{background:#E8EFF5;color:var(--navy);}
+.t-btn.his{background:var(--gold);color:#fff;}
+.his-log{max-height:180px;overflow-y:auto;}
+.his-item{display:flex;justify-content:space-between;align-items:center;padding:7px 9px;
+  background:#F8FBFF;border-radius:7px;margin-bottom:4px;font-size:0.7rem;}
+.his-item span:first-child{color:var(--navy);font-weight:600;}
+.his-item span:last-child{color:var(--muted);}
+
+/* LEOPOLD */
+.leopold-item{background:#fff;border-radius:11px;padding:12px;margin-bottom:7px;
+  border:1.5px solid #E8EFF5;display:flex;gap:10px;}
+.leopold-num{width:32px;height:32px;background:linear-gradient(135deg,var(--navy),var(--teal));
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:700;color:#fff;flex-shrink:0;}
+.leopold-title{font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:2px;}
+.leopold-desc{font-size:0.7rem;color:var(--muted);line-height:1.6;}
+.leopold-normal{font-size:0.65rem;font-weight:600;color:var(--teal);margin-top:3px;}
+
+/* KALA TABS */
+.kala-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.kala-tabs::-webkit-scrollbar{display:none;}
+.kala-tab{flex-shrink:0;padding:7px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;
+  cursor:pointer;border:1.5px solid #DDE8F0;color:var(--muted);background:#fff;transition:all 0.2s;white-space:nowrap;}
+.kala-tab.on{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+/* APN CHECKLIST */
+.anp-item{display:flex;align-items:flex-start;gap:10px;padding:10px 11px;background:#fff;
+  border-radius:9px;margin-bottom:5px;border:1px solid #E8EFF5;}
+.anp-cb{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;flex-shrink:0;margin-top:1px;}
+.anp-text{font-size:0.73rem;line-height:1.6;}
+.anp-text strong{color:var(--navy);display:block;font-size:0.75rem;}
+
+/* SCORE BOX */
+.score-box{text-align:center;padding:16px;background:linear-gradient(135deg,#F0FDF4,#DCFCE7);
+  border-radius:12px;margin-bottom:12px;}
+.score-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--teal);}
+.score-label{font-size:0.7rem;color:var(--muted);}
+
+/* OFFLINE BADGE */
+.offline{position:fixed;bottom:14px;right:14px;background:var(--navy);color:#fff;
+  border-radius:20px;padding:5px 11px;font-size:0.6rem;font-weight:600;
+  box-shadow:0 4px 16px rgba(26,53,86,0.3);z-index:200;display:flex;align-items:center;gap:4px;}
+
+/* INFO BOX */
+.info-box{border-radius:10px;padding:10px 12px;font-size:0.72rem;line-height:1.7;margin-bottom:10px;}
+.info-box.teal{background:#E6F7F5;border-left:3px solid var(--teal);color:var(--text);}
+.info-box.gold{background:#FFFBEB;border-left:3px solid var(--gold);color:var(--text);}
+.info-box.red{background:#FFF1F2;border-left:3px solid var(--rose);color:var(--text);}
+.info-box.navy{background:#EFF6FF;border-left:3px solid var(--navy);color:var(--text);}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,#DDE8F0,transparent);margin:14px 0;}
+
+/* NORMAL VALUES TABLE */
+.nv-table{width:100%;border-collapse:collapse;font-size:0.72rem;}
+.nv-table th{background:var(--navy);color:#fff;padding:7px 9px;text-align:left;font-weight:600;}
+.nv-table td{padding:7px 9px;border-bottom:1px solid #F0F4F8;}
+.nv-table tr:nth-child(even) td{background:#F8FBFF;}
+.nv-table tr:last-child td{border:none;}
+
+/* PROGRESS INDICATOR */
+.progress-wrap{margin:10px 0;}
+.progress-label{display:flex;justify-content:space-between;font-size:0.65rem;color:var(--muted);margin-bottom:4px;}
+.progress-bar{height:8px;background:#E8EFF5;border-radius:4px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:4px;transition:width 0.8s ease;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════
+     COVER PAGE
+═══════════════════════════════ -->
+<div class="cover" id="coverPage">
+  <div class="cover-badge">🌹 ERNAWATI BidanKu · FL-01 Series</div>
+  <div class="cover-rose">🌹</div>
+  <h1>Buku Asuhan<br><span>Persalinan</span><br>Digital</h1>
+  <p class="cover-sub">Panduan Klinis Berbasis Evidence-Based Practice<br>untuk Bidan & Mahasiswa Kebidanan Indonesia<br><em>WHO 2018 · Kemenkes RI 2020 · APN 2017</em></p>
+
+  <div class="cover-author">
+    <strong>Ernawati, SST., Bdn., M.Kes</strong>
+    <span>Pendidikan Profesi Bidan — FIKK<br>Institut Kesehatan Karsa Husada Garut<br>NIDN: 0407027302 · ernawatikoesendang@gmail.com</span>
+  </div>
+
+  <div class="cover-chapters">
+    <div class="cover-ch" onclick="openBook(0)">
+      <div class="cover-ch-icon">⏱️</div>
+      <div class="cover-ch-title">Timer His & Partograf</div>
+      <div class="cover-ch-sub">Pemantauan kemajuan</div>
+    </div>
+    <div class="cover-ch" onclick="openBook(1)">
+      <div class="cover-ch-icon">🔬</div>
+      <div class="cover-ch-title">Leopold & DJJ</div>
+      <div class="cover-ch-sub">Pemeriksaan fisik</div>
+    </div>
+    <div class="cover-ch" onclick="openBook(2)">
+      <div class="cover-ch-icon">📋</div>
+      <div class="cover-ch-title">Asuhan Kala I–IV</div>
+      <div class="cover-ch-sub">60 langkah APN</div>
+    </div>
+    <div class="cover-ch" onclick="openBook(3)">
+      <div class="cover-ch-icon">👶</div>
+      <div class="cover-ch-title">Asuhan BBL</div>
+      <div class="cover-ch-sub">DCC · Vit K₁ · HB0</div>
+    </div>
+    <div class="cover-ch" onclick="openBook(4)">
+      <div class="cover-ch-icon">🚨</div>
+      <div class="cover-ch-title">Tanda Bahaya</div>
+      <div class="cover-ch-sub">Deteksi & rujukan</div>
+    </div>
+    <div class="cover-ch" onclick="openBook(8)">
+      <div class="cover-ch-icon">📚</div>
+      <div class="cover-ch-title">Referensi</div>
+      <div class="cover-ch-sub">Scopus · WHO</div>
+    </div>
+  </div>
+
+  <button class="btn-start" onclick="openBook(0)">📖 Buka Buku Digital →</button>
+</div>
+
+<!-- ═══════════════════════════════
+     MAIN APP
+═══════════════════════════════ -->
+<div class="app" id="mainApp">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <button class="hdr-back" onclick="goHome()">🏠</button>
+    <div class="hdr-info">
+      <h2>Buku Asuhan Persalinan Digital</h2>
+      <p>🌹 ERNAWATI BidanKu · FIKK IKesKHG Garut</p>
+    </div>
+    <div class="hdr-badge">v2.0</div>
+  </div>
+
+  <!-- CHAPTER NAV -->
+  <div class="ch-nav">
+    <div class="ch-tabs" id="chTabs">
+      <div class="ch-tab" onclick="goPage(0)">⏱️ Timer His</div>
+      <div class="ch-tab" onclick="goPage(1)">🔬 Leopold & DJJ</div>
+      <div class="ch-tab" onclick="goPage(2)">📋 Kala I–IV</div>
+      <div class="ch-tab" onclick="goPage(3)">👶 Asuhan BBL</div>
+      <div class="ch-tab" onclick="goPage(4)">⚖️ TBJ Kalkulator</div>
+      <div class="ch-tab" onclick="goPage(5)">🚨 Tanda Bahaya</div>
+      <div class="ch-tab" onclick="goPage(6)">📋 60 Langkah APN</div>
+      <div class="ch-tab" onclick="goPage(7)">🥗 Gizi Intrapartum</div>
+      <div class="ch-tab" onclick="goPage(8)">📚 Referensi</div>
+    </div>
+  </div>
+
+  <!-- CONTENT PAGES -->
+  <div class="content">
+
+    <!-- ═══ PAGE 0: TIMER HIS & PARTOGRAF ═══ -->
+    <div class="page" id="p0">
+      <div class="hero">
+        <div class="hero-badge">BAB 1</div>
+        <h3>Timer His & Partograf</h3>
+        <p>Pemantauan Kemajuan Persalinan · WHO 2018 · Kemenkes RI 2020</p>
+      </div>
+
+      <!-- TIMER HIS -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#E6F7F5;">⏱️</div>
+          <div>
+            <div class="card-title">Timer Kontraksi His</div>
+            <div class="card-sub">Real-time monitoring · Penilaian His Adekuat</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="timer-display">
+            <div class="timer-num" id="timerNum">00:00</div>
+            <div class="timer-label" id="timerLabel">Waktu sejak kontraksi terakhir</div>
+          </div>
+          <div class="timer-btns">
+            <button class="t-btn start" id="btnMulai" onclick="mulaiKontraksi()">▶ Mulai Kontraksi</button>
+            <button class="t-btn stop" id="btnSelesai" onclick="selesaiKontraksi()" disabled>⏹ Kontraksi Selesai</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:12px;">
+            <div style="background:#F8FBFF;border-radius:9px;padding:9px;text-align:center;">
+              <div style="font-size:0.6rem;color:var(--muted);margin-bottom:2px;">Kontraksi</div>
+              <div id="jmlKontraksi" style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--navy);">0</div>
+            </div>
+            <div style="background:#F8FBFF;border-radius:9px;padding:9px;text-align:center;">
+              <div style="font-size:0.6rem;color:var(--muted);margin-bottom:2px;">Interval Rata²</div>
+              <div id="intervalRata" style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--teal);">—</div>
+            </div>
+            <div style="background:#F8FBFF;border-radius:9px;padding:9px;text-align:center;">
+              <div style="font-size:0.6rem;color:var(--muted);margin-bottom:2px;">Durasi Rata²</div>
+              <div id="durasiRata" style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--gold);">—</div>
+            </div>
+          </div>
+          <button class="t-btn reset" style="width:100%;margin-bottom:12px;" onclick="resetTimer()">🔄 Reset Semua</button>
+          <div id="hisResult" class="result info" style="display:none;"></div>
+
+          <div class="divider"></div>
+          <div class="section-label">📊 Log Kontraksi</div>
+          <div class="his-log" id="hisLog">
+            <div style="text-align:center;padding:16px;color:var(--muted);font-size:0.72rem;">Belum ada kontraksi tercatat</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PENILAIAN HIS ADEKUAT -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFFBEB;">📊</div>
+          <div>
+            <div class="card-title">Penilaian His Adekuat</div>
+            <div class="card-sub">Standar WHO 2018 · Kemenkes RI 2020</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-box teal">
+            <strong>His Adekuat (Kala I Aktif):</strong><br>
+            ✅ Frekuensi: ≥3 kontraksi / 10 menit<br>
+            ✅ Durasi: ≥40 detik per kontraksi<br>
+            ✅ Intensitas: kuat (fundus keras saat dipalpasi)
+          </div>
+          <div class="form-group">
+            <label class="form-label">Frekuensi His (per 10 menit)</label>
+            <input type="number" class="form-ctrl" id="frekHis" placeholder="Contoh: 3" min="0" max="7" oninput="nilaiHis()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Durasi His (detik)</label>
+            <input type="number" class="form-ctrl" id="durasiHis" placeholder="Contoh: 45" min="0" max="90" oninput="nilaiHis()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Intensitas His</label>
+            <select class="form-ctrl" id="intensitasHis" onchange="nilaiHis()">
+              <option value="">— Pilih Intensitas —</option>
+              <option value="lemah">Lemah (fundus lunak)</option>
+              <option value="sedang">Sedang</option>
+              <option value="kuat">Kuat (fundus keras, tidak dapat ditekan)</option>
+            </select>
+          </div>
+          <div id="resultHis" class="result" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- PARTOGRAF SEDERHANA -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#F0FDF4;">📈</div>
+          <div>
+            <div class="card-title">Partograf Digital</div>
+            <div class="card-sub">WHO Partograph · Pemantauan kemajuan persalinan</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-box navy">
+            <strong>Tentang Partograf:</strong> Partograf adalah alat pencatatan dan pemantauan kondisi ibu dan janin serta kemajuan persalinan. Garis waspada dan garis bertindak membantu bidan mendeteksi persalinan macet.
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Pembukaan Awal (cm)</label>
+              <input type="number" class="form-ctrl" id="pembukaanAwal" min="1" max="10" placeholder="4">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Jam Mulai Partograf</label>
+              <input type="time" class="form-ctrl" id="jamMulai">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Pembukaan Sekarang (cm)</label>
+              <input type="number" class="form-ctrl" id="pembukaanNow" min="1" max="10" placeholder="7">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Jam Periksa Sekarang</label>
+              <input type="time" class="form-ctrl" id="jamNow">
+            </div>
+          </div>
+          <button class="btn btn-teal" onclick="analisisPartograf()">📈 Analisis Partograf</button>
+          <div id="resultPartograf" class="result" style="display:none;margin-top:10px;"></div>
+
+          <div class="divider"></div>
+          <div class="section-label">📋 Standar Kemajuan Persalinan</div>
+          <table class="nv-table" style="margin-top:6px;">
+            <thead>
+              <tr><th>Fase</th><th>Pembukaan</th><th>Kemajuan Normal</th><th>Lama Kala</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Laten</td><td>0 → 4 cm</td><td>—</td><td>≤8 jam</td></tr>
+              <tr><td>Aktif Akselerasi</td><td>4 → 8 cm</td><td>≥1 cm/jam</td><td>—</td></tr>
+              <tr><td>Aktif Deselerasi</td><td>8 → 10 cm</td><td>≥1 cm/jam</td><td>—</td></tr>
+              <tr><td>Kala II primi</td><td>Lengkap</td><td>—</td><td>≤2 jam (≤3 jam dengan anestesi)</td></tr>
+              <tr><td>Kala II multi</td><td>Lengkap</td><td>—</td><td>≤1 jam (≤2 jam dengan anestesi)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 1: LEOPOLD & DJJ ═══ -->
+    <div class="page" id="p1">
+      <div class="hero">
+        <div class="hero-badge">BAB 2</div>
+        <h3>Pemeriksaan Leopold & DJJ</h3>
+        <p>Teknik · Interpretasi · Nilai Normal · Penilaian Kesejahteraan Janin</p>
+      </div>
+
+      <!-- LEOPOLD -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#E6F7F5;">🤲</div>
+          <div>
+            <div class="card-title">Palpasi Leopold I–IV</div>
+            <div class="card-sub">Teknik & Interpretasi Klinis</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-box teal" style="margin-bottom:12px;">
+            <strong>Persiapan:</strong> Ibu berbaring terlentang, kandung kemih kosong, bidan di sisi kanan ibu. Tangan hangat, tekanan lembut namun mantap.
+          </div>
+          <div class="leopold-item">
+            <div class="leopold-num">I</div>
+            <div>
+              <div class="leopold-title">Leopold I — Fundus Uteri</div>
+              <div class="leopold-desc"><strong>Tujuan:</strong> Menentukan bagian janin yang berada di fundus.<br><strong>Teknik:</strong> Kedua tangan meraba fundus secara simultan dari lateral ke tengah.<br><strong>Interpretasi:</strong><br>• Bulat, keras, ballotement (+) → Kepala<br>• Lunak, tidak teratur, tidak ballotement → Bokong</div>
+              <div class="leopold-normal">📏 TFU normal ~1cm per minggu (ab trimester II)</div>
+            </div>
+          </div>
+          <div class="leopold-item">
+            <div class="leopold-num">II</div>
+            <div>
+              <div class="leopold-title">Leopold II — Bagian Lateral</div>
+              <div class="leopold-desc"><strong>Tujuan:</strong> Menentukan punggung dan bagian kecil janin.<br><strong>Teknik:</strong> Tangan kanan menahan fundus, tangan kiri meraba sisi lateral bergantian.<br><strong>Interpretasi:</strong><br>• Tahanan keras, rata, memanjang → Punggung<br>• Tonjolan kecil, bergerak → Ekstremitas</div>
+              <div class="leopold-normal">📍 Punggung kiri/kanan → penentuan DJJ dan posisi kepala</div>
+            </div>
+          </div>
+          <div class="leopold-item">
+            <div class="leopold-num">III</div>
+            <div>
+              <div class="leopold-title">Leopold III — Bagian Terendah</div>
+              <div class="leopold-desc"><strong>Tujuan:</strong> Menentukan presentasi dan apakah sudah masuk PAP.<br><strong>Teknik:</strong> Satu tangan meraba di atas simfisis pubis.<br><strong>Interpretasi:</strong><br>• Bulat, keras, dapat digoyangkan → Kepala belum masuk PAP<br>• Bulat, keras, tidak dapat digoyangkan → Kepala sudah engaged</div>
+              <div class="leopold-normal">✅ Engagement terjadi saat kepala masuk PAP (primigravida: minggu 36–38)</div>
+            </div>
+          </div>
+          <div class="leopold-item">
+            <div class="leopold-num">IV</div>
+            <div>
+              <div class="leopold-title">Leopold IV — Konvergen/Divergen</div>
+              <div class="leopold-desc"><strong>Tujuan:</strong> Menentukan seberapa jauh kepala masuk panggul.<br><strong>Teknik:</strong> Bidan menghadap kaki ibu, kedua tangan di sisi kepala janin.<br><strong>Interpretasi:</strong><br>• Konvergen (ujung jari bertemu) → Kepala belum masuk PAP<br>• Divergen (ujung jari melebar) → Kepala sudah masuk PAP<br>• Sejajar → ½ masuk</div>
+              <div class="leopold-normal">📐 Penting untuk prediksi kemajuan kala II</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DJJ -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFF1F2;">❤️</div>
+          <div>
+            <div class="card-title">Penilaian DJJ</div>
+            <div class="card-sub">Denyut Jantung Janin · Kesejahteraan Janin</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">DJJ yang dihitung (x/menit)</label>
+            <input type="number" class="form-ctrl" id="djjInput" placeholder="Normal: 120–160" min="60" max="200" oninput="nilaiDJJ()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fase saat perhitungan DJJ</label>
+            <select class="form-ctrl" id="faseCount" onchange="nilaiDJJ()">
+              <option value="antara">Di antara kontraksi</option>
+              <option value="selama">Selama kontraksi</option>
+              <option value="setelah">Segera setelah kontraksi</option>
+            </select>
+          </div>
+          <div id="resultDJJ" class="result" style="display:none;"></div>
+
+          <div class="divider"></div>
+          <table class="nv-table">
+            <thead><tr><th>Parameter</th><th>Normal</th><th>Waspada</th><th>Bahaya</th></tr></thead>
+            <tbody>
+              <tr><td>DJJ Baseline</td><td>120–160 x/mnt</td><td>100–119 atau 161–180</td><td>&lt;100 atau &gt;180</td></tr>
+              <tr><td>Variabilitas</td><td>6–25 bpm</td><td>3–5 bpm</td><td>&lt;3 bpm atau &gt;25</td></tr>
+              <tr><td>Akselerasi</td><td>Ada ≥2×/20 mnt</td><td>Minimal</td><td>Tidak ada</td></tr>
+              <tr><td>Deselerasi</td><td>Tidak ada / early</td><td>Late ringan</td><td>Late berat / Variable</td></tr>
+            </tbody>
+          </table>
+
+          <div class="info-box red" style="margin-top:10px;">
+            <strong>⚠️ Gawat Janin — SEGERA TINDAK:</strong><br>
+            DJJ &lt;100 atau &gt;180 x/mnt · Deselerasi lambat (late deceleration) · Air ketuban hijau kental · Gerakan janin &lt;3×/jam
+          </div>
+        </div>
+      </div>
+
+      <!-- TFU Calculator -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFFBEB;">📏</div>
+          <div>
+            <div class="card-title">Kalkulator TFU & Presentasi</div>
+            <div class="card-sub">McDonald's Method · Penilaian Pembukaan Serviks</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">TFU (cm)</label>
+              <input type="number" class="form-ctrl" id="tfuVal" placeholder="28" oninput="hitungTFU()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Penurunan Kepala (per 5)</label>
+              <select class="form-ctrl" id="penurunan" onchange="hitungTFU()">
+                <option value="">Pilih...</option>
+                <option value="5/5">5/5 — Belum masuk</option>
+                <option value="4/5">4/5 — Masuk sedikit</option>
+                <option value="3/5">3/5 — Hampir masuk</option>
+                <option value="2/5">2/5 — Sudah masuk</option>
+                <option value="1/5">1/5 — Hampir di perineum</option>
+                <option value="0/5">0/5 — Di perineum</option>
+              </select>
+            </div>
+          </div>
+          <div id="resultTFU" class="result info" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 2: ASUHAN KALA I–IV ═══ -->
+    <div class="page" id="p2">
+      <div class="hero">
+        <div class="hero-badge">BAB 3</div>
+        <h3>Asuhan Kala I – IV</h3>
+        <p>Manajemen Aktif Persalinan · Asuhan Sayang Ibu · WHO 2018</p>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="kala-tabs" id="kalaTabs">
+            <div class="kala-tab on" onclick="showKala('kala1',this)">Kala I</div>
+            <div class="kala-tab" onclick="showKala('kala2',this)">Kala II</div>
+            <div class="kala-tab" onclick="showKala('kala3',this)">Kala III</div>
+            <div class="kala-tab" onclick="showKala('kala4',this)">Kala IV</div>
+          </div>
+
+          <!-- KALA I -->
+          <div id="kala1" class="kala-content">
+            <div class="section-label">🕐 KALA I — PEMBUKAAN (0–10 cm)</div>
+            <div class="info-box teal" style="margin-bottom:10px;">
+              <strong>Fase Laten:</strong> Pembukaan 0–4 cm · lama ≤8 jam<br>
+              <strong>Fase Aktif:</strong> Pembukaan 4–10 cm · kemajuan ≥1 cm/jam
+            </div>
+
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🏥 Asuhan di Fase Laten</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                • Sambut dengan hangat, perkenalkan diri<br>
+                • Anamnesis lengkap: HPHT, HPL, riwayat obstetri, keluhan<br>
+                • Pemeriksaan fisik: TTV, Leopold I–IV, DJJ, VT pertama<br>
+                • Partograf dimulai saat pembukaan 4cm<br>
+                • Anjurkan: mobilisasi, makan dan minum, posisi nyaman<br>
+                • Dampingi suami/keluarga (Asuhan Sayang Ibu)<br>
+                • Informed consent asuhan persalinan
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">⚡ Asuhan di Fase Aktif</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                • Pantau DJJ setiap 30 menit (fase laten) / 15 menit (fase aktif)<br>
+                • Pantau his setiap 30 menit (fase laten) / 15 menit (fase aktif)<br>
+                • Pantau pembukaan serviks setiap 4 jam (atau sesuai indikasi)<br>
+                • Ukur TTV setiap 1 jam (TD, Nadi, Suhu, Pernafasan)<br>
+                • Pantau kandung kemih (kosongkan setiap 2 jam)<br>
+                • Catat semua temuan di partograf<br>
+                • Berikan dukungan emosional dan informasi berkelanjutan
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">💊 Manajemen Nyeri Non-Farmakologis</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                <strong>Terbukti Efektif (Evidence-Based):</strong><br><br>
+                ✅ <strong>Posisi tegak/mobilisasi</strong> — berjalan, duduk, jongkok (WHO 2018 — strongly recommended)<br>
+                ✅ <strong>Pijat punggung bawah</strong> — oleh pendamping (RCT evidence)<br>
+                ✅ <strong>Kompres hangat</strong> — punggung bawah/perut (Cochrane evidence)<br>
+                ✅ <strong>Hidroterapi</strong> — mandi air hangat/berendam (WHO 2018)<br>
+                ✅ <strong>Teknik napas dalam</strong> — napas lambat saat kontraksi<br>
+                ✅ <strong>Dukungan terus-menerus</strong> dari doula/pendamping (Cochrane: menurunkan SC 25%)
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🚫 Praktik yang TIDAK Dianjurkan</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                ❌ Enema rutin (WHO 2018 — tidak direkomendasikan)<br>
+                ❌ Cukur pubis rutin (tidak direkomendasikan)<br>
+                ❌ Infus IV rutin pada persalinan normal<br>
+                ❌ Posisi litotomi sepanjang persalinan<br>
+                ❌ Episiotomi rutin (hanya atas indikasi)<br>
+                ❌ Amniotomi rutin tanpa indikasi<br>
+                ❌ Fundal pressure/Kristeller maneuver
+              </div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="section-label">📊 Pemantauan Kala I — Checklist</div>
+            <div id="checklistKala1"></div>
+          </div>
+
+          <!-- KALA II -->
+          <div id="kala2" class="kala-content" style="display:none;">
+            <div class="section-label">🍼 KALA II — PENGELUARAN JANIN</div>
+            <div class="info-box teal" style="margin-bottom:10px;">
+              <strong>Tanda Kala II:</strong> Pembukaan lengkap (10cm) + dorongan meneran + tekanan anus + perineum menonjol + kepala tampak di vulva
+            </div>
+
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">✅ Tanda-Tanda Kala II</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                ✅ Ibu merasa ingin meneran bersamaan his<br>
+                ✅ Ibu merasakan tekanan yang semakin meningkat di rektum/vagina<br>
+                ✅ Perineum menonjol<br>
+                ✅ Vulva-vagina dan sfingter ani terbuka<br>
+                ✅ Kepala janin tampak di introitus vagina
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🤲 Teknik Persalinan — Cara Meneran</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                <strong>Posisi meneran (WHO 2018 — pilihan ibu):</strong><br>
+                • Setengah duduk (semi-recumbent)<br>
+                • Jongkok (squat) — memperbesar diameter pelvis<br>
+                • Lateral kiri — mengurangi risiko laserasi<br>
+                • Merangkak (hands and knees) — mengurangi nyeri punggung<br><br>
+                <strong>Teknik meneran:</strong><br>
+                • Bersamaan dengan puncak kontraksi<br>
+                • Ambil napas dalam, tahan napas, mengejan ke bawah<br>
+                • Istirahat di antara kontraksi
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">👐 Langkah Pertolongan Persalinan Normal</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                <strong>1. Siapkan alat dan APD lengkap</strong><br>
+                <strong>2. Lindungi perineum:</strong> Tangan kanan menahan perineum, tangan kiri menahan kepala bayi<br>
+                <strong>3. Kepala defleksi:</strong> Biarkan kepala defleksi sendiri di bawah simfisis<br>
+                <strong>4. Periksa lilitan tali pusat</strong> — jika ada, longgarkan atau klem dan potong<br>
+                <strong>5. Tunggu rotasi luar kepala</strong> (external rotation/restitution)<br>
+                <strong>6. Lahirkan bahu:</strong><br>
+                • Bahu anterior: tekanan ke bawah<br>
+                • Bahu posterior: angkat ke atas<br>
+                <strong>7. Lahirkan badan dan bokong</strong> dengan menyangga<br>
+                <strong>8. Catat waktu lahir</strong>
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">⏰ Pemantauan Kala II</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                • DJJ setiap <strong>5 menit</strong><br>
+                • His dan meneran setiap <strong>30 menit</strong><br>
+                • Nadi setiap <strong>30 menit</strong><br>
+                • Warna air ketuban dipantau<br>
+                • Catat jam mulai kala II<br>
+                • Batas waktu: <strong>primigravida ≤2 jam</strong>, multigravida ≤1 jam
+              </div>
+            </div>
+          </div>
+
+          <!-- KALA III -->
+          <div id="kala3" class="kala-content" style="display:none;">
+            <div class="section-label">🫀 KALA III — PENGELUARAN PLASENTA</div>
+            <div class="info-box teal" style="margin-bottom:10px;">
+              <strong>Manajemen Aktif Kala III (MAKTIGA):</strong> Terbukti mengurangi risiko HPP 60–70% (Cochrane, Strenght: High)
+            </div>
+
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">💊 3 Komponen MAKTIGA</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                <strong>1. Oksitosin 10 IU IM</strong><br>
+                • Berikan dalam 1 menit setelah bayi lahir<br>
+                • Tempat: anterolateral paha atas<br>
+                • Efek: kontraksi uterus, melepas plasenta<br><br>
+                <strong>2. Penegangan Tali Pusat Terkendali (PTT)</strong><br>
+                • Klem tali pusat ±3cm dari vulva<br>
+                • Tangan kiri di suprapubik (dorso-kranial)<br>
+                • Dorong uterus ke kranial saat peregangan<br>
+                • Jangan tarik sebelum tanda pelepasan plasenta<br><br>
+                <strong>3. Masase Fundus Uteri</strong><br>
+                • Segera setelah plasenta lahir<br>
+                • Gosokan sirkular 15 detik<br>
+                • Pastikan kontraksi uterus baik (keras seperti batu)
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">✅ Tanda Pelepasan Plasenta</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                ✅ <strong>Perubahan bentuk uterus:</strong> bulat → diskoid<br>
+                ✅ <strong>Semburan darah tiba-tiba</strong> dari vagina<br>
+                ✅ <strong>Tali pusat memanjang</strong> di luar vulva<br>
+                ✅ <strong>Fundus naik</strong> karena plasenta turun ke SBR<br><br>
+                Normal: 5–15 menit setelah bayi lahir.<br>
+                ⚠️ >30 menit → Retensi plasenta → tatalaksana!
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🩸 Pemeriksaan Plasenta & Selaput</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                <strong>Setelah plasenta lahir, periksa:</strong><br><br>
+                <strong>Maternal side (sisi ibu — cotyledon):</strong><br>
+                • Hitung lobus (normally 15–20 kotiledon)<br>
+                • Pastikan tidak ada jaringan tertinggal<br><br>
+                <strong>Fetal side (sisi bayi — selaput):</strong><br>
+                • Periksa kelengkapan selaput ketuban (amnion + korion)<br>
+                • Periksa tali pusat: panjang, insersi, jumlah pembuluh (2 arteri + 1 vena)<br><br>
+                <strong>Berat plasenta normal:</strong> 500–600g (1/6 BB bayi)
+              </div>
+            </div>
+          </div>
+
+          <!-- KALA IV -->
+          <div id="kala4" class="kala-content" style="display:none;">
+            <div class="section-label">🔍 KALA IV — PENGAWASAN NIFAS AWAL (2 JAM)</div>
+            <div class="info-box red" style="margin-bottom:10px;">
+              <strong>⚠️ Kritis:</strong> 2 jam pertama setelah plasenta lahir adalah waktu paling berisiko HPP. Pantau ketat setiap 15 menit pada jam pertama!
+            </div>
+
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">📊 Jadwal Pemantauan Kala IV</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                <strong>15 menit pertama (4×):</strong><br>
+                • TFU, Kontraksi uterus, Kandung kemih, Perdarahan, TD, Nadi<br><br>
+                <strong>15 menit kedua (4×):</strong><br>
+                • TFU, Kontraksi, Kandung kemih, Perdarahan, TD, Nadi<br><br>
+                <strong>30 menit ke-3 dan ke-4 (2×):</strong><br>
+                • Semua parameter di atas + Suhu<br><br>
+                <strong>Total: 10 kali pemantauan dalam 2 jam</strong>
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🩸 Penilaian Perdarahan Post Partum</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                <strong>Normal:</strong> Kehilangan darah ≤500mL (persalinan normal) / ≤1000mL (SC)<br><br>
+                <strong>Perdarahan Post Partum (HPP):</strong><br>
+                • Kehilangan darah &gt;500mL dalam 24 jam<br><br>
+                <strong>4T Penyebab HPP:</strong><br>
+                🔴 <strong>Tone</strong> — Atonia uteri (70–80% HPP)<br>
+                🔴 <strong>Tissue</strong> — Sisa plasenta<br>
+                🔴 <strong>Trauma</strong> — Robekan jalan lahir<br>
+                🔴 <strong>Thrombin</strong> — Gangguan koagulasi
+              </div>
+            </div>
+            <div class="acc">
+              <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">✅ Asuhan di Kala IV</div><span class="acc-arrow">▼</span></div>
+              <div class="acc-body">
+                • Pastikan uterus berkontraksi keras (jika lunak → masase ulang + oksitosin)<br>
+                • Jahit laserasi perineum (jika ada) dengan anestesi lokal<br>
+                • Bersihkan ibu, ganti pakaian dan alas<br>
+                • Berikan makan dan minum<br>
+                • <strong>IMD (Inisiasi Menyusu Dini)</strong> minimal 1 jam<br>
+                • Pantau dan dokumentasikan di partograf<br>
+                • Edukasi: tanda bahaya nifas, KB, ASI eksklusif
+              </div>
+            </div>
+
+            <!-- Kalkulator Perdarahan -->
+            <div class="divider"></div>
+            <div class="section-label">🩸 Estimasi Kehilangan Darah</div>
+            <div class="form-group">
+              <label class="form-label">Estimasi volume darah yang keluar (mL)</label>
+              <input type="number" class="form-ctrl" id="darahKeluar" placeholder="500" oninput="nilaiDarah()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">BB Ibu (kg) — untuk estimasi EBV</label>
+              <input type="number" class="form-ctrl" id="bbDarah" placeholder="60" oninput="nilaiDarah()">
+            </div>
+            <div id="resultDarah" class="result" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 3: ASUHAN BBL ═══ -->
+    <div class="page" id="p3">
+      <div class="hero">
+        <div class="hero-badge">BAB 4</div>
+        <h3>Asuhan Bayi Baru Lahir</h3>
+        <p>DCC · Penilaian APGAR · Vit K₁ · HB0 · IMD · Perawatan Tali Pusat</p>
+      </div>
+
+      <!-- DCC -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#F0FDF4;">💛</div>
+          <div>
+            <div class="card-title">Delayed Cord Clamping (DCC)</div>
+            <div class="card-sub">Penundaan Pemotongan Tali Pusat · WHO 2014</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-box teal">
+            <strong>Rekomendasi WHO 2014:</strong> Tali pusat TIDAK segera diklem — tunggu minimal 1–3 menit setelah lahir atau hingga denyutan berhenti.
+          </div>
+          <div style="margin:10px 0;">
+            <div class="section-label">✅ Manfaat DCC (Evidence Level A)</div>
+            <div class="chips">
+              <span class="chip">+30% volume darah bayi</span>
+              <span class="chip">+50mg Fe tambahan</span>
+              <span class="chip">↓ Anemia usia 3–6 bulan</span>
+              <span class="chip">↑ Ferritin bayi</span>
+              <span class="chip">↑ Hemoglobin</span>
+              <span class="chip">↑ Myelinisasi otak</span>
+            </div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">📋 Prosedur DCC</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              1. Bayi lahir → letakkan di perut/dada ibu (skin-to-skin)<br>
+              2. <strong>Tunggu 1–3 menit</strong> (atau hingga denyutan berhenti)<br>
+              3. Sambil menunggu: keringkan bayi, nilai APGAR awal<br>
+              4. Klem tali pusat 2 tempat: 3cm dan 5cm dari umbilikus<br>
+              5. Gunting di antara kedua klem dengan gunting steril<br>
+              6. Lanjutkan IMD<br><br>
+              <strong>Kontraindikasi DCC:</strong> Asfiksia berat (perlu resusitasi segera), ibu tidak stabil, lilitan tali pusat ketat
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- APGAR -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#EFF6FF;">📊</div>
+          <div>
+            <div class="card-title">Penilaian Skor APGAR</div>
+            <div class="card-sub">1 menit · 5 menit · (10 menit jika perlu)</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="apgarForm"></div>
+          <button class="btn btn-teal" onclick="hitungAPGAR()">📊 Hitung Skor APGAR</button>
+          <div id="resultAPGAR" class="result" style="display:none;margin-top:10px;"></div>
+        </div>
+      </div>
+
+      <!-- PERAWATAN BBL -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFFBEB;">💉</div>
+          <div>
+            <div class="card-title">Profilaksis & Imunisasi BBL</div>
+            <div class="card-sub">Vit K₁ · HB0 · Salep Mata · Kemenkes RI 2020</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">💊 Vitamin K₁ (Phytomenadione)</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              <strong>Dosis:</strong> 1mg IM, paha kiri anterolateral, 1× saja<br>
+              <strong>Waktu:</strong> Segera setelah IMD (dalam 1 jam pertama)<br>
+              <strong>Tujuan:</strong> Mencegah Hemorrhagic Disease of Newborn (HDN/VKDB)<br>
+              <strong>Mekanisme:</strong> Bayi lahir dengan kadar Vit K rendah (tidak melewati plasenta dengan baik). Vit K diperlukan untuk faktor koagulasi II, VII, IX, X.<br>
+              <strong>Evidence:</strong> NNT 1:3.000 untuk mencegah HDN berat (WHO 2014, AAP 2022)
+            </div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">💉 Imunisasi Hepatitis B0 (HB0)</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              <strong>Dosis:</strong> 0,5mL IM, paha kanan anterolateral<br>
+              <strong>Waktu:</strong> ≤24 jam setelah lahir (idealnya setelah IMD dan Vit K)<br>
+              <strong>Tujuan:</strong> Mencegah transmisi hepatitis B perinatal (risiko infeksi kronik 90% jika tidak divaksinasi)<br>
+              <strong>Kontraindikasi:</strong> Anafilaksis terhadap komponen vaksin (sangat jarang)<br>
+              <strong>Evidence:</strong> Efektivitas 95% mencegah infeksi kronik (WHO, Kemenkes RI)
+            </div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">👁️ Salep/Tetes Mata Antibiotika</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              <strong>Obat:</strong> Eritromisin 0,5% atau Tetrasiklin 1% (salep mata)<br>
+              <strong>Waktu:</strong> Setelah IMD (dalam 1 jam pertama)<br>
+              <strong>Tujuan:</strong> Profilaksis oftalmia neonatorum (Gonore/Klamidia dari jalan lahir)<br>
+              <strong>Cara:</strong> Usap dari sudut dalam ke luar pada kedua kelopak mata<br>
+              <strong>Kemenkes RI:</strong> Wajib diberikan pada semua bayi baru lahir
+            </div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🤱 IMD — Inisiasi Menyusu Dini</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              <strong>Prinsip:</strong> Kontak kulit-ke-kulit sesegera mungkin, minimal 1 jam<br>
+              <strong>Cara:</strong> Letakkan bayi telungkup di dada ibu (skin-to-skin). Biarkan bayi mencari sendiri puting ibu.<br><br>
+              <strong>Manfaat IMD:</strong><br>
+              • Kolostrum = imunisasi pertama (kaya IgA, IgM, IgG)<br>
+              • Merangsang kontraksi uterus (oksitosin) → mengurangi HPP<br>
+              • Menstabilkan suhu bayi (kangaroo effect)<br>
+              • Memperkuat bonding ibu-bayi<br>
+              • Meningkatkan keberhasilan ASI eksklusif
+            </div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🌿 Perawatan Tali Pusat</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              <strong>Kemenkes RI / WHO: Perawatan Kering Terbuka</strong><br><br>
+              ✅ Biarkan tali pusat terbuka (tidak dibungkus)<br>
+              ✅ Jaga tali pusat tetap kering dan bersih<br>
+              ✅ Lipat popok di bawah tali pusat<br>
+              ✅ Tali pusat akan lepas sendiri dalam 7–10 hari<br><br>
+              ❌ JANGAN oleskan apapun (alkohol, betadine, minyak, ramuan tradisional)<br>
+              ❌ JANGAN bungkus dengan kain<br><br>
+              <strong>Penelitian Lokal Garut:</strong> Ernawati (2024) membuktikan pengolesan ASI topikal pada tali pusat aman dan dapat mencegah omphalitis (Nursing Case Insight Journal 2024)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pemeriksaan Fisik BBL -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#F0FDF4;">🔍</div>
+          <div>
+            <div class="card-title">Pemeriksaan Fisik BBL (Head-to-Toe)</div>
+            <div class="card-sub">Deteksi Dini Kelainan · Segera Setelah Lahir</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="nv-table">
+            <thead><tr><th>Parameter</th><th>Normal</th><th>Waspada / Rujuk</th></tr></thead>
+            <tbody>
+              <tr><td>BB Lahir</td><td>2.500–4.000g</td><td>&lt;2.500g (BBLR) atau &gt;4.000g (Makrosomia)</td></tr>
+              <tr><td>PB Lahir</td><td>48–52 cm</td><td>&lt;45 cm atau &gt;55 cm</td></tr>
+              <tr><td>Lingkar Kepala</td><td>33–35 cm</td><td>&lt;32 cm (mikrosefali) atau &gt;37 cm</td></tr>
+              <tr><td>Lingkar Dada</td><td>30–33 cm</td><td>&gt;LK &gt;2 cm atau &lt;LK &gt;2 cm</td></tr>
+              <tr><td>Suhu Aksiler</td><td>36,5–37,5°C</td><td>&lt;36,5°C (hipotermia) atau &gt;37,5°C</td></tr>
+              <tr><td>Nadi</td><td>120–160 x/mnt</td><td>&lt;100 atau &gt;160</td></tr>
+              <tr><td>Pernapasan</td><td>40–60 x/mnt</td><td>&lt;40 atau &gt;60 (distres napas)</td></tr>
+              <tr><td>APGAR 1 menit</td><td>7–10</td><td>&lt;7 → resusitasi</td></tr>
+              <tr><td>APGAR 5 menit</td><td>7–10</td><td>&lt;7 → evaluasi lebih lanjut</td></tr>
+            </tbody>
+          </table>
+
+          <div class="info-box red" style="margin-top:10px;">
+            <strong>🚨 Rujuk SEGERA jika:</strong><br>
+            APGAR 5 menit &lt;5 · Sianosis sentral menetap · RR &lt;30 atau &gt;80 · Suhu &lt;35°C · BB &lt;1.500g · Kelainan kongenital mayor
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 4: TBJ KALKULATOR ═══ -->
+    <div class="page" id="p4">
+      <div class="hero">
+        <div class="hero-badge">BAB 5</div>
+        <h3>Kalkulator TBJ & IMT</h3>
+        <p>Johnson-Toshach · Dare · BBLR/Makrosomia Detection · IMT Ibu</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#F0FDF4;">⚖️</div>
+          <div>
+            <div class="card-title">Kalkulator Taksiran Berat Janin</div>
+            <div class="card-sub">Johnson-Toshach & Dare Formula</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Tinggi Fundus Uteri / TFU (cm)</label>
+            <input type="number" class="form-ctrl" id="tfuTBJ" placeholder="32" oninput="hitungTBJ()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Penurunan Kepala (Untuk Johnson-Toshach)</label>
+            <select class="form-ctrl" id="penurunanTBJ" onchange="hitungTBJ()">
+              <option value="11">Kepala BELUM masuk PAP (−11)</option>
+              <option value="12">Kepala SUDAH masuk PAP (−12)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Lingkar Perut / LP (cm) — untuk Dare</label>
+            <input type="number" class="form-ctrl" id="lp" placeholder="90" oninput="hitungTBJ()">
+          </div>
+          <div id="resultTBJ" class="result info" style="display:none;"></div>
+
+          <div class="info-box navy" style="margin-top:12px;">
+            <strong>📐 Formula:</strong><br>
+            <strong>Johnson-Toshach:</strong> TBJ = (TFU − n) × 155<br>
+            &nbsp;&nbsp;n = 11 (kepala belum masuk) atau 12 (kepala sudah masuk)<br><br>
+            <strong>Dare:</strong> TBJ = TFU × LP (dalam cm) / (umum digunakan dalam klinis Indonesia)
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFF1F2;">📊</div>
+          <div>
+            <div class="card-title">Kalkulator IMT Ibu Bersalin</div>
+            <div class="card-sub">Penilaian Status Gizi Ibu</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Berat Badan (kg)</label>
+              <input type="number" class="form-ctrl" id="bbIbu" placeholder="65" oninput="hitungIMT()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tinggi Badan (cm)</label>
+              <input type="number" class="form-ctrl" id="tbIbu" placeholder="158" oninput="hitungIMT()">
+            </div>
+          </div>
+          <div id="resultIMT" class="result" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 5: TANDA BAHAYA ═══ -->
+    <div class="page" id="p5">
+      <div class="hero">
+        <div class="hero-badge">BAB 6</div>
+        <h3>Tanda Bahaya Persalinan</h3>
+        <p>Deteksi Dini Komplikasi · Kriteria Rujukan · SEGERA Tindak</p>
+      </div>
+
+      <div class="card" style="margin-top:12px;">
+        <div class="card-body" style="background:#FFF1F2;padding:12px;">
+          <div style="font-size:0.78rem;font-weight:700;color:var(--rose);display:flex;align-items:center;gap:6px;">
+            🚨 Segera rujuk ke RS jika ditemukan salah satu tanda berikut!
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFF1F2;">🚨</div>
+          <div>
+            <div class="card-title">Tanda Bahaya Kala I</div>
+          </div>
+        </div>
+        <div class="card-body" id="bahayaKala1"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFF1F2;">🚨</div>
+          <div>
+            <div class="card-title">Tanda Bahaya Kala II–IV & BBL</div>
+          </div>
+        </div>
+        <div class="card-body" id="bahayaKala24"></div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 6: 60 LANGKAH APN ═══ -->
+    <div class="page" id="p6">
+      <div class="hero">
+        <div class="hero-badge">BAB 7</div>
+        <h3>60 Langkah APN</h3>
+        <p>Asuhan Persalinan Normal · Checklist Interaktif</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#F0FDF4;">✅</div>
+          <div>
+            <div class="card-title">Checklist 60 Langkah APN</div>
+            <div class="card-sub">Centang setiap langkah yang telah dilakukan</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="apnProgress" style="margin-bottom:12px;"></div>
+          <div id="apnChecklist"></div>
+          <button class="btn btn-gold" onclick="resetAPN()" style="margin-top:12px;">🔄 Reset Checklist</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 7: GIZI INTRAPARTUM ═══ -->
+    <div class="page" id="p7">
+      <div class="hero">
+        <div class="hero-badge">BAB 8</div>
+        <h3>Gizi Intrapartum</h3>
+        <p>Kebutuhan Energi · Panduan Makan & Minum · Harris-Benedict</p>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#F0FDF4;">🔥</div>
+          <div>
+            <div class="card-title">Kalkulator Kalori Intrapartum</div>
+            <div class="card-sub">Harris-Benedict Formula · Kemenkes RI 2020</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="info-box teal" style="margin-bottom:12px;">
+            <strong>WHO 2018:</strong> Ibu bersalin dengan risiko rendah boleh makan dan minum sesuai keinginannya. Hidrasi adekuat mencegah ketosis dan kelelahan.
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Berat Badan (kg)</label>
+              <input type="number" class="form-ctrl" id="bbGizi" placeholder="65" oninput="hitungGizi()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tinggi Badan (cm)</label>
+              <input type="number" class="form-ctrl" id="tbGizi" placeholder="158" oninput="hitungGizi()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Usia (tahun)</label>
+              <input type="number" class="form-ctrl" id="usiaGizi" placeholder="28" oninput="hitungGizi()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Fase Persalinan</label>
+              <select class="form-ctrl" id="faseGizi" onchange="hitungGizi()">
+                <option value="laten">Kala I Laten</option>
+                <option value="aktif">Kala I Aktif</option>
+                <option value="kala2">Kala II</option>
+              </select>
+            </div>
+          </div>
+          <div id="resultGizi" class="result info" style="display:none;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-icon" style="background:#FFFBEB;">🥗</div>
+          <div>
+            <div class="card-title">Panduan Makan & Minum Intrapartum</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🥤 Kala I Laten — Bebas Makan & Minum</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              ✅ Dianjurkan minum air putih/isotonik/jus buah bening<br>
+              ✅ Makan makanan ringan (karbohidrat mudah dicerna): nasi, bubur, roti, pisang, apel<br>
+              ✅ Hindari makanan tinggi lemak dan protein (dicerna lambat)<br>
+              ✅ Minum minimal 200–250mL per jam (mencegah dehidrasi)<br>
+              ⚠️ Hindari minuman sangat manis (bisa menyebabkan mual)
+            </div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">🥤 Kala I Aktif — Minuman & Snack Ringan</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              ✅ Minuman: air putih, minuman isotonik (100–150mL setiap 30 menit)<br>
+              ✅ Snack ringan jika masih bisa menelan: biskuit, gel energi, madu<br>
+              ✅ Permen glukosa/lolipop untuk energi cepat<br>
+              ⚠️ Banyak ibu tidak nafsu makan saat kontraksi aktif — normal<br>
+              ⚠️ Jika ada risiko operasi → puasa sesuai protokol anestesi
+            </div>
+          </div>
+          <div class="acc">
+            <div class="acc-hdr" onclick="togAcc(this)"><div class="acc-title">💊 Tanda Dehidrasi & Ketosis</div><span class="acc-arrow">▼</span></div>
+            <div class="acc-body">
+              <strong>⚠️ Waspadai jika ibu:</strong><br>
+              • Mulut kering, haus berlebihan<br>
+              • Urin pekat, gelap, atau tidak BAK >3 jam<br>
+              • Lemah, pusing, mual berlebihan<br>
+              • Nadi >100x/mnt, TD menurun<br>
+              • Nafas berbau aseton (ketosis)<br><br>
+              <strong>Tatalaksana:</strong> Berikan cairan IV RL atau Dektrose 5% · Evaluasi kondisi ibu
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE 8: REFERENSI ═══ -->
+    <div class="page" id="p8">
+      <div class="hero">
+        <div class="hero-badge">REFERENSI</div>
+        <h3>Daftar Referensi</h3>
+        <p>Evidence-Based · Scopus · WHO · Kemenkes RI · Open Access</p>
+      </div>
+      <div class="card">
+        <div class="card-body" id="refContainer"></div>
+      </div>
+    </div>
+
+  </div><!-- end content -->
+</div><!-- end app -->
+
+<div class="offline">📶 Mode Offline</div>
+
+<script>
+// ═══ NAVIGATION ═══
+var curPage = 0;
+
+function goHome() {
+  document.getElementById('coverPage').style.display = 'flex';
+  document.getElementById('mainApp').classList.remove('show');
+}
+
+function openBook(pg) {
+  document.getElementById('coverPage').style.display = 'none';
+  document.getElementById('mainApp').classList.add('show');
+  goPage(pg);
+}
+
+function goPage(n) {
+  // Hide all pages
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('on');
+  }
+  // Deactivate all tabs
+  var tabs = document.querySelectorAll('.ch-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('on');
+  }
+  // Show target page
+  var target = document.getElementById('p' + n);
+  if (target) {
+    target.classList.add('on');
+    curPage = n;
+  }
+  // Activate tab
+  if (tabs[n]) tabs[n].classList.add('on');
+  window.scrollTo(0, 0);
+}
+
+// ═══ ACCORDION ═══
+function togAcc(hdr) {
+  var parent = hdr.parentElement;
+  parent.classList.toggle('open');
+}
+
+// ═══ KALA TABS ═══
+function showKala(id, el) {
+  var contents = document.querySelectorAll('.kala-content');
+  for (var i = 0; i < contents.length; i++) {
+    contents[i].style.display = 'none';
+  }
+  var tabs = document.querySelectorAll('.kala-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('on');
+  }
+  document.getElementById(id).style.display = 'block';
+  el.classList.add('on');
+}
+
+// ═══ TIMER HIS ═══
+var timerInterval = null;
+var isRunning = false;
+var startTime = null;
+var kontraksiStart = null;
+var hisLog = [];
+var totalDurasi = 0;
+var totalInterval = 0;
+
+function mulaiKontraksi() {
+  if (!isRunning) {
+    startTime = new Date();
+    kontraksiStart = new Date();
+    isRunning = true;
+    document.getElementById('btnMulai').disabled = true;
+    document.getElementById('btnSelesai').disabled = false;
+    document.getElementById('timerLabel').textContent = 'Kontraksi sedang berlangsung...';
+    clearInterval(timerInterval);
+    timerInterval = setInterval(function() {
+      var elapsed = Math.floor((new Date() - kontraksiStart) / 1000);
+      var m = Math.floor(elapsed / 60);
+      var s = elapsed % 60;
+      document.getElementById('timerNum').textContent =
+        (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
+  }
+}
+
+function selesaiKontraksi() {
+  if (isRunning) {
+    clearInterval(timerInterval);
+    isRunning = false;
+    var durasi = Math.floor((new Date() - kontraksiStart) / 1000);
+    var now = new Date();
+    var n = hisLog.length;
+    var interval = n > 0 ? Math.floor((kontraksiStart - hisLog[n-1].endTime) / 1000) : 0;
+
+    hisLog.push({ startTime: kontraksiStart, endTime: now, durasi: durasi, interval: interval });
+
+    if (durasi > 0) totalDurasi += durasi;
+    if (interval > 0) totalInterval += interval;
+
+    document.getElementById('jmlKontraksi').textContent = hisLog.length;
+    var avgDur = Math.round(totalDurasi / hisLog.length);
+    document.getElementById('durasiRata').textContent = avgDur + 's';
+    if (hisLog.length > 1) {
+      var avgInt = Math.round(totalInterval / (hisLog.length - 1));
+      var im = Math.floor(avgInt / 60), is = avgInt % 60;
+      document.getElementById('intervalRata').textContent = im + 'm' + is + 's';
+    }
+
+    document.getElementById('btnMulai').disabled = false;
+    document.getElementById('btnSelesai').disabled = true;
+    document.getElementById('timerNum').textContent = '00:00';
+    document.getElementById('timerLabel').textContent = 'Waktu sejak kontraksi terakhir';
+
+    updateHisLog();
+    evalHis();
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  isRunning = false;
+  hisLog = [];
+  totalDurasi = 0;
+  totalInterval = 0;
+  document.getElementById('timerNum').textContent = '00:00';
+  document.getElementById('jmlKontraksi').textContent = '0';
+  document.getElementById('intervalRata').textContent = '—';
+  document.getElementById('durasiRata').textContent = '—';
+  document.getElementById('btnMulai').disabled = false;
+  document.getElementById('btnSelesai').disabled = true;
+  document.getElementById('hisLog').innerHTML = '<div style="text-align:center;padding:16px;color:var(--muted);font-size:0.72rem;">Belum ada kontraksi tercatat</div>';
+  document.getElementById('hisResult').style.display = 'none';
+}
+
+function updateHisLog() {
+  var html = '';
+  for (var i = hisLog.length - 1; i >= 0; i--) {
+    var h = hisLog[i];
+    var t = h.startTime.toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+    html += '<div class="his-item"><span>Kontraksi ' + (i+1) + ' — ' + t + '</span><span>' + h.durasi + ' detik</span></div>';
+  }
+  document.getElementById('hisLog').innerHTML = html || '<div style="text-align:center;padding:16px;color:var(--muted);font-size:0.72rem;">Belum ada kontraksi</div>';
+}
+
+function evalHis() {
+  if (hisLog.length < 3) return;
+  var last3 = hisLog.slice(-3);
+  var avgDur = last3.reduce(function(a, b) { return a + b.durasi; }, 0) / 3;
+  var avgInt = 0;
+  for (var i = 1; i < last3.length; i++) {
+    avgInt += (last3[i].startTime - last3[i-1].startTime) / 1000;
+  }
+  avgInt = avgInt / 2 / 60; // convert to minutes
+  var frekPerMenit = avgInt > 0 ? (10 / avgInt).toFixed(1) : 0;
+  var adekuat = parseFloat(frekPerMenit) >= 3 && avgDur >= 40;
+
+  var el = document.getElementById('hisResult');
+  el.style.display = 'block';
+  if (adekuat) {
+    el.className = 'result ok show';
+    el.innerHTML = '<div class="result-title" style="color:#15803D;">✅ His Adekuat — Fase Aktif</div>' +
+      '<div class="result-grid">' +
+      '<div class="rg-item"><div class="rg-label">Frekuensi est.</div><div class="rg-value">' + frekPerMenit + '×/10 mnt</div></div>' +
+      '<div class="rg-item"><div class="rg-label">Durasi rata²</div><div class="rg-value">' + Math.round(avgDur) + ' detik</div></div>' +
+      '</div>';
+  } else {
+    el.className = 'result warn show';
+    el.innerHTML = '<div class="result-title" style="color:var(--gold);">⚠️ His Belum Adekuat</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);">Frekuensi est.: ' + frekPerMenit + '×/10 mnt · Durasi: ' + Math.round(avgDur) + ' det<br>' +
+      'His adekuat bila ≥3×/10 mnt, durasi ≥40 detik</div>';
+  }
+}
+
+function nilaiHis() {
+  var frek = parseFloat(document.getElementById('frekHis').value);
+  var durasi = parseFloat(document.getElementById('durasiHis').value);
+  var intensitas = document.getElementById('intensitasHis').value;
+  if (!frek && !durasi) return;
+  var el = document.getElementById('resultHis');
+  el.style.display = 'block';
+
+  var adekuat = frek >= 3 && durasi >= 40 && intensitas === 'kuat';
+  if (adekuat) {
+    el.className = 'result ok show';
+    el.innerHTML = '<div class="result-title" style="color:#15803D;">✅ HIS ADEKUAT — Fase Aktif Normal</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);">Frekuensi ' + frek + '×/10 mnt · Durasi ' + durasi + ' det · Intensitas ' + intensitas + '</div>';
+  } else if (frek >= 3 || durasi >= 40) {
+    el.className = 'result warn show';
+    el.innerHTML = '<div class="result-title" style="color:var(--gold);">⚠️ His Belum Sepenuhnya Adekuat</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);">Perlu pemantauan lebih ketat. Lengkapi minimal 3 kriteria: frekuensi ≥3, durasi ≥40 det, intensitas kuat.</div>';
+  } else {
+    el.className = 'result info show';
+    el.innerHTML = '<div class="result-title" style="color:var(--navy);">ℹ️ His Lemah / Fase Laten</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);">Pantau kemajuan. Anjurkan mobilisasi aktif. Pastikan asupan cairan adekuat.</div>';
+  }
+}
+
+// ═══ PARTOGRAF ═══
+function analisisPartograf() {
+  var bAwal = parseFloat(document.getElementById('pembukaanAwal').value);
+  var bNow = parseFloat(document.getElementById('pembukaanNow').value);
+  var jamAwal = document.getElementById('jamMulai').value;
+  var jamNow = document.getElementById('jamNow').value;
+
+  if (!bAwal || !bNow || !jamAwal || !jamNow) {
+    alert('Lengkapi semua data terlebih dahulu'); return;
+  }
+
+  var [h1, m1] = jamAwal.split(':').map(Number);
+  var [h2, m2] = jamNow.split(':').map(Number);
+  var menitTotal = (h2 * 60 + m2) - (h1 * 60 + m1);
+  if (menitTotal <= 0) menitTotal += 24 * 60;
+  var jamTotal = menitTotal / 60;
+  var kemajuan = (bNow - bAwal) / jamTotal;
+
+  var el = document.getElementById('resultPartograf');
+  el.style.display = 'block';
+
+  var html = '<div class="result-grid">' +
+    '<div class="rg-item"><div class="rg-label">Durasi dari awal</div><div class="rg-value">' + jamTotal.toFixed(1) + ' jam</div></div>' +
+    '<div class="rg-item"><div class="rg-label">Kemajuan pembukaan</div><div class="rg-value">' + kemajuan.toFixed(1) + ' cm/jam</div></div>' +
+    '<div class="rg-item"><div class="rg-label">Pembukaan sekarang</div><div class="rg-value">' + bNow + ' cm</div></div>' +
+    '<div class="rg-item"><div class="rg-label">Status garis</div></div>' +
+    '</div>';
+
+  if (kemajuan >= 1) {
+    el.className = 'result ok show';
+    html = '<div class="result-title" style="color:#15803D;">✅ Kemajuan Normal — Di Kiri Garis Waspada</div>' + html;
+  } else if (kemajuan >= 0.5) {
+    el.className = 'result warn show';
+    html = '<div class="result-title" style="color:var(--gold);">⚠️ Kemajuan Lambat — Dekati Garis Waspada</div>' + html +
+      '<div style="margin-top:6px;font-size:0.72rem;color:var(--muted);">Pantau lebih ketat setiap 30 menit. Evaluasi penyebab: power, passage, passenger.</div>';
+  } else {
+    el.className = 'result danger show';
+    html = '<div class="result-title" style="color:var(--rose);">🚨 Kemajuan Sangat Lambat / Melewati Garis Bertindak!</div>' + html +
+      '<div style="margin-top:6px;font-size:0.72rem;font-weight:600;color:var(--rose);">SEGERA evaluasi penyebab dan pertimbangkan rujukan ke dokter/SpOG!</div>';
+  }
+  el.innerHTML = html;
+}
+
+// ═══ DJJ ═══
+function nilaiDJJ() {
+  var djj = parseFloat(document.getElementById('djjInput').value);
+  var fase = document.getElementById('faseCount').value;
+  if (!djj) return;
+  var el = document.getElementById('resultDJJ');
+  el.style.display = 'block';
+
+  if (djj >= 120 && djj <= 160) {
+    el.className = 'result ok show';
+    el.innerHTML = '<div class="result-title" style="color:#15803D;">✅ DJJ Normal (' + djj + ' x/mnt)</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);">Kesejahteraan janin baik. Lanjutkan pemantauan setiap ' + (fase === 'antara' ? '15–30' : '5') + ' menit.</div>';
+  } else if (djj >= 100 && djj < 120) {
+    el.className = 'result warn show';
+    el.innerHTML = '<div class="result-title" style="color:var(--gold);">⚠️ Bradikardi Ringan (' + djj + ' x/mnt)</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);">Posisikan ibu miring kiri. Berikan O₂ 8L/mnt. Hentikan oksitosin jika sedang berjalan. Pantau ulang 5 menit. Siapkan rujukan.</div>';
+  } else if (djj > 160 && djj <= 180) {
+    el.className = 'result warn show';
+    el.innerHTML = '<div class="result-title" style="color:var(--gold);">⚠️ Takikardi Ringan (' + djj + ' x/mnt)</div>' +
+      '<div style="font-size:0.72rem;color:var(--muted);">Evaluasi demam ibu, dehidrasi, atau penggunaan obat. Pantau ulang 15 menit.</div>';
+  } else {
+    el.className = 'result danger show';
+    el.innerHTML = '<div class="result-title" style="color:var(--rose);">🚨 GAWAT JANIN! DJJ ' + djj + ' x/mnt</div>' +
+      '<div style="font-size:0.72rem;font-weight:600;color:var(--rose);">SEGERA: Posisi miring kiri · O₂ masker · Stop oksitosin · IV line · RUJUK SEGERA ke SpOG!</div>';
+  }
+}
+
+// ═══ TFU ═══
+function hitungTFU() {
+  var tfu = parseFloat(document.getElementById('tfuVal').value);
+  var penurunan = document.getElementById('penurunan').value;
+  if (!tfu) return;
+  var el = document.getElementById('resultTFU');
+  el.style.display = 'block';
+  el.className = 'result info show';
+  var usiaEst = tfu + ' minggu (estimasi)';
+  var tbj = Math.round((tfu - 11) * 155);
+  el.innerHTML = '<div class="result-grid">' +
+    '<div class="rg-item"><div class="rg-label">Usia Kehamilan Est.</div><div class="rg-value">' + usiaEst + '</div></div>' +
+    '<div class="rg-item"><div class="rg-label">TBJ Johnson-Toshach</div><div class="rg-value">' + tbj + ' g</div></div>' +
+    (penurunan ? '<div class="rg-item"><div class="rg-label">Penurunan Kepala</div><div class="rg-value">' + penurunan + '</div></div>' : '') +
+    '</div>';
+}
+
+// ═══ TBJ ═══
+function hitungTBJ() {
+  var tfu = parseFloat(document.getElementById('tfuTBJ').value);
+  var n = parseFloat(document.getElementById('penurunanTBJ').value);
+  var lp = parseFloat(document.getElementById('lp').value);
+  if (!tfu) return;
+  var tbjJT = Math.round((tfu - n) * 155);
+  var tbjDare = lp ? Math.round(tfu * lp) : null;
+  var el = document.getElementById('resultTBJ');
+  el.style.display = 'block';
+
+  var status = '', statusClass = 'ok';
+  if (tbjJT < 2500) { status = '⚠️ BBLR (Berat Badan Lahir Rendah < 2.500g) — Rujuk SpOG/NICU'; statusClass = 'danger'; }
+  else if (tbjJT > 4000) { status = '⚠️ Makrosomia (> 4.000g) — Evaluasi panggul, pertimbangkan SC'; statusClass = 'warn'; }
+  else { status = '✅ Berat janin normal (2.500–4.000g)'; }
+
+  el.className = 'result ' + statusClass + ' show';
+  el.innerHTML = '<div class="result-grid">' +
+    '<div class="rg-item"><div class="rg-label">TBJ Johnson-Toshach</div><div class="rg-value">' + tbjJT + ' g</div></div>' +
+    (tbjDare ? '<div class="rg-item"><div class="rg-label">TBJ Dare (TFU×LP)</div><div class="rg-value">' + tbjDare + ' g</div></div>' : '') +
+    '<div class="rg-item"><div class="rg-label">TFU Input</div><div class="rg-value">' + tfu + ' cm</div></div>' +
+    '</div>' +
+    '<div style="margin-top:8px;font-size:0.73rem;font-weight:600;">' + status + '</div>';
+}
+
+// ═══ IMT ═══
+function hitungIMT() {
+  var bb = parseFloat(document.getElementById('bbIbu').value);
+  var tb = parseFloat(document.getElementById('tbIbu').value);
+  if (!bb || !tb) return;
+  var imt = (bb / ((tb/100) * (tb/100))).toFixed(1);
+  var kat = imt < 18.5 ? 'Underweight (Kurus)' : imt < 25 ? 'Normal' : imt < 30 ? 'Overweight (Gemuk)' : 'Obesitas';
+  var cls = imt < 18.5 || imt >= 30 ? 'warn' : 'ok';
+  var el = document.getElementById('resultIMT');
+  el.style.display = 'block';
+  el.className = 'result ' + cls + ' show';
+  el.innerHTML = '<div class="result-grid">' +
+    '<div class="rg-item"><div class="rg-label">IMT</div><div class="rg-value">' + imt + ' kg/m²</div></div>' +
+    '<div class="rg-item"><div class="rg-label">Kategori</div><div class="rg-value">' + kat + '</div></div>' +
+    '</div>';
+}
+
+// ═══ PERDARAHAN ═══
+function nilaiDarah() {
+  var vol = parseFloat(document.getElementById('darahKeluar').value);
+  var bb = parseFloat(document.getElementById('bbDarah').value);
+  if (!vol) return;
+  var el = document.getElementById('resultDarah');
+  el.style.display = 'block';
+  var ebv = bb ? Math.round(bb * 75) : null;
+  var persen = ebv ? ((vol / ebv) * 100).toFixed(1) : null;
+
+  var cls = vol > 1000 ? 'danger' : vol > 500 ? 'warn' : 'ok';
+  var status = vol > 1000 ? '🚨 HPP BERAT — DARURAT! Aktifkan protokol HPP segera!' :
+               vol > 500 ? '⚠️ HPP — Pantau ketat, berikan oksitosin, pertimbangkan MgSO4' :
+               '✅ Perdarahan dalam batas normal';
+
+  el.className = 'result ' + cls + ' show';
+  el.innerHTML = '<div style="font-size:0.75rem;font-weight:700;margin-bottom:6px;">' + status + '</div>' +
+    '<div class="result-grid">' +
+    '<div class="rg-item"><div class="rg-label">Volume Darah</div><div class="rg-value">' + vol + ' mL</div></div>' +
+    (ebv ? '<div class="rg-item"><div class="rg-label">EBV (' + bb + 'kg)</div><div class="rg-value">' + ebv + ' mL</div></div>' : '') +
+    (persen ? '<div class="rg-item"><div class="rg-label">% dari EBV</div><div class="rg-value">' + persen + '%</div></div>' : '') +
+    '</div>';
+}
+
+// ═══ GIZI ═══
+function hitungGizi() {
+  var bb = parseFloat(document.getElementById('bbGizi').value);
+  var tb = parseFloat(document.getElementById('tbGizi').value);
+  var usia = parseFloat(document.getElementById('usiaGizi').value);
+  var fase = document.getElementById('faseGizi').value;
+  if (!bb || !tb || !usia) return;
+
+  var bmr = 655.1 + (9.563 * bb) + (1.85 * tb) - (4.676 * usia);
+  var faktor = fase === 'laten' ? 1.2 : fase === 'aktif' ? 1.4 : 1.6;
+  var kalori = Math.round(bmr * faktor);
+  var cairan = fase === 'kala2' ? 50 : fase === 'aktif' ? 150 : 200; // mL/jam
+
+  var el = document.getElementById('resultGizi');
+  el.style.display = 'block';
+  el.className = 'result info show';
+  el.innerHTML = '<div class="result-grid">' +
+    '<div class="rg-item"><div class="rg-label">BMR (Harris-Benedict)</div><div class="rg-value">' + Math.round(bmr) + ' kkal</div></div>' +
+    '<div class="rg-item"><div class="rg-label">Kebutuhan Kalori</div><div class="rg-value">' + kalori + ' kkal/hari</div></div>' +
+    '<div class="rg-item"><div class="rg-label">Cairan per jam</div><div class="rg-value">' + cairan + ' mL/jam</div></div>' +
+    '<div class="rg-item"><div class="rg-label">Total cairan/2jam</div><div class="rg-value">' + (cairan*2) + ' mL</div></div>' +
+    '</div>';
+}
+
+// ═══ APGAR ═══
+function buildAPGAR() {
+  var params = [
+    {name:'Appearance (Warna kulit)', opts:['0 — Seluruh tubuh biru/pucat','1 — Badan merah, ekstremitas biru','2 — Seluruh tubuh merah muda']},
+    {name:'Pulse (Nadi)', opts:['0 — Tidak ada','1 — <100 x/menit','2 — ≥100 x/menit']},
+    {name:'Grimace (Refleks)', opts:['0 — Tidak ada respons','1 — Meringis/lemah','2 — Menangis kuat, batuk, bersin']},
+    {name:'Activity (Tonus otot)', opts:['0 — Lemas/flaksid','1 — Sedikit fleksi','2 — Fleksi aktif, gerakan aktif']},
+    {name:'Respiration (Pernapasan)', opts:['0 — Tidak ada','1 — Lemah/tidak teratur/merintih','2 — Menangis kuat, teratur']},
+  ];
+  var html = '';
+  params.forEach(function(p, i) {
+    html += '<div style="margin-bottom:10px;">' +
+      '<div style="font-size:0.75rem;font-weight:700;color:var(--navy);margin-bottom:5px;">' + (i+1) + '. ' + p.name + '</div>' +
+      '<select class="form-ctrl" id="apgar' + i + '">' +
+      '<option value="">— Pilih —</option>' +
+      p.opts.map(function(o, j) { return '<option value="' + j + '">' + o + '</option>'; }).join('') +
+      '</select></div>';
+  });
+  document.getElementById('apgarForm').innerHTML = html;
+}
+
+function hitungAPGAR() {
+  var total = 0;
+  var unanswered = 0;
+  for (var i = 0; i < 5; i++) {
+    var el = document.getElementById('apgar' + i);
+    if (!el || el.value === '') { unanswered++; continue; }
+    total += parseInt(el.value);
+  }
+  if (unanswered > 0) { alert('Lengkapi semua ' + unanswered + ' parameter APGAR'); return; }
+
+  var el = document.getElementById('resultAPGAR');
+  el.style.display = 'block';
+  var cls, status, action;
+  if (total >= 7) {
+    cls = 'ok'; status = 'Normal (7–10)';
+    action = 'Bayi sehat. Lanjutkan perawatan rutin: keringkan, hangatkan, IMD, DCC, Vit K₁, HB0.';
+  } else if (total >= 4) {
+    cls = 'warn'; status = 'Asfiksia Sedang (4–6)';
+    action = '⚠️ Stimulasi taktil, isap lendir, O₂ aliran bebas. Nilai ulang 5 menit. Siapkan resusitasi.';
+  } else {
+    cls = 'danger'; status = 'Asfiksia Berat (0–3)';
+    action = '🚨 RESUSITASI SEGERA! VTP dengan BVM, pertimbangkan intubasi, panggil bantuan, RUJUK SEGERA.';
+  }
+  el.className = 'result ' + cls + ' show';
+  el.innerHTML = '<div class="score-box"><div class="score-num">' + total + '</div>' +
+    '<div class="score-label">APGAR Score — ' + status + '</div></div>' +
+    '<div style="font-size:0.73rem;line-height:1.7;">' + action + '</div>';
+}
+
+// ═══ TANDA BAHAYA ═══
+function buildBahaya() {
+  var kala1 = [
+    {t:'Partus Lama / Macet',d:'Tidak ada kemajuan pembukaan ≥2 jam pada fase aktif. Kemajuan pembukaan <1 cm/jam.',a:'🚨 Evaluasi 3P (Power, Passage, Passenger). Rujuk SpOG.'},
+    {t:'Gawat Janin',d:'DJJ <100 atau >180 x/mnt. Deselerasi lambat/variabel. Air ketuban hijau kental.',a:'🚨 Posisi miring kiri, O₂, stop oksitosin, SEGERA rujuk.'},
+    {t:'Perdarahan Antepartum',d:'Perdarahan >30mL dari vagina selama kala I tanpa tanda persalinan normal.',a:'🚨 Pertimbangkan plasenta previa/solusio. DARURAT.'},
+    {t:'Eklampsia',d:'Kejang pada ibu bersalin dengan riwayat PE. Kesadaran menurun.',a:'🚨 MgSO4 4g IV bolus, ventilasi, RUJUK SEGERA.'},
+    {t:'KPD > 18 jam',d:'Ketuban pecah dini >18 jam → risiko infeksi/korioamnionitis tinggi.',a:'🚨 Antibiotik, induksi/augmentasi, evaluasi SpOG.'},
+  ];
+  var kala24 = [
+    {t:'Retensio Plasenta (>30 menit)',d:'Plasenta belum lahir >30 menit setelah bayi lahir.',a:'🚨 Manual plasenta (dokter/SpOG), infus oksitosin, RUJUK.'},
+    {t:'HPP (Perdarahan >500mL)',d:'Perdarahan pasca persalinan >500mL. Penyebab: 4T.',a:'🚨 Masase uterus, oksitosin 20 IU IV, kompresi bimanual, RUJUK DARURAT.'},
+    {t:'Laserasi Derajat III–IV',d:'Robekan perineum hingga sfingter ani atau mukosa rektum.',a:'🚨 Jahit lapis demi lapis oleh dokter. Antibiotik profilaksis.'},
+    {t:'Inversio Uteri',d:'Uterus terbalik — terlihat massa di vagina/vulva setelah persalinan. Nyeri hebat, syok.',a:'🚨 DARURAT OBSTETRIK! Reposisi segera. RUJUK.'},
+    {t:'Asfiksia Neonatorum Berat',d:'APGAR <4 pada 5 menit. Tidak menangis, tidak bernapas, biru seluruh.',a:'🚨 Resusitasi (VTP, intubasi). RUJUK NICU segera.'},
+    {t:'Hipotermia BBL',d:'Suhu aksiler <36,5°C. Kulit dingin, sianosis, malas minum.',a:'🚨 Kangaroo Mother Care, hangatkan lingkungan. Perhatikan BBLR.'},
+  ];
+
+  var el1 = document.getElementById('bahayaKala1');
+  var el2 = document.getElementById('bahayaKala24');
+  if (el1) el1.innerHTML = kala1.map(function(b) {
+    return '<div class="danger-item"><div class="danger-title">🔴 ' + b.t + '</div>' +
+      '<div class="danger-desc">' + b.d + '</div><div class="danger-action">' + b.a + '</div></div>';
+  }).join('');
+  if (el2) el2.innerHTML = kala24.map(function(b) {
+    return '<div class="danger-item"><div class="danger-title">🔴 ' + b.t + '</div>' +
+      '<div class="danger-desc">' + b.d + '</div><div class="danger-action">' + b.a + '</div></div>';
+  }).join('');
+}
+
+// ═══ 60 LANGKAH APN ═══
+var apnSteps = [
+  {g:'MENGENALI TANDA KALA II',steps:['Ibu mempunyai dorongan kuat untuk meneran','Ibu merasakan tekanan yang semakin meningkat pada rektum dan vagina','Perineum tampak menonjol','Vulva dan sfingter ani membuka']},
+  {g:'MENYIAPKAN PERTOLONGAN',steps:['Pastikan kelengkapan alat, bahan, dan obat-obatan esensial','Pakai celemek plastik yang bersih','Lepas semua perhiasan yang dipakai, cuci tangan dengan sabun','Pakai sarung tangan DTT/steril untuk pemeriksaan dalam','Masukkan oksitosin ke dalam tabung suntik']},
+  {g:'MEMASTIKAN PEMBUKAAN LENGKAP',steps:['Lakukan pemeriksaan dalam untuk memastikan pembukaan lengkap','Dekontaminasi sarung tangan — celupkan ke klorin 0,5% selama 10 menit','Periksa DJJ setelah kontraksi/saat relaksasi uterus']},
+  {g:'MENYIAPKAN IBU DAN KELUARGA',steps:['Beritahu bahwa pembukaan lengkap, keadaan janin baik','Minta keluarga membantu menyiapkan posisi meneran','Lakukan pimpinan meneran saat ibu mempunyai dorongan meneran','Anjurkan ibu untuk berjalan, berjongkok, atau mengambil posisi nyaman']},
+  {g:'PERSIAPAN PERTOLONGAN KELAHIRAN',steps:['Letakkan handuk bersih di atas perut ibu untuk mengeringkan bayi','Letakkan kain bersih yang dilipat 1/3 bagian di bawah bokong ibu','Buka partus set','Pakai sarung tangan DTT/steril pada kedua tangan']},
+  {g:'PERTOLONGAN UNTUK MELAHIRKAN BAYI',steps:['Setelah tampak kepala bayi dengan diameter 5–6 cm, lindungi perineum','Periksa kemungkinan adanya lilitan tali pusat','Tunggu hingga kepala bayi melakukan putaran paksi luar secara spontan','Setelah kepala melakukan putaran paksi luar, pegang secara biparietetal','Anjurkan ibu meneran saat kontraksi, dengan gerakan ke bawah dan ke depan','Setelah bahu anterior lahir, lakukan sanggah susur untuk melahirkan bahu posterior','Lakukan sanggah susur untuk melahirkan seluruh tubuh bayi','Lakukan penilaian sepintas untuk adaptasi ekstra-uterin']},
+  {g:'PENANGANAN BAYI BARU LAHIR',steps:['Keringkan tubuh bayi mulai dari muka, kepala, dan bagian tubuh lainnya kecuali tangan','Periksa kembali uterus untuk memastikan tidak ada bayi lain','Beritahu ibu bahwa penolong akan menyuntikkan oksitosin untuk membantu uterus berkontraksi','Dalam waktu 1 menit, suntikkan oksitosin 10 unit IM di 1/3 paha atas bagian distal lateral','Dengan menggunakan klem, jepit tali pusat sekitar 3 cm dari pusat bayi','Dengan satu tangan, pegang tali pusat yang telah dijepit, dan lakukan pengguntingan tali pusat','Letakkan bayi agar ada kontak kulit ibu ke kulit bayi, letakkan bayi di atas perut ibu']},
+  {g:'PENATALAKSANAAN AKTIF KALA III',steps:['Pindahkan klem pada tali pusat sekitar 5–10 cm dari vulva','Letakkan satu tangan di atas kain pada perut ibu, di tepi atas simfisis untuk mendeteksi kontraksi','Setelah uterus berkontraksi, tegangkan tali pusat ke arah bawah','Setelah plasenta terlepas, minta ibu meneran sambil penolong menarik tali pusat ke arah bawah','Saat plasenta terlihat di introitus vagina, lahirkan plasenta dengan kedua tangan','Segera setelah plasenta dan selaput ketuban lahir, lakukan masase uterus']},
+  {g:'MENILAI PERDARAHAN',steps:['Periksa kedua sisi plasenta baik yang menempel ke ibu maupun janin','Evaluasi kemungkinan laserasi pada vagina dan perineum','Lakukan penjahitan bila laserasi menyebabkan perdarahan']},
+  {g:'MELAKUKAN PROSEDUR PASCA PERSALINAN',steps:['Pastikan uterus berkontraksi dengan baik dan tidak terjadi perdarahan pervaginam','Biarkan bayi tetap melakukan kontak kulit ke kulit selama paling sedikit 1 jam','Setelah 1 jam, lakukan penimbangan/pengukuran bayi, beri tetes mata antibiotika, dan vitamin K1','Setelah 1 jam pemberian vitamin K1 berikan suntikan imunisasi hepatitis B','Lanjutkan pemantauan kontraksi dan mencegah perdarahan pervaginam','Ajarkan ibu/keluarga cara melakukan masase uterus','Evaluasi dan estimasi jumlah kehilangan darah','Memeriksa nadi ibu dan pastikan keadaan umum ibu baik','Pantau keadaan bayi dan pastikan bahwa bayi bernapas dengan baik','Tempatkan semua peralatan bekas pakai dalam larutan klorin 0,5%','Buang bahan-bahan yang terkontaminasi ke tempat sampah yang sesuai','Bersihkan badan ibu menggunakan air DTT','Pastikan ibu merasa nyaman, bantu ibu memberikan ASI','Dekontaminasi tempat bersalin dengan larutan klorin 0,5%','Celupkan sarung tangan kotor ke dalam larutan klorin 0,5%, balikkan bagian dalam ke luar dan rendam dalam larutan klorin 0,5%','Cuci kedua tangan dengan sabun dan air bersih','Lengkapi partograf (halaman depan dan belakang), periksa tanda vital dan asuhan kala IV']},
+];
+
+function buildAPN() {
+  var el = document.getElementById('apnChecklist');
+  if (!el) return;
+  var num = 0;
+  var html = '';
+  apnSteps.forEach(function(g) {
+    html += '<div style="font-size:0.65rem;font-weight:700;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin:12px 0 6px;padding:4px 0;border-bottom:1px solid #E8EFF5;">' + g.g + '</div>';
+    g.steps.forEach(function(s) {
+      num++;
+      html += '<div class="anp-item"><input type="checkbox" class="anp-cb" id="apn' + num + '" onchange="updateAPNProgress()"><div class="anp-text"><strong>' + num + '.</strong> ' + s + '</div></div>';
+    });
+  });
+  el.innerHTML = html;
+  updateAPNProgress();
+}
+
+function updateAPNProgress() {
+  var checked = document.querySelectorAll('.anp-cb:checked').length;
+  var total = document.querySelectorAll('.anp-cb').length;
+  var pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+  var el = document.getElementById('apnProgress');
+  if (!el) return;
+  var color = pct < 30 ? '#E8EFF5' : pct < 70 ? '#FCD34D' : '#86EFAC';
+  el.innerHTML = '<div class="progress-wrap"><div class="progress-label"><span style="font-weight:600;color:var(--navy);">' + checked + ' / ' + total + ' langkah</span><span style="color:var(--teal);font-weight:700;">' + pct + '%</span></div>' +
+    '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%;background:' + (pct < 30 ? 'var(--rose)' : pct < 70 ? 'var(--gold)' : 'var(--teal)') + ';"></div></div></div>';
+}
+
+function resetAPN() {
+  document.querySelectorAll('.anp-cb').forEach(function(cb) { cb.checked = false; });
+  updateAPNProgress();
+}
+
+// ═══ CHECKLIST KALA I ═══
+function buildChecklistKala1() {
+  var el = document.getElementById('checklistKala1');
+  if (!el) return;
+  var items = [
+    'DJJ diperiksa tiap 30 menit (laten) / 15 menit (aktif)',
+    'His dinilai tiap 30 menit (frekuensi, durasi, intensitas)',
+    'Tekanan darah diukur tiap 1 jam',
+    'Nadi diperiksa tiap 30 menit',
+    'Suhu diperiksa tiap 2 jam',
+    'Kandung kemih dikosongkan tiap 2 jam',
+    'VT dilakukan tiap 4 jam atau sesuai indikasi',
+    'Asupan cairan oral diberikan sesuai keinginan ibu',
+    'Mobilisasi dan posisi nyaman dianjurkan',
+    'Dukungan emosional dari pendamping diberikan',
+    'Partograf diisi dengan lengkap dan benar',
+    'Informed consent asuhan persalinan sudah diberikan',
+  ];
+  el.innerHTML = items.map(function(item, i) {
+    return '<div class="anp-item"><input type="checkbox" class="anp-cb"><div class="anp-text">' + item + '</div></div>';
+  }).join('');
+}
+
+// ═══ REFERENSI ═══
+function buildRef() {
+  var el = document.getElementById('refContainer');
+  if (!el) return;
+  var refs = [
+    {n:1,t:'WHO recommendations: Intrapartum care for a positive childbirth experience',s:'World Health Organization, 2018',d:'WHO/RHR/18.12',b:'who',link:'https://www.who.int/publications/i/item/9789241550215'},
+    {n:2,t:'Buku Acuan Asuhan Persalinan Normal (APN) Edisi 5',s:'JNPK-KR/POGI · Kemenkes RI, 2017',d:'ISBN: 978-979-9012-10-4',b:'km',link:'#'},
+    {n:3,t:'Pedoman Pelayanan Antenatal, Persalinan, Nifas, dan Bayi Baru Lahir di Era Adaptasi Kebiasaan Baru',s:'Kemenkes RI, 2020',d:'ISBN: 978-602-416-961-0',b:'km',link:'#'},
+    {n:4,t:'WHO Guideline: Delayed Umbilical Cord Clamping for Improved Maternal and Infant Health and Nutrition Outcomes',s:'World Health Organization, 2014',d:'WHO/NMH/NHD/14.05',b:'who',link:'https://www.who.int/publications/i/item/9789241508209'},
+    {n:5,t:'Neonatal resuscitation: 2022 American Heart Association guidelines',s:'American Academy of Pediatrics (AAP), 2022',d:'DOI: 10.1542/peds.2022-058629',b:'scopus',link:'https://pmc.ncbi.nlm.nih.gov/articles/PMC9435481/'},
+    {n:6,t:'Active management of the third stage of labour (Cochrane Review)',s:'Gallos et al. Cochrane Database, 2018',d:'DOI: 10.1002/14651858.CD007412.pub4',b:'scopus',link:'https://www.cochranelibrary.com'},
+    {n:7,t:'Continuous support for women during childbirth (Cochrane Review)',s:'Bohren et al. Cochrane Database, 2017',d:'DOI: 10.1002/14651858.CD003766.pub6',b:'scopus',link:'https://www.cochranelibrary.com'},
+    {n:8,t:'Non-pharmacological interventions for pain relief in labour (Cochrane Review)',s:'Smith et al. Cochrane Database, 2018',d:'DOI: 10.1002/14651858.CD009356.pub3',b:'scopus',link:'https://www.cochranelibrary.com'},
+    {n:9,t:'Topical breast milk as an alternative prevention intervention of omphalitis in newborn: Case study',s:'Ernawati. Nursing Case Insight Journal, 2024',d:'DOI: 10.63166/eaqm0c05',b:'scopus',link:'https://nci.journalhealth.org'},
+    {n:10,t:'Penundaan pemotongan tali pusat terhadap tingkat kebugaran bayi asfiksia di BPM Ernawati Garut',s:'Ernawati & Sarah, 2017',d:'STIKes KHG Garut (Original Research)',b:'km',link:'#'},
+    {n:11,t:'The effect of polyethylene swaddle in hypothermia prevention among low birth weight neonates',s:'Patimah I., Koesendang E., Nurmawan S., Minaf A. Nursing and Midwifery Studies, 2022',d:'DOI: 10.4103/nms.nms_63_20',b:'scopus',link:'https://pmc.ncbi.nlm.nih.gov/articles/PMC9019984/'},
+    {n:12,t:'Labor position and its impact on the birth process: A literature review',s:'Ahmar H., Sofyana S., Suciati S., Ernawati, Liantanty F. JCHS, 2025',d:'DOI: 10.47679/jchs.2025115',b:'scopus',link:'#'},
+    {n:13,t:'WHO recommendations for augmentation of labour',s:'World Health Organization, 2014',d:'ISBN: 978-92-4-150765-8',b:'who',link:'#'},
+    {n:14,t:'Investigation and Care of a Small-for-Gestational-Age Fetus (Green-top 31)',s:'Morris et al. BJOG, 2024',d:'DOI: 10.1111/1471-0528.17814',b:'scopus',link:'#'},
+    {n:15,t:'Profil Kesehatan Indonesia 2023',s:'Kemenkes RI, 2024',d:'Jakarta: Pusdatin Kemenkes RI',b:'km',link:'#'},
+  ];
+  var bColor = {scopus:'var(--navy)',who:'var(--teal)',km:'var(--gold)'};
+  var bLabel = {scopus:'Scopus/Int\'l',who:'WHO',km:'Kemenkes RI'};
+  el.innerHTML = refs.map(function(r) {
+    return '<div class="ref-item"><div class="ref-num">' + r.n + '</div><div>' +
+      '<div class="ref-title">' + r.t + '</div>' +
+      '<div class="ref-source">' + r.s + '</div>' +
+      '<div class="ref-doi">' + r.d + '</div>' +
+      '<div><span class="badge ' + r.b + '" style="background:' + bColor[r.b] + ';color:#fff;">' + bLabel[r.b] + '</span>' +
+      (r.link !== '#' ? ' <a href="' + r.link + '" target="_blank" style="font-size:0.62rem;color:var(--teal);text-decoration:none;">🔗 Akses</a>' : '') +
+      '</div></div></div>';
+  }).join('');
+}
+
+// ═══ INIT ═══
+document.addEventListener('DOMContentLoaded', function() {
+  buildAPGAR();
+  buildAPN();
+  buildBahaya();
+  buildRef();
+  buildChecklistKala1();
+  // Set default time
+  var now = new Date();
+  var hh = ('0'+now.getHours()).slice(-2);
+  var mm = ('0'+now.getMinutes()).slice(-2);
+  var timeStr = hh + ':' + mm;
+  var jm = document.getElementById('jamMulai');
+  var jn = document.getElementById('jamNow');
+  if (jm) jm.value = timeStr;
+  if (jn) jn.value = timeStr;
+});
+</script>
+</body>
+</html>
